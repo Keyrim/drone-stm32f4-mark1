@@ -1,0 +1,11 @@
+mask.c:14:8:MASK_get_empty_mask	32	static
+mask.c:28:6:MASK_clean_every_flags	24	static
+mask.c:42:8:Mask_test_and	32	static
+mask.c:60:8:Mask_test_or	32	static
+mask.c:78:8:MASK_set_flag	32	static
+mask.c:102:8:MASK_clear_flag	32	static
+mask.c:123:8:MASK_and	40	static
+mask.c:137:8:MASK_or	40	static
+mask.c:152:8:MASK_not	40	static
+mask.c:167:8:MASK_create	40	static
+mask.c:182:8:MASK_create_single	24	static
