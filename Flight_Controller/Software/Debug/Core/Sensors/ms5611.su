@@ -1,9 +1,0 @@
-ms5611.c:12:18:MS5611_init	48	static
-ms5611.c:44:18:MS5611_request_temp	24	static
-ms5611.c:62:18:MS5611_request_pressure	24	static
-ms5611.c:80:18:MS5611_read_temp	24	static
-ms5611.c:99:18:MS5611_read_pressure	24	static
-ms5611.c:119:6:MS5611_calculate_temperature	24	static
-ms5611.c:125:6:MS5611_calculate_pressure	72	static
-ms5611.c:133:6:MS5611_calculate_altitude	24	static
-ms5611.c:145:6:MS5611_i2c_rx_callabck	16	static

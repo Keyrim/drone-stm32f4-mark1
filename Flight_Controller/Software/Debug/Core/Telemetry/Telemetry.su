@@ -1,6 +1,0 @@
-Telemetry.c:18:10:get_nb_bytes_available	24	static
-Telemetry.c:26:6:TELEMETRY_Init	16	static
-Telemetry.c:42:6:TELEMETRY_Process	32	static
-Telemetry.c:94:6:TELEMETRY_Send_Data	48	static
-Telemetry.c:110:6:TELEMETRY_Send_Data_Raw	24	static
-Telemetry.c:123:6:TELEMETRY_Idle_Line_Detection	4	static

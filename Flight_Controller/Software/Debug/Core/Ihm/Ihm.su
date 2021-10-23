@@ -1,5 +1,0 @@
-Ihm.c:24:6:IHM_Init	16	static
-Ihm.c:28:6:IHM_Led_Init	24	static
-Ihm.c:38:6:IHM_Set_Sequence	16	static
-Ihm.c:44:6:IHM_Set_Sequences	16	static
-Ihm.c:55:6:IHM_Update	16	static

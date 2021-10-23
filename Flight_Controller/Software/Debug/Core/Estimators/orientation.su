@@ -1,4 +1,0 @@
-orientation.c:20:14:angle_180	16	static
-orientation.c:28:14:absolu	16	static
-orientation.c:39:6:ORIENTATION_Init	32	static
-orientation.c:60:6:ORIENTATION_Update	48	static

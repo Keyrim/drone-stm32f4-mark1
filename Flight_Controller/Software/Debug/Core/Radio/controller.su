@@ -1,5 +1,0 @@
-controller.c:20:6:CONTROLLER_Init	16	static
-controller.c:39:6:CONTROLLER_Update_Channels_Analysis	16	static
-controller.c:117:13:flag_process	8	static
-controller.c:211:8:CONTROLLER_Update_Channels_Array	8	static
-controller.c:216:6:CONTROLLER_Rx_Data_Rdy	8	static
