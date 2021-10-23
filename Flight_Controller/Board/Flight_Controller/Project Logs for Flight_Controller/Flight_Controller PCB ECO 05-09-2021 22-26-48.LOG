@@ -1,5 +1,0 @@
-Removed Pin From Net: NetName=LED1 Pin=F4-2
-Removed Pin From Net: NetName=LED2 Pin=F4-3
-Added Pin To Net: NetName=LED2 Pin=F4-2
-Added Pin To Net: NetName=LED1 Pin=F4-3
-Added Member To Class: ClassName=Flight_Controller Member=Component PowerBoard SM08B-SRSS-TB__LF__SN_

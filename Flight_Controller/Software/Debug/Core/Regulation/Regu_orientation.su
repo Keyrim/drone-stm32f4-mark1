@@ -1,0 +1,3 @@
+Regu_orientation.c:31:6:REGULATION_ORIENTATION_Init	24	static
+Regu_orientation.c:51:6:REGULATION_ORIENTATION_Set_Regulation_Mode	16	static
+Regu_orientation.c:55:6:REGULATION_ORIENTATION_Process	8	static

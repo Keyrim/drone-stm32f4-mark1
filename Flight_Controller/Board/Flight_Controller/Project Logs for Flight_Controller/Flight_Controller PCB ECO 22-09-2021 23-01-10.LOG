@@ -1,0 +1,7 @@
+Added Pin To Net: NetName=3V3 Pin=µC-1
+Added Pin To Net: NetName=3V3 Pin=µC-13
+Added Pin To Net: NetName=3V3 Pin=µC-19
+Added Pin To Net: NetName=3V3 Pin=µC-32
+Added Pin To Net: NetName=3V3 Pin=µC-48
+Added Pin To Net: NetName=3V3 Pin=µC-64
+Added Room: Name=Flight_Controller

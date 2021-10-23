@@ -1,0 +1,5 @@
+Ibus.c:19:10:check_sum_f	24	static
+Ibus.c:26:6:IBUS_init	24	static
+Ibus.c:35:6:IBUS_RxCplt	16	static
+Ibus.c:41:6:IBUS_RxHalfCplt	16	static
+Ibus.c:48:8:IBUS_Channel_Update	48	static

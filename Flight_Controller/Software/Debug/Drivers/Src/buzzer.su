@@ -1,0 +1,5 @@
+buzzer.c:20:13:set_arr_from_frequency	24	static
+buzzer.c:35:6:BUZZER_Init	16	static
+buzzer.c:40:6:BUZZER_Start	16	static
+buzzer.c:45:6:BUZZER_Stop	16	static
+buzzer.c:49:6:BUZZER_Update	16	static

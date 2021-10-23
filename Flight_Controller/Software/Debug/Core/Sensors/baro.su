@@ -1,0 +1,7 @@
+baro.c:22:13:ms5611_raw_temp_rdy	8	static
+baro.c:25:13:ms5611_raw_pressure_rdy	8	static
+baro.c:29:6:BARO_init	24	static
+baro.c:48:10:BARO_Main	24	static
+baro.c:84:6:BARO_compute_temp	16	static
+baro.c:88:6:BARO_compute_pressure	16	static
+baro.c:91:6:BARO_compute_altitude	24	static

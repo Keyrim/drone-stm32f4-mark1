@@ -1,14 +1,35 @@
 Project Outputs Generation Report
 ---------------------------------
-Start Output Generation At 19:21:36 On 07/09/2021
+Start Output Generation At 19:00:30 On 06/10/2021
 
-Output: Bill of Materials
-Type  : BOM
-From  : Variant [[No Variations]] of Project [Flight_Controller.PrjPcb]
-   Generated File[Bill of Materials-Flight_Controller.xls]
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : PCB Document [Flight_Controller.PcbDoc]
+   Generated File[Flight_Controller_Copper_Signal_Top.gbr]
+   Generated File[Flight_Controller_Copper_Signal_Bot.gbr]
+   Generated File[Flight_Controller_Pads_Bot.gbr]
+   Generated File[Flight_Controller_Pads_Top.gbr]
+   Generated File[Flight_Controller_Legend_Bot.gbr]
+   Generated File[Flight_Controller_Soldermask_Bot.gbr]
+   Generated File[Flight_Controller_Paste_Bot.gbr]
+   Generated File[Flight_Controller_Legend_Top.gbr]
+   Generated File[Flight_Controller_Paste_Top.gbr]
+   Generated File[Flight_Controller_Soldermask_Top.gbr]
+   Generated File[Flight_Controller_Keep-out.gbr]
+   Generated File[Flight_Controller_Mechanical_13.gbr]
+   Generated File[Flight_Controller_Mechanical_14.gbr]
+   Generated File[Flight_Controller_Mechanical_1.gbr]
+   Generated File[Flight_Controller_Mechanical_15.gbr]
+   Generated File[Flight_Controller_Profile.gbr]
+   Generated File[Flight_Controller_PTH_Drill.gbr]
+   Generated File[Flight_Controller_Drawing_1.gbr]
+   Generated File[Flight_Controller_Drillmap_1.gbr]
+   Generated File[Flight_Controller.RUL]
+   Generated File[Flight_Controller.EXTREP]
+   Generated File[Flight_Controller.REP]
 
 
-Files Generated   : 1
+Files Generated   : 22
 Documents Printed : 0
 
-Finished Output Generation At 19:21:38 On 07/09/2021
+Finished Output Generation At 19:00:35 On 06/10/2021

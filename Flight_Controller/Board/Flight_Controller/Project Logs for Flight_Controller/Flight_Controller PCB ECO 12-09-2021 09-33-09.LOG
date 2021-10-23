@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=GND Pin=C1-2
+Removed Pin From Net: NetName=GND Pin=C2-2
+Removed Member From Class: ClassName=Flight_Controller Member=C1
+Removed Member From Class: ClassName=Flight_Controller Member=C2
+Added Member To Class: ClassName=Flight_Controller Member=Component F? STM32F405RGT6
+Added Room: Name=Flight_Controller

@@ -1,0 +1,32 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 19:17:09 On 06/10/2021
+
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : PCB Document [Sensors.PcbDoc]
+   Generated File[Sensors_Copper_Signal_Top.gbr]
+   Generated File[Sensors_Copper_Signal_Bot.gbr]
+   Generated File[Sensors_Pads_Bot.gbr]
+   Generated File[Sensors_Pads_Top.gbr]
+   Generated File[Sensors_Soldermask_Bot.gbr]
+   Generated File[Sensors_Legend_Top.gbr]
+   Generated File[Sensors_Paste_Top.gbr]
+   Generated File[Sensors_Soldermask_Top.gbr]
+   Generated File[Sensors_Keep-out.gbr]
+   Generated File[Sensors_Mechanical_13.gbr]
+   Generated File[Sensors_Mechanical_1.gbr]
+   Generated File[Sensors_Mechanical_15.gbr]
+   Generated File[Sensors_Profile.gbr]
+   Generated File[Sensors_PTH_Drill.gbr]
+   Generated File[Sensors_Drawing_1.gbr]
+   Generated File[Sensors_Drillmap_1.gbr]
+   Generated File[Sensors.RUL]
+   Generated File[Sensors.EXTREP]
+   Generated File[Sensors.REP]
+
+
+Files Generated   : 19
+Documents Printed : 0
+
+Finished Output Generation At 19:17:14 On 06/10/2021

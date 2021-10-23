@@ -1,0 +1,3 @@
+Flight_mode.c:36:6:FLIGHT_MODE_Init	16	static
+Flight_mode.c:42:6:FLIGHT_MODE_Set_Flight_Mode	16	static
+Flight_mode.c:46:6:FLIGHT_MODE_Main	16	static

@@ -1,0 +1,104 @@
+Removed Pin From Net: NetName=GND Pin=CVCAP1-2
+Removed Pin From Net: NetName=GND Pin=CVCAP2-2
+Removed Pin From Net: NetName=UART4_TX Pin=F?-1
+Removed Pin From Net: NetName=LED2 Pin=F?-2
+Removed Pin From Net: NetName=LED1 Pin=F?-3
+Removed Pin From Net: NetName=OSC_IN Pin=F?-5
+Removed Pin From Net: NetName=OSC_OUT Pin=F?-6
+Removed Pin From Net: NetName=PROG_NRST Pin=F?-7
+Removed Pin From Net: NetName=ADC1_IN13 Pin=F?-11
+Removed Pin From Net: NetName=TIM3_CH2 Pin=F?-13
+Removed Pin From Net: NetName=UART4_TX Pin=F?-14
+Removed Pin From Net: NetName=UART4_RX Pin=F?-15
+Removed Pin From Net: NetName=UART2_RX Pin=F?-17
+Removed Pin From Net: NetName=TIM3_CH1 Pin=F?-22
+Removed Pin From Net: NetName=TIM3_CH2 Pin=F?-23
+Removed Pin From Net: NetName=ADC1_IN14 Pin=F?-24
+Removed Pin From Net: NetName=TIM3_CH3 Pin=F?-26
+Removed Pin From Net: NetName=TIM3_CH4 Pin=F?-27
+Removed Pin From Net: NetName=UART3_TX Pin=F?-29
+Removed Pin From Net: NetName=UART3_RX Pin=F?-30
+Removed Pin From Net: NetName=UART2_RX Pin=F?-32
+Removed Pin From Net: NetName=UART6_TX Pin=F?-37
+Removed Pin From Net: NetName=UART6_RX Pin=F?-38
+Removed Pin From Net: NetName=PC9 Pin=F?-40
+Removed Pin From Net: NetName=TIM1_CH1 Pin=F?-41
+Removed Pin From Net: NetName=TIM1_CH2 Pin=F?-42
+Removed Pin From Net: NetName=TIM1_CH3 Pin=F?-43
+Removed Pin From Net: NetName=TIM1_CH4 Pin=F?-44
+Removed Pin From Net: NetName=PROG_SWDIO Pin=F?-46
+Removed Pin From Net: NetName=PROG_SWCLK Pin=F?-49
+Removed Pin From Net: NetName=MPU_CS Pin=F?-50
+Removed Pin From Net: NetName=SPI3_SCK Pin=F?-51
+Removed Pin From Net: NetName=SPI3_MISO Pin=F?-52
+Removed Pin From Net: NetName=SPI3_MOSI Pin=F?-53
+Removed Pin From Net: NetName=PROG_SWO Pin=F?-55
+Removed Pin From Net: NetName=UART1_TX Pin=F?-58
+Removed Pin From Net: NetName=UART1_RX Pin=F?-59
+Removed Pin From Net: NetName=GND Pin=F?-60
+Removed Pin From Net: NetName=I2C1_SCL Pin=F?-61
+Removed Pin From Net: NetName=I2C1_SDA Pin=F?-62
+Added Component: Designator=µC(QFP50P1200X1200X160-64N)
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "STM32F405RGT6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/stm32f405rgt6/stmicroelectronics?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://www.st.com/web/en/resource/technical/document/datasheet/DM00037051.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.6mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "STM32F405RGT6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "511-STM32F405RGT6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/STM32F405RGT6?qs=Z8%252BeY1k3TIKgj7QWsYGpQw%3D%3D"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=CVCAP1-1
+Added Pin To Net: NetName=GND Pin=CVCAP2-1
+Added Pin To Net: NetName=LED1 Pin=µC-2
+Added Pin To Net: NetName=LED2 Pin=µC-3
+Added Pin To Net: NetName=OSC_IN Pin=µC-5
+Added Pin To Net: NetName=OSC_OUT Pin=µC-6
+Added Pin To Net: NetName=PROG_NRST Pin=µC-7
+Added Pin To Net: NetName=ADC1_IN13 Pin=µC-11
+Added Pin To Net: NetName=GND Pin=µC-12
+Added Pin To Net: NetName=UART4_TX Pin=µC-14
+Added Pin To Net: NetName=UART4_RX Pin=µC-15
+Added Pin To Net: NetName=UART2_RX Pin=µC-17
+Added Pin To Net: NetName=GND Pin=µC-18
+Added Pin To Net: NetName=TIM3_CH1 Pin=µC-22
+Added Pin To Net: NetName=TIM3_CH2 Pin=µC-23
+Added Pin To Net: NetName=ADC1_IN14 Pin=µC-24
+Added Pin To Net: NetName=TIM3_CH3 Pin=µC-26
+Added Pin To Net: NetName=TIM3_CH4 Pin=µC-27
+Added Pin To Net: NetName=UART3_TX Pin=µC-29
+Added Pin To Net: NetName=UART3_RX Pin=µC-30
+Added Pin To Net: NetName=UART6_TX Pin=µC-37
+Added Pin To Net: NetName=UART6_RX Pin=µC-38
+Added Pin To Net: NetName=PC9 Pin=µC-40
+Added Pin To Net: NetName=TIM1_CH1 Pin=µC-41
+Added Pin To Net: NetName=TIM1_CH2 Pin=µC-42
+Added Pin To Net: NetName=TIM1_CH3 Pin=µC-43
+Added Pin To Net: NetName=TIM1_CH4 Pin=µC-44
+Added Pin To Net: NetName=PROG_SWDIO Pin=µC-46
+Added Pin To Net: NetName=PROG_SWCLK Pin=µC-49
+Added Pin To Net: NetName=MPU_CS Pin=µC-50
+Added Pin To Net: NetName=SPI3_SCK Pin=µC-51
+Added Pin To Net: NetName=SPI3_MISO Pin=µC-52
+Added Pin To Net: NetName=SPI3_MOSI Pin=µC-53
+Added Pin To Net: NetName=PROG_SWO Pin=µC-55
+Added Pin To Net: NetName=UART1_TX Pin=µC-58
+Added Pin To Net: NetName=UART1_RX Pin=µC-59
+Added Pin To Net: NetName=GND Pin=µC-60
+Added Pin To Net: NetName=I2C1_SCL Pin=µC-61
+Added Pin To Net: NetName=I2C1_SDA Pin=µC-62
+Added Pin To Net: NetName=GND Pin=µC-63
+Added Pin To Net: NetName=NetCVCAP1_2 Pin=CVCAP1-2
+Added Pin To Net: NetName=NetCVCAP1_2 Pin=µC-31
+Added Net: Name=NetCVCAP1_2
+Added Pin To Net: NetName=NetCVCAP2_2 Pin=CVCAP2-2
+Added Pin To Net: NetName=NetCVCAP2_2 Pin=µC-47
+Added Net: Name=NetCVCAP2_2
+Added Pin To Net: NetName=VCC Pin=µC-1
+Added Pin To Net: NetName=VCC Pin=µC-13
+Added Pin To Net: NetName=VCC Pin=µC-19
+Added Pin To Net: NetName=VCC Pin=µC-32
+Added Pin To Net: NetName=VCC Pin=µC-48
+Added Pin To Net: NetName=VCC Pin=µC-64
+Added Net: Name=VCC
+Added Member To Class: ClassName=Flight_Controller Member=Component µC STM32F405RGT6
+Added Room: Name=Flight_Controller
