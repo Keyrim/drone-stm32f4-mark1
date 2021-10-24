@@ -26,7 +26,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "../OS/scheduler/scheduler.h"
+#include "../OS/tasks/task.h"
+#include "../Peripherals/Uart.h"
+#include "../Data_Logger/Data_logger.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+static system_t mark1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,12 +96,20 @@ int main(void)
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
 
+  /* Peripherals initialization */
+  UART_Init();
+
+  /* System initialization */
+  DATA_LOGGER_Init(&mark1);
+  TASK_Init(&mark1);
+  SCHEDULER_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  SCHEDULER_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

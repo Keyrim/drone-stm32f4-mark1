@@ -1,0 +1,11 @@
+Data_logger.c:80:6:DATA_LOGGER_Init	16	static
+Data_logger.c:109:6:DATA_LOGGER_Start	4	static
+Data_logger.c:116:6:DATA_LOGGER_Stop	4	static
+Data_logger.c:124:6:DATA_LOGGER_Main	8	static
+Data_logger.c:133:6:DATA_LOGGER_Reception	24	static
+Data_logger.c:198:9:DATA_LOGGER_Get_Data_Value	32	static
+Data_logger.c:263:9:DATA_LOGGER_Get_Data_Config	24	static
+Data_logger.c:289:10:DATA_LOGGER_Get_Data	16	static
+Data_logger.c:301:6:push_data_to_uart	72	static
+Data_logger.c:318:13:state_machine	16	static
+Data_logger.c:421:13:parse_uart	16	static

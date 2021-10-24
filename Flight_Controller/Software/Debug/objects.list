@@ -1,3 +1,4 @@
+"./Core/Data_Logger/Data_logger.o"
 "./Core/OS/events/events.o"
 "./Core/OS/events/mask.o"
 "./Core/OS/events/mask_def.o"

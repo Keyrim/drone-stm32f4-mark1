@@ -20,6 +20,7 @@ OBJCOPY_BIN :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Data_Logger \
 Core/OS/events \
 Core/OS/scheduler \
 Core/OS/tasks \

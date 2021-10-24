@@ -17,6 +17,7 @@ RM := rm -rf
 -include Core/OS/scheduler/subdir.mk
 -include Core/OS/events/subdir.mk
 -include Core/OS/subdir.mk
+-include Core/Data_Logger/subdir.mk
 -include subdir.mk
 -include objects.mk
 

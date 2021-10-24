@@ -1,5 +1,6 @@
-Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
- ../Core/OS/tasks/../system_d.h ../Core/OS/tasks/../macro_types.h \
+Core/Data_Logger/Data_logger.o: ../Core/Data_Logger/Data_logger.c \
+ ../Core/Data_Logger/Data_logger.h ../Core/Data_Logger/../OS/system_d.h \
+ ../Core/Data_Logger/../OS/macro_types.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -27,29 +28,22 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/OS/tasks/../scheduler/scheduler.h \
- ../Core/OS/tasks/../scheduler/../tasks/task.h \
- ../Core/OS/tasks/../scheduler/../macro_types.h \
- ../Core/OS/tasks/../scheduler/../system_d.h \
- ../Core/OS/tasks/../events/events.h \
- ../Core/OS/tasks/../events/mask_def_enum.h \
- ../Core/OS/tasks/../events/mask.h \
- ../Core/OS/tasks/../events/../macro_types.h \
- ../Core/OS/tasks/../events/flags.h \
- ../Core/OS/tasks/../events/../system_d.h ../Core/Inc/../OS/time.h \
- ../Core/OS/tasks/../../config.h \
- ../Core/OS/tasks/../../Peripherals/Uart.h \
- ../Core/OS/tasks/../../Peripherals/../Inc/usart.h \
- ../Core/OS/tasks/../../Peripherals/../Inc/main.h \
- ../Core/OS/tasks/../../Peripherals/../OS/macro_types.h \
- ../Core/OS/tasks/../../Data_Logger/Data_logger.h \
- ../Core/OS/tasks/../../Data_Logger/../OS/system_d.h
+ ../Core/Data_Logger/../OS/tasks/task.h \
+ ../Core/Data_Logger/../OS/tasks/../system_d.h \
+ ../Core/Data_Logger/../OS/scheduler/scheduler.h \
+ ../Core/Data_Logger/../OS/scheduler/../tasks/task.h \
+ ../Core/Data_Logger/../OS/scheduler/../macro_types.h \
+ ../Core/Data_Logger/../OS/scheduler/../system_d.h \
+ ../Core/Data_Logger/../Peripherals/Uart.h \
+ ../Core/Data_Logger/../Peripherals/../Inc/usart.h \
+ ../Core/Data_Logger/../Peripherals/../Inc/main.h \
+ ../Core/Data_Logger/../Peripherals/../OS/macro_types.h
 
-../Core/OS/tasks/task.h:
+../Core/Data_Logger/Data_logger.h:
 
-../Core/OS/tasks/../system_d.h:
+../Core/Data_Logger/../OS/system_d.h:
 
-../Core/OS/tasks/../macro_types.h:
+../Core/Data_Logger/../OS/macro_types.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -105,38 +99,22 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Core/OS/tasks/../scheduler/scheduler.h:
+../Core/Data_Logger/../OS/tasks/task.h:
 
-../Core/OS/tasks/../scheduler/../tasks/task.h:
+../Core/Data_Logger/../OS/tasks/../system_d.h:
 
-../Core/OS/tasks/../scheduler/../macro_types.h:
+../Core/Data_Logger/../OS/scheduler/scheduler.h:
 
-../Core/OS/tasks/../scheduler/../system_d.h:
+../Core/Data_Logger/../OS/scheduler/../tasks/task.h:
 
-../Core/OS/tasks/../events/events.h:
+../Core/Data_Logger/../OS/scheduler/../macro_types.h:
 
-../Core/OS/tasks/../events/mask_def_enum.h:
+../Core/Data_Logger/../OS/scheduler/../system_d.h:
 
-../Core/OS/tasks/../events/mask.h:
+../Core/Data_Logger/../Peripherals/Uart.h:
 
-../Core/OS/tasks/../events/../macro_types.h:
+../Core/Data_Logger/../Peripherals/../Inc/usart.h:
 
-../Core/OS/tasks/../events/flags.h:
+../Core/Data_Logger/../Peripherals/../Inc/main.h:
 
-../Core/OS/tasks/../events/../system_d.h:
-
-../Core/Inc/../OS/time.h:
-
-../Core/OS/tasks/../../config.h:
-
-../Core/OS/tasks/../../Peripherals/Uart.h:
-
-../Core/OS/tasks/../../Peripherals/../Inc/usart.h:
-
-../Core/OS/tasks/../../Peripherals/../Inc/main.h:
-
-../Core/OS/tasks/../../Peripherals/../OS/macro_types.h:
-
-../Core/OS/tasks/../../Data_Logger/Data_logger.h:
-
-../Core/OS/tasks/../../Data_Logger/../OS/system_d.h:
+../Core/Data_Logger/../Peripherals/../OS/macro_types.h:

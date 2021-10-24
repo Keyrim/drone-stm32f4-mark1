@@ -11,10 +11,18 @@
 #include "macro_types.h"
 #include "stm32f4xx_hal.h"
 
-
-typedef struct system_t
+/*
+ * @brief software structure definition
+ * 		  use this to put things when u do not know where to put them :)
+ */
+typedef struct
 {
+	uint8_t cpu_load;
+}software_t;
 
+typedef struct
+{
+	software_t software;
 }system_t;
 
 

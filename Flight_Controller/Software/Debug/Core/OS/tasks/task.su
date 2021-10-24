@@ -1,4 +1,6 @@
-task.c:34:6:TASK_Init	16	static
-task.c:64:13:process_scheduler	16	static
-task.c:72:13:process_events	16	static
-task.c:82:10:TASK_get_task	16	static
+task.c:36:6:TASK_Init	16	static
+task.c:86:13:process_scheduler	16	static
+task.c:94:13:process_events	16	static
+task.c:103:13:process_uart_test	48	static
+task.c:113:13:process_data_logger	16	static
+task.c:126:10:TASK_get_task	16	static

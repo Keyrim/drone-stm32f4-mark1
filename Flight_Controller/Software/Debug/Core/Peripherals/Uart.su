@@ -1,0 +1,7 @@
+Uart.c:22:6:UART_Idle_Line_Callback	24	static
+Uart.c:34:6:UART_Transfer_Complete_Callback	32	static
+Uart.c:61:10:UART_Availables	16	static
+Uart.c:72:6:UART_Get	16	static
+Uart.c:86:6:UART_Init	16	static
+Uart.c:108:6:UART_Transmit	32	static
+Uart.c:130:10:get_nb_bytes_available	24	static

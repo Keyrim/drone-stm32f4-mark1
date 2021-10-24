@@ -36,6 +36,8 @@ typedef enum
 {
 	task_ids_eSCHEDULER,
 	task_ids_eEVENTS,
+	task_ids_eUART_TEST,
+	task_ids_eDATA_LOGGER,
 	task_ids_eCOUNT
 }task_ids_e;
 
@@ -44,11 +46,11 @@ typedef enum
  */
 typedef enum
 {
-	task_mode_eWAIT = 0x00,	//Task is in iddle mode, i.e never called, wait mode has to be 0 cuz tasks start in the wait mode by default
-	task_mode_eTIME,			//Execute the task at a given frequency
+	task_mode_eWAIT = 0x00,	//Task is in idle mode, i.e never called, wait mode has to be 0 cuz tasks start in the wait mode by default
+	task_mode_eTIME,		//Execute the task at a given frequency
 	task_mode_eEVENT,		//Execute the task once and then goes to wait mode
 	task_mode_eALWAYS,		//Always executed
-	task_mode_eTIMMER		//Execute in a timmer routine and not in the main scheduler
+	task_mode_eTIMMER		//Execute in a timer routine and not in the main scheduler
 }task_mode_e;
 
 typedef struct task
