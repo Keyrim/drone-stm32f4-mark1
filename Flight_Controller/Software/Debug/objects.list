@@ -5,6 +5,7 @@
 "./Core/OS/scheduler/scheduler.o"
 "./Core/OS/tasks/task.o"
 "./Core/OS/time.o"
+"./Core/Peripherals/Spi.o"
 "./Core/Peripherals/Uart.o"
 "./Core/Src/dma.o"
 "./Core/Src/gpio.o"

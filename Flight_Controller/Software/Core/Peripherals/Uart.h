@@ -28,10 +28,11 @@ typedef enum
  */
 typedef enum
 {
-	uart_e4 = 0,
+	uart_e1 = 0,
+	uart_e4,
 	uart_eCOUNT,
 	/* Redefinition for a more practical use */
-	uart_eTELEMETRY = uart_e4
+	uart_eTELEMETRY = uart_e1
 }uart_e;
 
 /*

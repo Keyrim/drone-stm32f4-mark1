@@ -13,8 +13,8 @@
 
 #define DEFINE_EVENT(event_function_param, nb_mask_param, enable_param)\
 {  																\
-		.function = event_function_param ,						\
-		.nb_mask = nb_mask_param , 								\
+		.function = event_function_param,						\
+		.nb_mask = nb_mask_param, 								\
 		.state = enable_param									\
 }
 
