@@ -48,7 +48,7 @@ void SPI_Init(void)
 	/* Set every CS pin to "unlock" (set) */
 	for(uint8_t p = 0; p < cs_eCOUNT; p++)
 	{
-		HAL_GPIO_WritePin(cs[p].port, cs[p].pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(cs[p].port, cs[p].pin, GPIO_PIN_SET);
 	}
 
 }

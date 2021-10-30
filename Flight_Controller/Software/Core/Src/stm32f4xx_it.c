@@ -274,7 +274,7 @@ void USART1_IRQHandler(void)
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
-
+  UART_Idle_Line_Callback(uart_e1);
   /* USER CODE END USART1_IRQn 1 */
 }
 
@@ -340,6 +340,10 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 	if(huart == &huart4)
 	{
 		UART_Transfer_Complete_Callback(uart_e4);
+	}
+	else if(huart == &huart1)
+	{
+		UART_Transfer_Complete_Callback(uart_e1 );
 	}
 }
 

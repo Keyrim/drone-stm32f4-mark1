@@ -86,8 +86,8 @@ void UART_Get(uart_e id, uint8_t * c)
 void UART_Init(void)
 {
 	/* Link  huarts to the right uarts structures */
+	uart[uart_e1].huart = &huart1;
 	uart[uart_e4].huart = &huart4;
-	uart[uart_e4].huart = &huart1;
 
 	/* Initialization */
 	for(uint8_t u = 0; u < uart_eCOUNT; u ++)
