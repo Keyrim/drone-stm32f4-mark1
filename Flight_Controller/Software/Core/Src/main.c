@@ -21,6 +21,7 @@
 #include "main.h"
 #include "dma.h"
 #include "spi.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -30,6 +31,8 @@
 #include "../OS/tasks/task.h"
 #include "../Peripherals/Uart.h"
 #include "../Data_Logger/Data_logger.h"
+#include "../Sensors/Mpu.h"
+#include "../Peripherals/Timer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,15 +98,20 @@ int main(void)
   MX_UART4_Init();
   MX_SPI3_Init();
   MX_USART1_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* Peripherals initialization */
   UART_Init();
+//  SPI_Init(); C est de la merde ça marche pas :!!!!!!!!!!!!!!!!!!!!!!!!!!! dsfng:;jnsdfgkdfsg
+  /* Sensors initialization */
+  MPU_Init();
 
   /* System initialization */
   DATA_LOGGER_Init(&mark1);
   TASK_Init(&mark1);
   SCHEDULER_init();
+  TIMER_Start(timer_eMOTORS, TIM_CHANNEL_ALL);
   /* USER CODE END 2 */
 
   /* Infinite loop */

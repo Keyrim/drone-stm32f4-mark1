@@ -7,6 +7,9 @@
 
 #include "Spi.h"
 
+
+#define SPI_TRANSMIT_TIMEOUT	5
+
 /*
  * @brief Macro to configure spi structures
  */
@@ -17,13 +20,14 @@
 
 #define DEF_CS(cs_port_, cs_pin_) 				\
 {												\
-	.port = cs_port_,						\
-	.pin = cs_pin_							\
+	.port = cs_port_,							\
+	.pin_high = cs_pin_,						\
+	.pin_low = cs_pin_<<16						\
 }
 
 static cs_t cs[cs_eCOUNT] =
 {
-		[cs_eMPU6000] = DEF_CS(GPIOA, 12)
+		[cs_eMPU6000] = DEF_CS(GPIOA, GPIO_PIN_15)
 };
 
 /*
@@ -35,7 +39,7 @@ static spi_t spi[spi_eCOUNT] =
 };
 
 /*
- * @brief Initialize hspi with the correct prescaler
+ * @brief Initialize hspi
  * 		  Set the cs pin in "set" mode to unlock the spi
  */
 void SPI_Init(void)
@@ -48,8 +52,59 @@ void SPI_Init(void)
 	/* Set every CS pin to "unlock" (set) */
 	for(uint8_t p = 0; p < cs_eCOUNT; p++)
 	{
-		HAL_GPIO_WritePin(cs[p].port, cs[p].pin, GPIO_PIN_SET);
+		cs[p].port->BSRR = cs[p].pin_high;
 	}
-
 }
+
+/*
+ * @brief send data to a specified chip over a specified spi
+ * @param spi_id Which spi
+ * @param cs_id Which chip select
+ * @param data data array to transmit
+ * @param len number of bytes
+ */
+void SPI_Transmit(spi_e spi_id, cs_e cs_id, uint8_t * data, uint8_t len)
+{
+	/* Lock the chip */
+	HAL_GPIO_WritePin(cs[cs_id].port, cs[cs_id].pin_high, GPIO_PIN_RESET);
+	/* Send data */
+	HAL_SPI_Transmit(spi[spi_id].hspi, data, len, SPI_TRANSMIT_TIMEOUT);
+	/* Unlock the chip */
+	HAL_GPIO_WritePin(cs[cs_id].port, cs[cs_id].pin_high, GPIO_PIN_SET);
+}
+
+/*
+ * @brief send and receive data to a specified chip over a specified spi
+ * @param spi_id Id of the spi to use
+ * @param cs_id Id of the chip selet to use
+ * @param transmit Data to transmit
+ * @param receive Buffer to put the data
+ * @param len Number of byte
+ */
+void SPI_Transmit_Receive(spi_e spi_id, cs_e cs_id, uint8_t * transmit, uint8_t * receive, uint16_t len)
+{
+	/* Lock the chip */
+	HAL_GPIO_WritePin(cs[cs_id].port, cs[cs_id].pin_high, GPIO_PIN_RESET);
+	/* Send data */
+	HAL_SPI_TransmitReceive(spi[spi_id].hspi, transmit, receive, len, SPI_TRANSMIT_TIMEOUT);
+	/* Unlock the chip */
+	HAL_GPIO_WritePin(cs[cs_id].port, cs[cs_id].pin_high, GPIO_PIN_SET);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

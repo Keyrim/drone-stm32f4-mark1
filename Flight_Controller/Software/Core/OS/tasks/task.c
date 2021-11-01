@@ -12,6 +12,7 @@
 #include "../../config.h"
 #include "../../Peripherals/Uart.h"
 #include "../../Data_Logger/Data_logger.h"
+#include "../../Sensors/Mpu.h"
 
 #define TASKS_START_TIME_US 2000000
 #define PERIOD_US_FROM_HERTZ(hertz_param) (1000000 / hertz_param)
@@ -38,15 +39,15 @@ void TASK_Init(system_t * mark1_)
 	mark1 = mark1_;
 	SCHEDULER_enable_task(task_ids_eEVENTS, TRUE);
 	SCHEDULER_enable_task(task_ids_eSCHEDULER, TRUE);
-//	SCHEDULER_enable_task(task_ids_eUART_TEST, TRUE);
+	SCHEDULER_enable_task(task_ids_eGYRO_UPDATE, TRUE);
 	SCHEDULER_enable_task(task_ids_eDATA_LOGGER, TRUE);
 }
 
 /* Task function prototypes */
 static void process_scheduler(uint32_t current_time_us);
 static void process_events(uint32_t current_time_us);
-static void process_uart_test(uint32_t current_time_us);
 static void process_data_logger(uint32_t current_time_us);
+static void process_gyro_update(uint32_t current_time_us);
 
 /* Tasks definition */
 task_t tasks [task_ids_eCOUNT] =
@@ -63,18 +64,19 @@ task_t tasks [task_ids_eCOUNT] =
 													PERIOD_US_FROM_HERTZ(1),
 													task_mode_eALWAYS
 													),
-		[task_ids_eUART_TEST] = 		DEFINE_TASK(task_ids_eUART_TEST,
-													task_priority_eHIGH,
-													process_uart_test,
-													PERIOD_US_FROM_HERTZ(1),
-													task_mode_eTIME
-													),
 		[task_ids_eDATA_LOGGER] = 		DEFINE_TASK(task_ids_eDATA_LOGGER,
 													task_priority_eHIGH,
 													process_data_logger,
 													PERIOD_US_FROM_HERTZ(1),
 													task_mode_eTIME
 													),
+		[task_ids_eGYRO_UPDATE] = 		DEFINE_TASK(task_ids_eGYRO_UPDATE,
+													task_priority_eREAL_TIME,
+													process_gyro_update,
+													PERIOD_US_FROM_HERTZ(100),
+													task_mode_eTIME
+													),
+
 
 };
 
@@ -98,22 +100,20 @@ static void process_events(uint32_t current_time_us)
 }
 
 /*
- * @brief test function for the uart driver
- */
-static void process_uart_test(uint32_t current_time_us)
-{
-	UNUSED(current_time_us);
-	uint8_t data [] = "Hello what's up ?\n";
-	UART_Transmit(uart_eTELEMETRY, data, 20);
-}
-
-/*
  * @brief Call the data logger main function
  */
 static void process_data_logger(uint32_t current_time_us)
 {
 	UNUSED(current_time_us);
 	DATA_LOGGER_Main();
+}
+
+/*
+ * @brief Measure new data from the gyro
+ */
+static void process_gyro_update(uint32_t current_time_us)
+{
+	MPU_Read_All();
 }
 
 /* ---------------- Public functions ------------------ */

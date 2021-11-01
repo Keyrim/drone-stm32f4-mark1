@@ -36,8 +36,8 @@ typedef enum
 {
 	task_ids_eSCHEDULER,
 	task_ids_eEVENTS,
-	task_ids_eUART_TEST,
 	task_ids_eDATA_LOGGER,
+	task_ids_eGYRO_UPDATE,
 	task_ids_eCOUNT
 }task_ids_e;
 

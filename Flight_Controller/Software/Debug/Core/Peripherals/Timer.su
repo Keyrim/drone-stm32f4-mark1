@@ -1,0 +1,4 @@
+Timer.c:35:6:TIMER_Start	16	static
+Timer.c:45:6:TIMER_Stop	16	static
+Timer.c:55:6:TIMER_Set_ARR	16	static
+Timer.c:65:6:TIMER_Set_All_CCR	16	static
