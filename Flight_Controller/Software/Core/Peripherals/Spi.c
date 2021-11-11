@@ -44,10 +44,12 @@ static spi_t spi[spi_eCOUNT] =
  */
 void SPI_Init(void)
 {
+	uint8_t just_to_init_spi = 0;
 	/* Initialize every SPI */
 	for(uint8_t s = 0; s < spi_eCOUNT; s++)
 	{
 		HAL_SPI_Init(spi[s].hspi);
+		HAL_SPI_Transmit(spi[s].hspi, &just_to_init_spi, 1, SPI_TRANSMIT_TIMEOUT);
 	}
 	/* Set every CS pin to "unlock" (set) */
 	for(uint8_t p = 0; p < cs_eCOUNT; p++)

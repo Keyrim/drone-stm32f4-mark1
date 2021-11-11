@@ -39,7 +39,7 @@ void TASK_Init(system_t * mark1_)
 	mark1 = mark1_;
 	SCHEDULER_enable_task(task_ids_eEVENTS, TRUE);
 	SCHEDULER_enable_task(task_ids_eSCHEDULER, TRUE);
-	SCHEDULER_enable_task(task_ids_eGYRO_UPDATE, TRUE);
+//	SCHEDULER_enable_task(task_ids_eGYRO_UPDATE, TRUE);
 	SCHEDULER_enable_task(task_ids_eDATA_LOGGER, TRUE);
 }
 
@@ -73,7 +73,7 @@ task_t tasks [task_ids_eCOUNT] =
 		[task_ids_eGYRO_UPDATE] = 		DEFINE_TASK(task_ids_eGYRO_UPDATE,
 													task_priority_eREAL_TIME,
 													process_gyro_update,
-													PERIOD_US_FROM_HERTZ(100),
+													PERIOD_US_FROM_HERTZ(1),
 													task_mode_eTIME
 													),
 

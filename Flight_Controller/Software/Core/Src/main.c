@@ -103,15 +103,16 @@ int main(void)
 
   /* Peripherals initialization */
   UART_Init();
-//  SPI_Init(); C est de la merde ça marche pas :!!!!!!!!!!!!!!!!!!!!!!!!!!! dsfng:;jnsdfgkdfsg
+//  SPI_Init(); //C est de la merde ça marche pas :!!!!!!!!!!!!!!!!!!!!!!!!!!! dsfng:;jnsdfgkdfsg
   /* Sensors initialization */
-  MPU_Init();
+  HAL_Delay(100);
+//  MPU_Init();
 
   /* System initialization */
   DATA_LOGGER_Init(&mark1);
   TASK_Init(&mark1);
   SCHEDULER_init();
-  TIMER_Start(timer_eMOTORS, TIM_CHANNEL_ALL);
+  TIMER_Start_All_Channels(timer_eMOTORS);
   /* USER CODE END 2 */
 
   /* Infinite loop */

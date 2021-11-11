@@ -38,6 +38,18 @@ void TIMER_Start(timer_e timer_id, uint16_t channel)
 }
 
 /*
+ * @brief Start all channels of a timer
+ * @param timer_id id of the timer
+ */
+void TIMER_Start_All_Channels(timer_e timer_id)
+{
+	HAL_TIM_PWM_Start(timer[timer_id].htim, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(timer[timer_id].htim, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(timer[timer_id].htim, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(timer[timer_id].htim, TIM_CHANNEL_4);
+}
+
+/*
  * @brief Stop channels of a timer
  * @param timer_id The timer
  * @param channel The channel
@@ -45,6 +57,18 @@ void TIMER_Start(timer_e timer_id, uint16_t channel)
 void TIMER_Stop(timer_e timer_id, uint16_t channel)
 {
 	HAL_TIM_PWM_Stop(timer[timer_id].htim, channel);
+}
+
+/*
+ * @brief Stop all channels of a timer
+ * @param timer_id id of the timer
+ */
+void TIMER_Stop_All_Channels(timer_e timer_id)
+{
+	HAL_TIM_PWM_Stop(timer[timer_id].htim, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop(timer[timer_id].htim, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Stop(timer[timer_id].htim, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Stop(timer[timer_id].htim, TIM_CHANNEL_4);
 }
 
 /*

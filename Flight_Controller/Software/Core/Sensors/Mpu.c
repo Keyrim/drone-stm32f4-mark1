@@ -42,8 +42,8 @@ void MPU_Init(void)
 	SPI_Transmit(mpu.spi, mpu.cs, mpu_disable_i2c, 2);
 	HAL_Delay(150);
 	/* -------------------- Gyroscope initialization --------------------------- */
-	uint8_t temp_write[2];
-	uint8_t temp_read[2];
+	uint8_t temp_write[2] = { 0 };
+	uint8_t temp_read[2] = { 0 };
 	temp_write[0] = MPU6050_GYRO_CONFIG | MPU6050_READ ;
 	SPI_Transmit_Receive(mpu.spi, mpu.cs, temp_write, temp_read, 2);
 	HAL_Delay(150);
