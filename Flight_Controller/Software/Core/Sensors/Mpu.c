@@ -8,12 +8,17 @@
 #include "Mpu.h"
 #include "main.h"
 
+
 /* MPU6000 use configuration */
 static mpu_t mpu =
 {
 		.gyro_range = MPU_GYRO_2000s,
 		.acc_range = MPU_ACC_8G
 };
+
+/* Static functions prototypes */
+void MPU_Convert_Acc_Data(void);
+void MPU_Convert_Gyro_Data(void);
 
 /*
  * @brief Wake up the MPU6000
@@ -132,6 +137,16 @@ void MPU_Init(void)
 			break;
 	}
 }
+float * MPU_Get_Gyro_Ptr(void)
+{
+	return mpu.gyro;
+}
+
+float * MPU_Get_Acc_Ptr(void)
+{
+	return mpu.acc;
+}
+
 void MPU_Read_All(void)
 {
 #if USE_SPI
@@ -140,6 +155,8 @@ void MPU_Read_All(void)
 #else
 	I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_XOUT_H, mpu.data, 14);
 #endif
+	MPU_Convert_Acc_Data();
+	MPU_Convert_Gyro_Data();
 }
 
 void Gyro_Read(void)
@@ -150,8 +167,28 @@ void Gyro_Read(void)
 #else
 	I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_GYRO_XOUT_H, mpu.gyro_data, 6);
 #endif
+	MPU_Convert_Gyro_Data();
 }
 
+/*
+ * @brief Convert acc bytes to measurement
+ */
+void MPU_Convert_Acc_Data(void)
+{
+	mpu.acc[0] = (int16_t)(mpu.acc_data[1] | (mpu.acc_data[0] << 8)) * mpu.acc_conversion;
+	mpu.acc[1] = (int16_t)(mpu.acc_data[3] | (mpu.acc_data[2] << 8)) * mpu.acc_conversion;
+	mpu.acc[2] = (int16_t)(mpu.acc_data[5] | (mpu.acc_data[4] << 8)) * mpu.acc_conversion;
+}
+
+/*
+ * @brief Convert gyro bytes to measurement
+ */
+void MPU_Convert_Gyro_Data(void)
+{
+	mpu.gyro[0] = (int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion;
+	mpu.gyro[1] = (int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion;
+	mpu.gyro[2] = (int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion;
+}
 
 
 

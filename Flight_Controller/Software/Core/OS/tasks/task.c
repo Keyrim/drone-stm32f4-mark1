@@ -13,6 +13,7 @@
 #include "../../Peripherals/Uart.h"
 #include "../../Data_Logger/Data_logger.h"
 #include "../../Sensors/Mpu.h"
+#include "../../Complementary_Filter/Complementary_Filter.h"
 
 #define TASKS_START_TIME_US 2000000
 #define PERIOD_US_FROM_HERTZ(hertz_param) (1000000 / hertz_param)
@@ -73,7 +74,7 @@ task_t tasks [task_ids_eCOUNT] =
 		[task_ids_eGYRO_UPDATE] = 		DEFINE_TASK(task_ids_eGYRO_UPDATE,
 													task_priority_eREAL_TIME,
 													process_gyro_update,
-													PERIOD_US_FROM_HERTZ(1),
+													PERIOD_US_FROM_HERTZ(100),
 													task_mode_eTIME
 													),
 
@@ -114,6 +115,7 @@ static void process_data_logger(uint32_t current_time_us)
 static void process_gyro_update(uint32_t current_time_us)
 {
 	MPU_Read_All();
+	COMPLEMENTARY_FILTER_Process();
 }
 
 /* ---------------- Public functions ------------------ */

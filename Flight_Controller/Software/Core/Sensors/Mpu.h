@@ -108,18 +108,22 @@ typedef struct
 	/* MPU globals */
 	mpu_state_e state;
 	uint8_t data[14];
-	/* Gyroscope settings */
+	/* Gyroscope */
 	gyro_range_e gyro_range;
 	uint8_t * gyro_data;
 	float gyro_conversion;
-	/* Accelerometer settings */
+	float gyro[3];
+	/* Accelerometer */
 	uint8_t * acc_data;
 	acc_range_e acc_range;
 	float acc_conversion;
+	float acc[3];
 }mpu_t;
 
 void MPU_Init(void);
 void MPU_Read_All(void);
+float * MPU_Get_Gyro_Ptr(void);
+float * MPU_Get_Acc_Ptr(void);
 void Gyro_Read(void);
 
 #endif /* SENSORS_MPU_H_ */

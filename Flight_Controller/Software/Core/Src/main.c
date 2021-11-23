@@ -32,6 +32,7 @@
 #include "../Peripherals/Uart.h"
 #include "../Data_Logger/Data_logger.h"
 #include "../Sensors/Mpu.h"
+#include "../Complementary_Filter/Complementary_Filter.h"
 #include "../Peripherals/Timer.h"
 /* USER CODE END Includes */
 
@@ -106,6 +107,7 @@ int main(void)
   /* Sensors initialization */
   HAL_Delay(100);
   MPU_Init();
+  COMPLEMENTARY_FILTER_Init(MPU_Get_Gyro_Ptr(), MPU_Get_Acc_Ptr());
 
   /* System initialization */
   DATA_LOGGER_Init(&mark1);

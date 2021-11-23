@@ -1,0 +1,3 @@
+Complementary_Filter.c:28:6:COMPLEMENTARY_FILTER_Init	16	static
+Complementary_Filter.c:37:6:COMPLEMENTARY_FILTER_Process	32	static
+Complementary_Filter.c:91:13:angle_180	16	static

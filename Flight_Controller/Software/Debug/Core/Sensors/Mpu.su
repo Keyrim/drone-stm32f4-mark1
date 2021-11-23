@@ -1,3 +1,7 @@
-Mpu.c:22:6:MPU_Init	24	static
-Mpu.c:135:6:MPU_Read_All	16	static
-Mpu.c:145:6:Gyro_Read	16	static
+Mpu.c:27:6:MPU_Init	24	static
+Mpu.c:140:9:MPU_Get_Gyro_Ptr	4	static
+Mpu.c:145:9:MPU_Get_Acc_Ptr	4	static
+Mpu.c:150:6:MPU_Read_All	16	static
+Mpu.c:162:6:Gyro_Read	16	static
+Mpu.c:176:6:MPU_Convert_Acc_Data	4	static
+Mpu.c:186:6:MPU_Convert_Gyro_Data	4	static

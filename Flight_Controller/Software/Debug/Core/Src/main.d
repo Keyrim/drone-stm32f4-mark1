@@ -44,6 +44,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../Data_Logger/../OS/system_d.h ../Core/Src/../Sensors/Mpu.h \
  ../Core/Src/../Sensors/../Peripherals/I2c.h \
  ../Core/Src/../Sensors/../Peripherals/../Inc/i2c.h \
+ ../Core/Src/../Complementary_Filter/Complementary_Filter.h \
+ ../Core/Src/../Complementary_Filter/../OS/macro_types.h \
  ../Core/Src/../Peripherals/Timer.h
 
 ../Core/Inc/main.h:
@@ -149,5 +151,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../Sensors/../Peripherals/I2c.h:
 
 ../Core/Src/../Sensors/../Peripherals/../Inc/i2c.h:
+
+../Core/Src/../Complementary_Filter/Complementary_Filter.h:
+
+../Core/Src/../Complementary_Filter/../OS/macro_types.h:
 
 ../Core/Src/../Peripherals/Timer.h:

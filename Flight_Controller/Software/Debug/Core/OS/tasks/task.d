@@ -50,7 +50,9 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
  ../Core/OS/tasks/../../Sensors/Mpu.h \
  ../Core/OS/tasks/../../Sensors/../Peripherals/I2c.h \
  ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h
+ ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h \
+ ../Core/OS/tasks/../../Complementary_Filter/Complementary_Filter.h \
+ ../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h
 
 ../Core/OS/tasks/task.h:
 
@@ -161,3 +163,7 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
 ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h:
 
 ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h:
+
+../Core/OS/tasks/../../Complementary_Filter/Complementary_Filter.h:
+
+../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h:
