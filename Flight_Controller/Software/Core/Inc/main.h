@@ -58,8 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define MPU_CS_Pin GPIO_PIN_15
-#define MPU_CS_GPIO_Port GPIOA
+#define MPU_POWER_Pin GPIO_PIN_12
+#define MPU_POWER_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

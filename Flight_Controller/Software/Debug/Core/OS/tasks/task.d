@@ -23,9 +23,10 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
@@ -47,11 +48,9 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
  ../Core/OS/tasks/../../Data_Logger/Data_logger.h \
  ../Core/OS/tasks/../../Data_Logger/../OS/system_d.h \
  ../Core/OS/tasks/../../Sensors/Mpu.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/Spi.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/spi.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/gpio.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../OS/macro_types.h
+ ../Core/OS/tasks/../../Sensors/../Peripherals/I2c.h \
+ ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h \
+ ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h
 
 ../Core/OS/tasks/task.h:
 
@@ -105,11 +104,13 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
 
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h:
+
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
+
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
-
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 
@@ -155,12 +156,8 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
 
 ../Core/OS/tasks/../../Sensors/Mpu.h:
 
-../Core/OS/tasks/../../Sensors/../Peripherals/Spi.h:
+../Core/OS/tasks/../../Sensors/../Peripherals/I2c.h:
 
-../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/spi.h:
+../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h:
 
 ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h:
-
-../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/gpio.h:
-
-../Core/OS/tasks/../../Sensors/../Peripherals/../OS/macro_types.h:

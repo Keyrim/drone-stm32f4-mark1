@@ -20,7 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
-#include "spi.h"
+#include "i2c.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -96,17 +96,16 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_UART4_Init();
-  MX_SPI3_Init();
   MX_USART1_UART_Init();
   MX_TIM3_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
   /* Peripherals initialization */
   UART_Init();
-//  SPI_Init(); //C est de la merde ça marche pas :!!!!!!!!!!!!!!!!!!!!!!!!!!! dsfng:;jnsdfgkdfsg
   /* Sensors initialization */
   HAL_Delay(100);
-//  MPU_Init();
+  MPU_Init();
 
   /* System initialization */
   DATA_LOGGER_Init(&mark1);

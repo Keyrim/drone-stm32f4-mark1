@@ -39,7 +39,7 @@ void TASK_Init(system_t * mark1_)
 	mark1 = mark1_;
 	SCHEDULER_enable_task(task_ids_eEVENTS, TRUE);
 	SCHEDULER_enable_task(task_ids_eSCHEDULER, TRUE);
-//	SCHEDULER_enable_task(task_ids_eGYRO_UPDATE, TRUE);
+	SCHEDULER_enable_task(task_ids_eGYRO_UPDATE, TRUE);
 	SCHEDULER_enable_task(task_ids_eDATA_LOGGER, TRUE);
 }
 

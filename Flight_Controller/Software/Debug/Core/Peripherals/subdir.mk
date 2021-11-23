@@ -5,17 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Peripherals/Spi.c \
+../Core/Peripherals/I2c.c \
 ../Core/Peripherals/Timer.c \
 ../Core/Peripherals/Uart.c 
 
 OBJS += \
-./Core/Peripherals/Spi.o \
+./Core/Peripherals/I2c.o \
 ./Core/Peripherals/Timer.o \
 ./Core/Peripherals/Uart.o 
 
 C_DEPS += \
-./Core/Peripherals/Spi.d \
+./Core/Peripherals/I2c.d \
 ./Core/Peripherals/Timer.d \
 ./Core/Peripherals/Uart.d 
 

@@ -2,13 +2,23 @@
  * Mpu.h
  *
  *  Created on: 30 oct. 2021
- *      Author: Theo
+ *      Author: Théo Magne
  */
 
 #ifndef SENSORS_MPU_H_
 #define SENSORS_MPU_H_
 
+#define USE_SPI	0	/* If we dont use SPI, then we use I2C */
+
+#if USE_SPI
 #include "../Peripherals/Spi.h"
+#define SPI_MPU	spi_e1
+#define CS_MPU	cs_eMPU6000
+#else
+#include "../Peripherals/I2c.h"
+#define I2C_MPU i2c_e1
+#endif
+
 
 /* Default I2C address */
 #define MPU6050_I2C_ADDR			0xD0
@@ -95,12 +105,9 @@ typedef enum
 
 typedef struct
 {
-	/* SPI configuration */
-	spi_e spi;
-	cs_e cs;
 	/* MPU globals */
 	mpu_state_e state;
-	uint8_t readings[14];
+	uint8_t data[14];
 	/* Gyroscope settings */
 	gyro_range_e gyro_range;
 	uint8_t * gyro_data;
