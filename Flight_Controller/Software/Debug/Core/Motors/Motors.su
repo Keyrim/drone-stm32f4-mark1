@@ -1,5 +1,5 @@
-Motors.c:17:6:MOTOR_Init	16	static
-Motors.c:26:6:MOTOR_Process	8	static
-Motors.c:59:6:MOTOR_Enable	4	static
-Motors.c:67:6:MOTOR_Disable	4	static
-Motors.c:76:6:MOTOR_Set	16	static
+Motors.c:17:6:MOTOR_Init	8	static
+Motors.c:22:6:MOTOR_Process	8	static
+Motors.c:55:6:MOTOR_Enable	4	static
+Motors.c:63:6:MOTOR_Disable	4	static
+Motors.c:72:6:MOTOR_Set	16	static

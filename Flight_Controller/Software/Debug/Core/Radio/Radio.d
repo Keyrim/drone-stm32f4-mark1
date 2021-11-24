@@ -1,5 +1,7 @@
-Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
- ../Core/OS/tasks/../system_d.h ../Core/OS/tasks/../macro_types.h \
+Core/Radio/Radio.o: ../Core/Radio/Radio.c ../Core/Radio/Radio.h \
+ ../Core/Radio/../Peripherals/Uart.h \
+ ../Core/Radio/../Peripherals/../Inc/usart.h \
+ ../Core/Radio/../Peripherals/../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -30,38 +32,16 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/OS/tasks/../scheduler/scheduler.h \
- ../Core/OS/tasks/../scheduler/../tasks/task.h \
- ../Core/OS/tasks/../scheduler/../macro_types.h \
- ../Core/OS/tasks/../scheduler/../system_d.h \
- ../Core/OS/tasks/../events/events.h \
- ../Core/OS/tasks/../events/mask_def_enum.h \
- ../Core/OS/tasks/../events/mask.h \
- ../Core/OS/tasks/../events/../macro_types.h \
- ../Core/OS/tasks/../events/flags.h \
- ../Core/OS/tasks/../events/../system_d.h ../Core/Inc/../OS/time.h \
- ../Core/OS/tasks/../../config.h \
- ../Core/OS/tasks/../../Peripherals/Uart.h \
- ../Core/OS/tasks/../../Peripherals/../Inc/usart.h \
- ../Core/OS/tasks/../../Peripherals/../Inc/main.h \
- ../Core/OS/tasks/../../Peripherals/../OS/macro_types.h \
- ../Core/OS/tasks/../../Data_Logger/Data_logger.h \
- ../Core/OS/tasks/../../Data_Logger/../OS/system_d.h \
- ../Core/OS/tasks/../../Sensors/Mpu.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/I2c.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h \
- ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h \
- ../Core/OS/tasks/../../Complementary_Filter/Complementary_Filter.h \
- ../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h \
- ../Core/OS/tasks/../../Motors/Motors.h \
- ../Core/OS/tasks/../../Motors/../Peripherals/Timer.h ../Core/Inc/tim.h \
- ../Core/Inc/main.h ../Core/OS/tasks/../../Motors/../OS/macro_types.h
+ ../Core/Radio/../Peripherals/../Task_Manager/macro_types.h \
+ ../Core/Radio/../Task_Manager/macro_types.h ../Core/Radio/Ibus.h
 
-../Core/OS/tasks/task.h:
+../Core/Radio/Radio.h:
 
-../Core/OS/tasks/../system_d.h:
+../Core/Radio/../Peripherals/Uart.h:
 
-../Core/OS/tasks/../macro_types.h:
+../Core/Radio/../Peripherals/../Inc/usart.h:
+
+../Core/Radio/../Peripherals/../Inc/main.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -123,60 +103,8 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Core/OS/tasks/../scheduler/scheduler.h:
+../Core/Radio/../Peripherals/../Task_Manager/macro_types.h:
 
-../Core/OS/tasks/../scheduler/../tasks/task.h:
+../Core/Radio/../Task_Manager/macro_types.h:
 
-../Core/OS/tasks/../scheduler/../macro_types.h:
-
-../Core/OS/tasks/../scheduler/../system_d.h:
-
-../Core/OS/tasks/../events/events.h:
-
-../Core/OS/tasks/../events/mask_def_enum.h:
-
-../Core/OS/tasks/../events/mask.h:
-
-../Core/OS/tasks/../events/../macro_types.h:
-
-../Core/OS/tasks/../events/flags.h:
-
-../Core/OS/tasks/../events/../system_d.h:
-
-../Core/Inc/../OS/time.h:
-
-../Core/OS/tasks/../../config.h:
-
-../Core/OS/tasks/../../Peripherals/Uart.h:
-
-../Core/OS/tasks/../../Peripherals/../Inc/usart.h:
-
-../Core/OS/tasks/../../Peripherals/../Inc/main.h:
-
-../Core/OS/tasks/../../Peripherals/../OS/macro_types.h:
-
-../Core/OS/tasks/../../Data_Logger/Data_logger.h:
-
-../Core/OS/tasks/../../Data_Logger/../OS/system_d.h:
-
-../Core/OS/tasks/../../Sensors/Mpu.h:
-
-../Core/OS/tasks/../../Sensors/../Peripherals/I2c.h:
-
-../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h:
-
-../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h:
-
-../Core/OS/tasks/../../Complementary_Filter/Complementary_Filter.h:
-
-../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h:
-
-../Core/OS/tasks/../../Motors/Motors.h:
-
-../Core/OS/tasks/../../Motors/../Peripherals/Timer.h:
-
-../Core/Inc/tim.h:
-
-../Core/Inc/main.h:
-
-../Core/OS/tasks/../../Motors/../OS/macro_types.h:
+../Core/Radio/Ibus.h:

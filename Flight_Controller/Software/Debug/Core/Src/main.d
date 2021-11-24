@@ -30,25 +30,21 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/dma.h ../Core/Inc/main.h ../Core/Inc/i2c.h ../Core/Inc/tim.h \
- ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- ../Core/Src/../OS/scheduler/scheduler.h \
- ../Core/Src/../OS/scheduler/../tasks/task.h \
- ../Core/Src/../OS/scheduler/../tasks/../system_d.h \
- ../Core/Src/../OS/scheduler/../tasks/../macro_types.h \
- ../Core/Src/../OS/scheduler/../macro_types.h \
- ../Core/Src/../OS/scheduler/../system_d.h ../Core/Src/../OS/tasks/task.h \
- ../Core/Src/../Peripherals/Uart.h \
+ ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Src/../Peripherals/Uart.h \
  ../Core/Src/../Peripherals/../Inc/usart.h \
- ../Core/Src/../Peripherals/../OS/macro_types.h \
+ ../Core/Src/../Peripherals/../Task_Manager/macro_types.h \
  ../Core/Src/../Data_Logger/Data_logger.h \
- ../Core/Src/../Data_Logger/../OS/system_d.h ../Core/Src/../Sensors/Mpu.h \
- ../Core/Src/../Sensors/../Peripherals/I2c.h \
+ ../Core/Src/../Data_Logger/../Task_Manager/macro_types.h \
+ ../Core/Src/../Sensors/Mpu.h ../Core/Src/../Sensors/../Peripherals/I2c.h \
  ../Core/Src/../Sensors/../Peripherals/../Inc/i2c.h \
  ../Core/Src/../Complementary_Filter/Complementary_Filter.h \
- ../Core/Src/../Complementary_Filter/../OS/macro_types.h \
+ ../Core/Src/../Complementary_Filter/../Task_Manager/macro_types.h \
+ ../Core/Src/../Radio/Radio.h ../Core/Src/../Radio/../Peripherals/Uart.h \
+ ../Core/Src/../Radio/../Task_Manager/macro_types.h \
  ../Core/Src/../Peripherals/Timer.h ../Core/Src/../Motors/Motors.h \
  ../Core/Src/../Motors/../Peripherals/Timer.h \
- ../Core/Src/../Motors/../OS/macro_types.h
+ ../Core/Src/../Motors/../Task_Manager/macro_types.h \
+ ../Core/Src/../Task_Manager/Task_Manager.h
 
 ../Core/Inc/main.h:
 
@@ -124,29 +120,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/gpio.h:
 
-../Core/Src/../OS/scheduler/scheduler.h:
-
-../Core/Src/../OS/scheduler/../tasks/task.h:
-
-../Core/Src/../OS/scheduler/../tasks/../system_d.h:
-
-../Core/Src/../OS/scheduler/../tasks/../macro_types.h:
-
-../Core/Src/../OS/scheduler/../macro_types.h:
-
-../Core/Src/../OS/scheduler/../system_d.h:
-
-../Core/Src/../OS/tasks/task.h:
-
 ../Core/Src/../Peripherals/Uart.h:
 
 ../Core/Src/../Peripherals/../Inc/usart.h:
 
-../Core/Src/../Peripherals/../OS/macro_types.h:
+../Core/Src/../Peripherals/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Data_Logger/Data_logger.h:
 
-../Core/Src/../Data_Logger/../OS/system_d.h:
+../Core/Src/../Data_Logger/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Sensors/Mpu.h:
 
@@ -156,7 +138,13 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Src/../Complementary_Filter/Complementary_Filter.h:
 
-../Core/Src/../Complementary_Filter/../OS/macro_types.h:
+../Core/Src/../Complementary_Filter/../Task_Manager/macro_types.h:
+
+../Core/Src/../Radio/Radio.h:
+
+../Core/Src/../Radio/../Peripherals/Uart.h:
+
+../Core/Src/../Radio/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Peripherals/Timer.h:
 
@@ -164,4 +152,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Src/../Motors/../Peripherals/Timer.h:
 
-../Core/Src/../Motors/../OS/macro_types.h:
+../Core/Src/../Motors/../Task_Manager/macro_types.h:
+
+../Core/Src/../Task_Manager/Task_Manager.h:

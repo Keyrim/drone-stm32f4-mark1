@@ -69,7 +69,6 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
   /* USER CODE END I2C1_MspInit 0 */
 
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_I2C1_CLK_ENABLE();
     /**I2C1 GPIO Configuration
     PB8     ------> I2C1_SCL
     PB9     ------> I2C1_SDA
@@ -82,6 +81,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* I2C1 clock enable */
+    __HAL_RCC_I2C1_CLK_ENABLE();
 
     /* I2C1 DMA Init */
     /* I2C1_RX Init */

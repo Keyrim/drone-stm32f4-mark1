@@ -1,6 +1,9 @@
 Core/Data_Logger/Data_logger.o: ../Core/Data_Logger/Data_logger.c \
- ../Core/Data_Logger/Data_logger.h ../Core/Data_Logger/../OS/system_d.h \
- ../Core/Data_Logger/../OS/macro_types.h \
+ ../Core/Data_Logger/Data_logger.h \
+ ../Core/Data_Logger/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Peripherals/Uart.h \
+ ../Core/Data_Logger/../Peripherals/../Inc/usart.h \
+ ../Core/Data_Logger/../Peripherals/../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -31,22 +34,17 @@ Core/Data_Logger/Data_logger.o: ../Core/Data_Logger/Data_logger.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Data_Logger/../OS/tasks/task.h \
- ../Core/Data_Logger/../OS/tasks/../system_d.h \
- ../Core/Data_Logger/../OS/scheduler/scheduler.h \
- ../Core/Data_Logger/../OS/scheduler/../tasks/task.h \
- ../Core/Data_Logger/../OS/scheduler/../macro_types.h \
- ../Core/Data_Logger/../OS/scheduler/../system_d.h \
- ../Core/Data_Logger/../Peripherals/Uart.h \
- ../Core/Data_Logger/../Peripherals/../Inc/usart.h \
- ../Core/Data_Logger/../Peripherals/../Inc/main.h \
- ../Core/Data_Logger/../Peripherals/../OS/macro_types.h
+ ../Core/Data_Logger/../Peripherals/../Task_Manager/macro_types.h
 
 ../Core/Data_Logger/Data_logger.h:
 
-../Core/Data_Logger/../OS/system_d.h:
+../Core/Data_Logger/../Task_Manager/macro_types.h:
 
-../Core/Data_Logger/../OS/macro_types.h:
+../Core/Data_Logger/../Peripherals/Uart.h:
+
+../Core/Data_Logger/../Peripherals/../Inc/usart.h:
+
+../Core/Data_Logger/../Peripherals/../Inc/main.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -108,22 +106,4 @@ Core/Data_Logger/Data_logger.o: ../Core/Data_Logger/Data_logger.c \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Core/Data_Logger/../OS/tasks/task.h:
-
-../Core/Data_Logger/../OS/tasks/../system_d.h:
-
-../Core/Data_Logger/../OS/scheduler/scheduler.h:
-
-../Core/Data_Logger/../OS/scheduler/../tasks/task.h:
-
-../Core/Data_Logger/../OS/scheduler/../macro_types.h:
-
-../Core/Data_Logger/../OS/scheduler/../system_d.h:
-
-../Core/Data_Logger/../Peripherals/Uart.h:
-
-../Core/Data_Logger/../Peripherals/../Inc/usart.h:
-
-../Core/Data_Logger/../Peripherals/../Inc/main.h:
-
-../Core/Data_Logger/../Peripherals/../OS/macro_types.h:
+../Core/Data_Logger/../Peripherals/../Task_Manager/macro_types.h:

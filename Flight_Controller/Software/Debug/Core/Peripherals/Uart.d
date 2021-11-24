@@ -31,7 +31,7 @@ Core/Peripherals/Uart.o: ../Core/Peripherals/Uart.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Peripherals/../OS/macro_types.h
+ ../Core/Peripherals/../Task_Manager/macro_types.h
 
 ../Core/Peripherals/Uart.h:
 
@@ -99,4 +99,4 @@ Core/Peripherals/Uart.o: ../Core/Peripherals/Uart.c \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Core/Peripherals/../OS/macro_types.h:
+../Core/Peripherals/../Task_Manager/macro_types.h:

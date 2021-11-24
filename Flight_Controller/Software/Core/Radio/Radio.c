@@ -6,3 +6,44 @@
  */
 
 
+#include "Radio.h"
+#include "Ibus.h"
+
+#define TIMEOUT_RADIO_MS	50
+
+static radio_t radio = { 0 };
+
+void RADIO_Process_Init(void)
+{
+#if USE_IBUS
+	IBUS_Init(radio.channels);
+#endif
+}
+
+void RADIO_Process_Main(void)
+{
+
+#if USE_IBUS
+	if(IBUS_Process())
+	{
+		radio.next_update = HAL_GetTick() + TIMEOUT_RADIO_MS;
+		radio.state = radio_state_eOK;
+	}
+	else if(HAL_GetTick() > radio.next_update)
+	{
+		radio.state = radio_state_eTIMEOUT;
+	}
+#endif
+}
+
+radio_state_e RADIO_Get_State(void)
+{
+	return radio.state;
+}
+
+uint16_t * RADIO_Get_Channel(void)
+{
+	return radio.channels;
+}
+
+

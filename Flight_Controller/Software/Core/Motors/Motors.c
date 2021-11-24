@@ -11,16 +11,12 @@
 #define TIMER_MOTOR timer_e3
 
 static motor_t motor = { 0 };
-static bool_e flag_start = FALSE;
+static bool_e flag_start = TRUE;
 static bool_e flag_stop = FALSE;
 
-void MOTOR_Init(bool_e enable)
+void MOTOR_Init(void)
 {
 	 TIMER_Start_All_Channels(TIMER_MOTOR);
-	 if(enable)
-	 {
-		 flag_start = TRUE;
-	 }
 }
 
 void MOTOR_Process(void)

@@ -8,7 +8,7 @@
 #ifndef DATA_LOGGER_H_
 #define DATA_LOGGER_H_
 
-#include "../OS/system_d.h"
+#include "../Task_Manager/macro_types.h"
 
 /*
  * @brief data id enumeration definition
@@ -69,7 +69,7 @@ typedef struct
 }data_t;
 
 
-void DATA_LOGGER_Init(system_t * sys_);
+void DATA_LOGGER_Init(void);
 void DATA_LOGGER_Main(void);
 void DATA_LOGGER_Reception(uint8_t * input_buffer);
 data_t * DATA_LOGGER_Get_Data(data_id_e id);

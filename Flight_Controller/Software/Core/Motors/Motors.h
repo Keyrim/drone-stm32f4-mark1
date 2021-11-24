@@ -9,7 +9,7 @@
 #define MOTORS_H_
 
 #include "../Peripherals/Timer.h"
-#include "../OS/macro_types.h"
+#include "../Task_Manager/macro_types.h"
 
 typedef enum
 {
@@ -26,8 +26,9 @@ typedef struct
 	uint16_t output[motor_eCOUNT];
 }motor_t;
 
-void MOTOR_Init(bool_e enable);
+void MOTOR_Init(void);
 void MOTOR_Process(void);
 void MOTOR_Enable(void);
 void MOTOR_Disable(void);
+void MOTOR_Set(float * target);
 #endif /* MOTORS_H_ */

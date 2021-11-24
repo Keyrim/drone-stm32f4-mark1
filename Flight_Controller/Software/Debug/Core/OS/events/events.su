@@ -1,5 +1,0 @@
-events.c:41:6:EVENT_init	8	static
-events.c:52:6:EVENT_process	40	static
-events.c:95:8:EVENT_Check_flag	24	static
-events.c:104:6:EVENT_Set_flag	16	static,ignoring_inline_asm
-events.c:115:6:EVENT_Clear_flag	16	static,ignoring_inline_asm

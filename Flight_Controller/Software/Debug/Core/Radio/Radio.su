@@ -1,0 +1,4 @@
+Radio.c:16:6:RADIO_Process_Init	8	static
+Radio.c:23:6:RADIO_Process_Main	8	static
+Radio.c:39:15:RADIO_Get_State	4	static
+Radio.c:44:12:RADIO_Get_Channel	4	static

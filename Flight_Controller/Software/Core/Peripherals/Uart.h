@@ -10,7 +10,7 @@
 
 
 #include "../Inc/usart.h"
-#include "../OS/macro_types.h"
+#include "../Task_Manager/macro_types.h"
 
 #define LEN_BUFFER	512
 
@@ -31,8 +31,6 @@ typedef enum
 	uart_e1 = 0,
 	uart_e4,
 	uart_eCOUNT,
-	/* Redefinition for a more practical use */
-	uart_eTELEMETRY = uart_e1
 }uart_e;
 
 /*

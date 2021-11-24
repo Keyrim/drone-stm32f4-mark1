@@ -6,6 +6,7 @@
  */
 
 #include "Complementary_Filter.h"
+#include "../Sensors/Mpu.h"
 #include "math.h"
 
 
@@ -19,17 +20,16 @@ static complementary_filter_t filter =
 {
 		.frequency = FREQUENCY,
 		.period = (1.0f / (float)FREQUENCY)
-
 };
 
 /* Static function prototype */
 static void angle_180(float * x);
 
-void COMPLEMENTARY_FILTER_Init(float * gyro, float * acc)
+void COMPLEMENTARY_FILTER_Init(void)
 {
-	filter.gyro = gyro;
+	filter.gyro = MPU_Get_Gyro_Ptr();
 	filter.gyro_raw = NULL;
-	filter.acc = acc;
+	filter.acc = MPU_Get_Acc_Ptr();
 	filter.alpha_gyro = ALPHA;
 	filter.alpha_acc = 1.0f - ALPHA;
 }

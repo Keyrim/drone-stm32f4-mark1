@@ -24,13 +24,11 @@ Core/Complementary_Filter \
 Core/Controller \
 Core/Data_Logger \
 Core/Motors \
-Core/OS/events \
-Core/OS/scheduler \
-Core/OS/tasks \
-Core/OS \
 Core/Peripherals \
+Core/Radio \
 Core/Sensors \
 Core/Src \
 Core/Startup \
+Core/Task_Manager \
 Drivers/STM32F4xx_HAL_Driver/Src \
 

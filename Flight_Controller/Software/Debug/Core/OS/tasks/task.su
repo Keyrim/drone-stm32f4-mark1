@@ -1,6 +1,0 @@
-task.c:39:6:TASK_Init	16	static
-task.c:90:13:process_scheduler	16	static
-task.c:98:13:process_events	16	static
-task.c:107:13:process_data_logger	16	static
-task.c:116:13:process_gyro_update	16	static
-task.c:129:10:TASK_get_task	16	static

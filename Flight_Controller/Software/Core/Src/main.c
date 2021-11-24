@@ -27,14 +27,14 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../OS/scheduler/scheduler.h"
-#include "../OS/tasks/task.h"
 #include "../Peripherals/Uart.h"
 #include "../Data_Logger/Data_logger.h"
 #include "../Sensors/Mpu.h"
 #include "../Complementary_Filter/Complementary_Filter.h"
+#include "../Radio/Radio.h"
 #include "../Peripherals/Timer.h"
 #include "../Motors/Motors.h"
+#include "../Task_Manager/Task_Manager.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,7 +54,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-static system_t mark1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -102,28 +101,27 @@ int main(void)
   MX_TIM3_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+  /* Wait for everyone to start */
+  HAL_Delay(15);
   /* Peripherals initialization */
   UART_Init();
-  /* Sensors initialization */
-  HAL_Delay(100);
-  MPU_Init();
-  COMPLEMENTARY_FILTER_Init(MPU_Get_Gyro_Ptr(), MPU_Get_Acc_Ptr());
-  MOTOR_Init(TRUE);
+  /* Task definition */
+  TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Read_All);
+  TASK_MANAGER_Add_Task("Complementary Filter", 	COMPLEMENTARY_FILTER_Init, 		NULL, 								COMPLEMENTARY_FILTER_Process);
+  TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL, 								MOTOR_Process);
+  TASK_MANAGER_Add_Task("Radio", 					RADIO_Process_Init, 			RADIO_Process_Main, 				NULL);
+  TASK_MANAGER_Add_Task("Data Logger", 				DATA_LOGGER_Init, 				DATA_LOGGER_Main, 					NULL);
 
   /* System initialization */
-  DATA_LOGGER_Init(&mark1);
-  TASK_Init(&mark1);
-  SCHEDULER_init();
+  TASK_MANAGER_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  SCHEDULER_run();
     /* USER CODE END WHILE */
-
+	  TASK_MANAGER_Main();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

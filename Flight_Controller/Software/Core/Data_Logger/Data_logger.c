@@ -7,15 +7,14 @@
 
 #include "Data_logger.h"
 #include "string.h"
-#include "../OS/tasks/task.h"
-#include "../OS/scheduler/scheduler.h"
 #include "../Peripherals/Uart.h"
 
-static system_t * mark1 ;
 
-#define PERIODE_PING 			500000
-#define PERIODE_CONFIG_SEND 	100000
-#define PERIODE_SEND			10000
+
+#define PERIODE_PING 			500
+#define PERIODE_CONFIG_SEND 	100
+#define PERIODE_SEND			10
+#define UART_TELEMETRY			uart_e1
 
 /*
  * @brief Macro to define data
@@ -77,12 +76,11 @@ static void parse_uart(void);
  * @brief Declare every data
  * @param mark1_ pointer to a system_t structure
  */
-void DATA_LOGGER_Init(system_t * mark1_)
+void DATA_LOGGER_Init(void)
 {
-	mark1 = mark1_;
 	/* -------------- Outputs ----------------- */
 	DEFINE_DATA(data_id_eMCU_LOAD,
-				(void*)&mark1->software.cpu_load,
+				NULL,
 				data_format_e16B_FLOAT_2D,
 				"Mcu Load",
 				use_format_eAS_OUTPUT);
@@ -309,7 +307,7 @@ void push_data_to_uart(uint8_t * buffer, uint8_t len)
 		checksum += (uint32_t)buffer_new[1 + b];
 	}
 	buffer_new[1 + len] = (uint8_t)(checksum % 256) ;
-	UART_Transmit(uart_eTELEMETRY, buffer_new, len+2);
+	UART_Transmit(UART_TELEMETRY, buffer_new, len+2);
 }
 
 /*
@@ -317,6 +315,17 @@ void push_data_to_uart(uint8_t * buffer, uint8_t len)
  */
 static void state_machine(void)
 {
+	/* Time management for periodic transmissions */
+	static uint32_t next_time_state_machine = 0;
+	static uint32_t current_period = PERIODE_PING;
+	uint32_t time_ms = HAL_GetTick();
+	if(time_ms < next_time_state_machine)
+	{
+		return;
+	}
+	next_time_state_machine = time_ms + current_period;
+
+	/* State machine variables */
 	static data_logger_state_e state = data_logger_state_eIDLE;
 	static data_logger_state_e previous_state = data_logger_state_eTRANSMIT_CONFIG ;
 	bool_e entrance = previous_state != state ;
@@ -327,7 +336,7 @@ static void state_machine(void)
 			if(entrance)
 			{
 				/* When we are in the idle mode, we just ping the device at PERIODE_PING µs interval */
-				SCHEDULER_reschedule_task(task_ids_eDATA_LOGGER, PERIODE_PING);
+				current_period = PERIODE_PING;
 			}
 
 			tmp_len = DATA_LOGGER_Get_Data_Config(data_id_eCONFIG_REQUEST, tmp);
@@ -367,7 +376,7 @@ static void state_machine(void)
 			/* Change the data logger task period to send configuration slowly */
 			if(entrance)
 			{
-				SCHEDULER_reschedule_task(task_ids_eDATA_LOGGER, PERIODE_CONFIG_SEND);
+				current_period = PERIODE_CONFIG_SEND;
 			}
 			while(data_list[id_init_counter].use_format == use_format_eNOT_USED && id_init_counter < data_id_eCOUNT)
 			{
@@ -397,7 +406,7 @@ static void state_machine(void)
 		case data_logger_state_eLOG:
 			if(entrance)
 			{
-				SCHEDULER_reschedule_task(task_ids_eDATA_LOGGER, PERIODE_SEND);
+				current_period = PERIODE_SEND;
 			}
 			if(stop_flag)
 			{
@@ -428,10 +437,10 @@ static void parse_uart(void)
 	static uint8_t buffer_counter = 0;
 	static uint16_t checksum = 0;
 	/* Check for available data */
-	if(UART_Availables(uart_eTELEMETRY))
+	if(UART_Availables(UART_TELEMETRY))
 	{
 		uint8_t c;
-		UART_Get(uart_eTELEMETRY, &c);
+		UART_Get(UART_TELEMETRY, &c);
 		switch(state)
 		{
 			case parser_state_eSTART_BYTE:

@@ -32,7 +32,8 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
  ../Core/Inc/stm32f4xx_it.h ../Core/Src/../Peripherals/Uart.h \
  ../Core/Src/../Peripherals/../Inc/usart.h \
  ../Core/Src/../Peripherals/../Inc/main.h \
- ../Core/Src/../Peripherals/../OS/macro_types.h
+ ../Core/Src/../Peripherals/../Task_Manager/macro_types.h \
+ ../Core/Src/../Task_Manager/Task_Manager.h
 
 ../Core/Inc/main.h:
 
@@ -104,4 +105,6 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
 
 ../Core/Src/../Peripherals/../Inc/main.h:
 
-../Core/Src/../Peripherals/../OS/macro_types.h:
+../Core/Src/../Peripherals/../Task_Manager/macro_types.h:
+
+../Core/Src/../Task_Manager/Task_Manager.h:

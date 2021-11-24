@@ -5,16 +5,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/OS/scheduler/scheduler.c 
+../Core/Task_Manager/Task_Manager.c \
+../Core/Task_Manager/time.c 
 
 OBJS += \
-./Core/OS/scheduler/scheduler.o 
+./Core/Task_Manager/Task_Manager.o \
+./Core/Task_Manager/time.o 
 
 C_DEPS += \
-./Core/OS/scheduler/scheduler.d 
+./Core/Task_Manager/Task_Manager.d \
+./Core/Task_Manager/time.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Core/OS/scheduler/%.o: ../Core/OS/scheduler/%.c Core/OS/scheduler/subdir.mk
+Core/Task_Manager/%.o: ../Core/Task_Manager/%.c Core/Task_Manager/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F405xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 

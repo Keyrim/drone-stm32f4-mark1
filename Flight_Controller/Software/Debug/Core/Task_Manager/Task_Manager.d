@@ -1,5 +1,5 @@
-Core/OS/events/events.o: ../Core/OS/events/events.c \
- ../Core/OS/events/mask_def.h ../Core/OS/events/events.h \
+Core/Task_Manager/Task_Manager.o: ../Core/Task_Manager/Task_Manager.c \
+ ../Core/Task_Manager/macro_types.h ../Core/Task_Manager/time.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -30,18 +30,11 @@ Core/OS/events/events.o: ../Core/OS/events/events.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/OS/events/mask_def_enum.h ../Core/OS/events/mask.h \
- ../Core/OS/events/../macro_types.h ../Core/OS/events/flags.h \
- ../Core/OS/events/../system_d.h ../Core/OS/events/../macro_types.h \
- ../Core/OS/events/../scheduler/scheduler.h \
- ../Core/OS/events/../scheduler/../tasks/task.h \
- ../Core/OS/events/../scheduler/../tasks/../system_d.h \
- ../Core/OS/events/../scheduler/../macro_types.h \
- ../Core/OS/events/../scheduler/../system_d.h
+ ../Core/Task_Manager/Task_Manager.h
 
-../Core/OS/events/mask_def.h:
+../Core/Task_Manager/macro_types.h:
 
-../Core/OS/events/events.h:
+../Core/Task_Manager/time.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -103,24 +96,4 @@ Core/OS/events/events.o: ../Core/OS/events/events.c \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Core/OS/events/mask_def_enum.h:
-
-../Core/OS/events/mask.h:
-
-../Core/OS/events/../macro_types.h:
-
-../Core/OS/events/flags.h:
-
-../Core/OS/events/../system_d.h:
-
-../Core/OS/events/../macro_types.h:
-
-../Core/OS/events/../scheduler/scheduler.h:
-
-../Core/OS/events/../scheduler/../tasks/task.h:
-
-../Core/OS/events/../scheduler/../tasks/../system_d.h:
-
-../Core/OS/events/../scheduler/../macro_types.h:
-
-../Core/OS/events/../scheduler/../system_d.h:
+../Core/Task_Manager/Task_Manager.h:

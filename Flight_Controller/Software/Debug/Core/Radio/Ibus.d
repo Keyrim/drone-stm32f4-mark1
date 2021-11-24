@@ -1,7 +1,7 @@
-Core/OS/scheduler/scheduler.o: ../Core/OS/scheduler/scheduler.c \
- ../Core/OS/scheduler/scheduler.h ../Core/OS/scheduler/../tasks/task.h \
- ../Core/OS/scheduler/../tasks/../system_d.h \
- ../Core/OS/scheduler/../tasks/../macro_types.h \
+Core/Radio/Ibus.o: ../Core/Radio/Ibus.c ../Core/Radio/Ibus.h \
+ ../Core/Radio/Radio.h ../Core/Radio/../Peripherals/Uart.h \
+ ../Core/Radio/../Peripherals/../Inc/usart.h \
+ ../Core/Radio/../Peripherals/../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -32,16 +32,19 @@ Core/OS/scheduler/scheduler.o: ../Core/OS/scheduler/scheduler.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/OS/scheduler/../macro_types.h ../Core/OS/scheduler/../system_d.h \
- ../Core/OS/scheduler/../time.h
+ ../Core/Radio/../Peripherals/../Task_Manager/macro_types.h \
+ ../Core/Radio/../Task_Manager/macro_types.h \
+ ../Core/Radio/../Task_Manager/time.h
 
-../Core/OS/scheduler/scheduler.h:
+../Core/Radio/Ibus.h:
 
-../Core/OS/scheduler/../tasks/task.h:
+../Core/Radio/Radio.h:
 
-../Core/OS/scheduler/../tasks/../system_d.h:
+../Core/Radio/../Peripherals/Uart.h:
 
-../Core/OS/scheduler/../tasks/../macro_types.h:
+../Core/Radio/../Peripherals/../Inc/usart.h:
+
+../Core/Radio/../Peripherals/../Inc/main.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -103,8 +106,8 @@ Core/OS/scheduler/scheduler.o: ../Core/OS/scheduler/scheduler.c \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Core/OS/scheduler/../macro_types.h:
+../Core/Radio/../Peripherals/../Task_Manager/macro_types.h:
 
-../Core/OS/scheduler/../system_d.h:
+../Core/Radio/../Task_Manager/macro_types.h:
 
-../Core/OS/scheduler/../time.h:
+../Core/Radio/../Task_Manager/time.h:
