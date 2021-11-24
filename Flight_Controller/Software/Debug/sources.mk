@@ -21,6 +21,7 @@ OBJCOPY_BIN :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Complementary_Filter \
+Core/Controller \
 Core/Data_Logger \
 Core/Motors \
 Core/OS/events \

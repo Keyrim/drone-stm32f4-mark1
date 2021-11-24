@@ -23,11 +23,8 @@ void MOTOR_Init(bool_e enable)
 	 }
 }
 
-
-
 void MOTOR_Process(void)
 {
-
 	if(flag_stop)
 	{
 		/* Clear flag */
@@ -72,6 +69,10 @@ void MOTOR_Disable(void)
 	flag_stop = TRUE;
 }
 
+/*
+ * @brief update motor target values
+ * @param array of new float values
+ */
 void MOTOR_Set(float * target)
 {
 	motor.output[0] = (uint16_t)target[0]+1000;

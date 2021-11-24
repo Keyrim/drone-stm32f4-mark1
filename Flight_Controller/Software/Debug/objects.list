@@ -1,4 +1,5 @@
 "./Core/Complementary_Filter/Complementary_Filter.o"
+"./Core/Controller/Controller.o"
 "./Core/Data_Logger/Data_logger.o"
 "./Core/Motors/Motors.o"
 "./Core/OS/events/events.o"

@@ -20,6 +20,14 @@ typedef enum
 	TRUE
 }bool_e;
 
+typedef enum
+{
+	axe_eROLL = 0,
+	axe_ePITCH,
+	axe_eYAW,
+	axe_eCOUNT
+}axe_e;
+
 
 #define BITS_OFF(var, mask)		((var) &= ~0 ^ (mask))
 #define BIT_SET(var, bitno)		((var) |= (1 << (bitno)))

@@ -11,13 +11,7 @@
 #include "stdint.h"
 #include "../OS/macro_types.h"
 
-typedef enum
-{
-	axe_eROLL = 0,
-	axe_ePITCH,
-	axe_eYAW,
-	axe_eCOUNT
-}axe_e;
+
 
 typedef struct
 {
