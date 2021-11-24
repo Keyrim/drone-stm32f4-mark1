@@ -6,17 +6,30 @@
  */
 
 #include "Controller.h"
-static controller_t controller = { 0 };
+#include "../Complementary_Filter/Complementary_Filter.h"
+#include "../Motor_Mixer/Motor_Mixer.h"
 
-void CONTROLLER_Init(float * angle, float * angle_speed)
+static controller_t controller =
 {
-	controller.angle = angle;
-	controller.angle_speed = angle_speed;
+		/* Pid Configuration 	 Roll 		Pitch 		Yaw*/
+		.angle_kp = 			{10.0f, 	10.0f, 		0},
+		.angle_speed_kp = 		{3.0f, 		3.0f, 		10.0f},
+};
+
+void CONTROLLER_Init(void)
+{
+	controller.angle = COMPLEMENTARY_FILTER_Get_Filter()->angle;
+	controller.angle_speed = COMPLEMENTARY_FILTER_Get_Filter()->gyro;
+	controller.output = MOTOR_MIXER_Get_Angle_Input_Ptr();
 
 	controller.state = controller_state_eDISABLED;
 }
 void CONTROLLER_Process(void)
 {
+	if(controller.new_state != controller.state)
+	{
+		controller.state = controller.new_state;
+	}
 	if(controller.state)
 	{
 		/* A first PID to correct angle errors when we are in angle mode */
@@ -49,4 +62,29 @@ void CONTROLLER_Process(void)
 		controller.output[axe_eYAW] = 0;
 	}
 }
+
+void CONTROLLER_Set_State(controller_state_e new_state)
+{
+	controller.new_state = new_state;
+}
+
+float * CONTROLLER_Get_Angle_Target(void)
+{
+	return controller.target_angle;
+}
+
+float * CONTROLLER_Get_Angle_Speed_Target(void)
+{
+	return controller.target_angle_speed;
+}
+
+
+
+
+
+
+
+
+
+
 

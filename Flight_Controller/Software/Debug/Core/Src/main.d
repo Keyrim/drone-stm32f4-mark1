@@ -44,7 +44,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../Peripherals/Timer.h ../Core/Src/../Motors/Motors.h \
  ../Core/Src/../Motors/../Peripherals/Timer.h \
  ../Core/Src/../Motors/../Task_Manager/macro_types.h \
- ../Core/Src/../Task_Manager/Task_Manager.h
+ ../Core/Src/../Task_Manager/Task_Manager.h \
+ ../Core/Src/../Controller/Controller.h \
+ ../Core/Src/../Controller/Controller.h \
+ ../Core/Src/../Controller/../Task_Manager/macro_types.h \
+ ../Core/Src/../High_Level/High_Level.h \
+ ../Core/Src/../High_Level/../Task_Manager/macro_types.h \
+ ../Core/Src/../Motor_Mixer/Motor_Mixer.h \
+ ../Core/Src/../Motor_Mixer/../Task_Manager/macro_types.h \
+ ../Core/Src/../Motor_Mixer/../Motors/Motors.h
 
 ../Core/Inc/main.h:
 
@@ -155,3 +163,19 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../Motors/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Task_Manager/Task_Manager.h:
+
+../Core/Src/../Controller/Controller.h:
+
+../Core/Src/../Controller/Controller.h:
+
+../Core/Src/../Controller/../Task_Manager/macro_types.h:
+
+../Core/Src/../High_Level/High_Level.h:
+
+../Core/Src/../High_Level/../Task_Manager/macro_types.h:
+
+../Core/Src/../Motor_Mixer/Motor_Mixer.h:
+
+../Core/Src/../Motor_Mixer/../Task_Manager/macro_types.h:
+
+../Core/Src/../Motor_Mixer/../Motors/Motors.h:

@@ -99,8 +99,7 @@ typedef enum
 typedef enum
 {
 	mpu_state_eOK = 0,
-	mpu_state_eNO_ANSWER,
-	mpu_state_eBUSY
+	mpu_state_eERROR
 }mpu_state_e;
 
 typedef struct

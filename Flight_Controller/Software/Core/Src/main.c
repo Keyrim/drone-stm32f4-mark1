@@ -35,6 +35,9 @@
 #include "../Peripherals/Timer.h"
 #include "../Motors/Motors.h"
 #include "../Task_Manager/Task_Manager.h"
+#include "../Controller/Controller.h"
+#include "../High_Level/High_Level.h"
+#include "../Motor_Mixer/Motor_Mixer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,8 +112,11 @@ int main(void)
   TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Read_All);
   TASK_MANAGER_Add_Task("Complementary Filter", 	COMPLEMENTARY_FILTER_Init, 		NULL, 								COMPLEMENTARY_FILTER_Process);
   TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL, 								MOTOR_Process);
+  TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								CONTROLLER_Process);
+  TASK_MANAGER_Add_Task("Motor Mixer", 				NULL, 							NULL, 								MOTOR_MIXER_Process);
   TASK_MANAGER_Add_Task("Radio", 					RADIO_Process_Init, 			RADIO_Process_Main, 				NULL);
   TASK_MANAGER_Add_Task("Data Logger", 				DATA_LOGGER_Init, 				DATA_LOGGER_Main, 					NULL);
+  TASK_MANAGER_Add_Task("High Level", 				HIGH_LEVEL_Init, 				HIGH_LEVEL_Process_Main, 			NULL);
 
   /* System initialization */
   TASK_MANAGER_Init();

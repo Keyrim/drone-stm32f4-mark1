@@ -23,6 +23,8 @@ SUBDIRS := \
 Core/Complementary_Filter \
 Core/Controller \
 Core/Data_Logger \
+Core/High_Level \
+Core/Motor_Mixer \
 Core/Motors \
 Core/Peripherals \
 Core/Radio \

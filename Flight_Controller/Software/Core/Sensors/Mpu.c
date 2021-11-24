@@ -149,11 +149,19 @@ float * MPU_Get_Acc_Ptr(void)
 
 void MPU_Read_All(void)
 {
+	if(mpu.state == mpu_state_eERROR)
+	{
+		return;
+	}
 #if USE_SPI
 	uint8_t registers [14] = {MPU6050_ACCEL_XOUT_H | MPU6050_READ};
 	SPI_Transmit_Receive(SPI_MPU, CS_MPU, registers, mpu.data, 14);
 #else
-	I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_XOUT_H, mpu.data, 14);
+	if(I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_XOUT_H, mpu.data, 14))
+	{
+		mpu.state = mpu_state_eERROR;
+		return;
+	}
 #endif
 	MPU_Convert_Acc_Data();
 	MPU_Convert_Gyro_Data();
@@ -161,11 +169,19 @@ void MPU_Read_All(void)
 
 void Gyro_Read(void)
 {
+	if(mpu.state == mpu_state_eERROR)
+	{
+		return;
+	}
 #if USE_SPI
 	uint8_t registers [6] = {MPU6050_GYRO_XOUT_H | MPU6050_READ};
 	SPI_Transmit_Receive(SPI_MPU, CS_MPU, registers, mpu.gyro_data, 6);
 #else
-	I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_GYRO_XOUT_H, mpu.gyro_data, 6);
+	if(I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_GYRO_XOUT_H, mpu.gyro_data, 6))
+	{
+		mpu.state = mpu_state_eERROR;
+		return;
+	}
 #endif
 	MPU_Convert_Gyro_Data();
 }

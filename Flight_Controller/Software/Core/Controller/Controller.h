@@ -31,13 +31,15 @@ typedef struct
 	float angle_speed_error[axe_eCOUNT];	/*	[degree / s]	Angular speed error */
 	float angle_speed_kp[axe_eCOUNT];
 	/* Controller state */
-	float output[axe_eCOUNT];
+	float * output;
 	controller_state_e state;
 	controller_state_e new_state;
 }controller_t;
 
-void CONTROLLER_Init(float * angle, float * angle_speed);
+void CONTROLLER_Init(void);
 void CONTROLLER_Process(void);
 void CONTROLLER_Set_State(controller_state_e new_state);
+float * CONTROLLER_Get_Angle_Target(void);
+float * CONTROLLER_Get_Angle_Speed_Target(void);
 
 #endif /* CONTROLLER_H_ */

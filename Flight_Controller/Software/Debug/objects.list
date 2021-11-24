@@ -1,6 +1,8 @@
 "./Core/Complementary_Filter/Complementary_Filter.o"
 "./Core/Controller/Controller.o"
 "./Core/Data_Logger/Data_logger.o"
+"./Core/High_Level/High_Level.o"
+"./Core/Motor_Mixer/Motor_Mixer.o"
 "./Core/Motors/Motors.o"
 "./Core/Peripherals/I2c.o"
 "./Core/Peripherals/Timer.o"

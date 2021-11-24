@@ -25,12 +25,12 @@ static i2c_t i2c[i2c_eCOUNT] =
 void I2C_Init(void)
 {
 }
-void I2C_Mem_Write(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size)
+HAL_StatusTypeDef I2C_Mem_Write(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size)
 {
-	HAL_I2C_Mem_Write(i2c[i2c_id].hi2c, device_address, mem_address, I2C_MEMADD_SIZE_8BIT, data, size, I2C_OPERATION_TIMEOUT);
+	return HAL_I2C_Mem_Write(i2c[i2c_id].hi2c, device_address, mem_address, I2C_MEMADD_SIZE_8BIT, data, size, I2C_OPERATION_TIMEOUT);
 }
 
-void I2C_Mem_Read(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size)
+HAL_StatusTypeDef I2C_Mem_Read(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size)
 {
-	HAL_I2C_Mem_Read(i2c[i2c_id].hi2c, device_address, mem_address, I2C_MEMADD_SIZE_8BIT, data, size, I2C_OPERATION_TIMEOUT);
+	return HAL_I2C_Mem_Read(i2c[i2c_id].hi2c, device_address, mem_address, I2C_MEMADD_SIZE_8BIT, data, size, I2C_OPERATION_TIMEOUT);
 }

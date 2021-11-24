@@ -28,7 +28,7 @@ typedef struct
 }i2c_t;
 
 void I2C_Init(void);
-void I2C_Mem_Write(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
-void I2C_Mem_Read(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
+HAL_StatusTypeDef I2C_Mem_Write(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
+HAL_StatusTypeDef I2C_Mem_Read(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
 
 #endif /* I2C_H_ */
