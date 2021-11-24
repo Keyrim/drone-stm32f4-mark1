@@ -17,8 +17,6 @@ typedef enum
 {
 	timer_e3,
 	timer_eCOUNT,
-	/* Rename for an easier use */
-	timer_eMOTORS = timer_e3
 }timer_e;
 
 

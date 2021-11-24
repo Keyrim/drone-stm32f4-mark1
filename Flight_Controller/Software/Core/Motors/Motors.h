@@ -8,13 +8,8 @@
 #ifndef MOTORS_H_
 #define MOTORS_H_
 
-#include "../Peripherals/Spi.h"
-
-typedef enum
-{
-	motor_state_eLOCKED,
-	motor_state_eUNLOCKED
-}motor_state_e;
+#include "../Peripherals/Timer.h"
+#include "../OS/macro_types.h"
 
 typedef enum
 {
@@ -27,9 +22,12 @@ typedef enum
 
 typedef struct
 {
-	motor_state_e state;
-	float target[motor_eCOUNT];
-	int16_t target_linearized[motor_eCOUNT];
+	bool_e is_enabled;
+	uint16_t output[motor_eCOUNT];
 }motor_t;
 
+void MOTOR_Init(bool_e enable);
+void MOTOR_Process(void);
+void MOTOR_Enable(void);
+void MOTOR_Disable(void);
 #endif /* MOTORS_H_ */

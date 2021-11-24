@@ -6,3 +6,76 @@
  */
 
 
+#include "Motors.h"
+
+#define TIMER_MOTOR timer_e3
+
+static motor_t motor = { 0 };
+static bool_e flag_start = FALSE;
+static bool_e flag_stop = FALSE;
+
+void MOTOR_Init(bool_e enable)
+{
+	 TIMER_Start_All_Channels(TIMER_MOTOR);
+	 if(enable)
+	 {
+		 flag_start = TRUE;
+	 }
+}
+
+
+
+void MOTOR_Process(void)
+{
+
+	if(flag_stop)
+	{
+		/* Clear flag */
+		flag_stop = FALSE;
+		/* Stop pwm on every channel */
+		TIMER_Stop_All_Channels(TIMER_MOTOR);
+		motor.is_enabled = FALSE;
+	}
+	else if(flag_start)
+	{
+		/* Clear flag */
+		flag_start = FALSE;
+		/* Reset target to 0 */
+		motor.output[0] = 1000;
+		motor.output[1] = 1000;
+		motor.output[2] = 1000;
+		motor.output[3] = 1000;
+		/* Start the pwm */
+		TIMER_Start_All_Channels(TIMER_MOTOR);
+		motor.is_enabled = TRUE;
+	}
+	if(motor.is_enabled)
+	{
+		TIMER_Set_All_CCR(TIMER_MOTOR, motor.output);
+	}
+}
+
+
+/*
+ * @brief Request to start the motors
+ */
+void MOTOR_Enable(void)
+{
+	flag_start = TRUE;
+}
+
+/*
+ * @brief Request to stop the motors
+ */
+void MOTOR_Disable(void)
+{
+	flag_stop = TRUE;
+}
+
+void MOTOR_Set(float * target)
+{
+	motor.output[0] = (uint16_t)target[0]+1000;
+	motor.output[1] = (uint16_t)target[1]+1000;
+	motor.output[2] = (uint16_t)target[2]+1000;
+	motor.output[3] = (uint16_t)target[3]+1000;
+}

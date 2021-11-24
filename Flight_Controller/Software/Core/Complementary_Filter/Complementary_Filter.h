@@ -37,7 +37,7 @@ typedef struct
 }complementary_filter_t;
 
 void COMPLEMENTARY_FILTER_Init(float * gyro, float * acc);
-
 void COMPLEMENTARY_FILTER_Process(void);
+complementary_filter_t * COMPLEMENTARY_FILTER_Get_Filter(void);
 
 #endif /* COMPLEMENTARY_FILTER_H_ */

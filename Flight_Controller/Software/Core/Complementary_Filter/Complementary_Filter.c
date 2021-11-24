@@ -87,6 +87,10 @@ void COMPLEMENTARY_FILTER_Process(void)
 
 }
 
+complementary_filter_t * COMPLEMENTARY_FILTER_Get_Filter(void)
+{
+	return &filter;
+}
 
 static void angle_180(float * x)
 {

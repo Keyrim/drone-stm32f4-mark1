@@ -14,6 +14,7 @@
 #include "../../Data_Logger/Data_logger.h"
 #include "../../Sensors/Mpu.h"
 #include "../../Complementary_Filter/Complementary_Filter.h"
+#include "../../Motors/Motors.h"
 
 #define TASKS_START_TIME_US 2000000
 #define PERIOD_US_FROM_HERTZ(hertz_param) (1000000 / hertz_param)

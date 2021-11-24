@@ -34,6 +34,7 @@
 #include "../Sensors/Mpu.h"
 #include "../Complementary_Filter/Complementary_Filter.h"
 #include "../Peripherals/Timer.h"
+#include "../Motors/Motors.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -108,12 +109,12 @@ int main(void)
   HAL_Delay(100);
   MPU_Init();
   COMPLEMENTARY_FILTER_Init(MPU_Get_Gyro_Ptr(), MPU_Get_Acc_Ptr());
+  MOTOR_Init(TRUE);
 
   /* System initialization */
   DATA_LOGGER_Init(&mark1);
   TASK_Init(&mark1);
   SCHEDULER_init();
-  TIMER_Start_All_Channels(timer_eMOTORS);
   /* USER CODE END 2 */
 
   /* Infinite loop */

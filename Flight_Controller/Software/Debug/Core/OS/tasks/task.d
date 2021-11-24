@@ -52,7 +52,10 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
  ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/i2c.h \
  ../Core/OS/tasks/../../Sensors/../Peripherals/../Inc/main.h \
  ../Core/OS/tasks/../../Complementary_Filter/Complementary_Filter.h \
- ../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h
+ ../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h \
+ ../Core/OS/tasks/../../Motors/Motors.h \
+ ../Core/OS/tasks/../../Motors/../Peripherals/Timer.h ../Core/Inc/tim.h \
+ ../Core/Inc/main.h ../Core/OS/tasks/../../Motors/../OS/macro_types.h
 
 ../Core/OS/tasks/task.h:
 
@@ -167,3 +170,13 @@ Core/OS/tasks/task.o: ../Core/OS/tasks/task.c ../Core/OS/tasks/task.h \
 ../Core/OS/tasks/../../Complementary_Filter/Complementary_Filter.h:
 
 ../Core/OS/tasks/../../Complementary_Filter/../OS/macro_types.h:
+
+../Core/OS/tasks/../../Motors/Motors.h:
+
+../Core/OS/tasks/../../Motors/../Peripherals/Timer.h:
+
+../Core/Inc/tim.h:
+
+../Core/Inc/main.h:
+
+../Core/OS/tasks/../../Motors/../OS/macro_types.h:
