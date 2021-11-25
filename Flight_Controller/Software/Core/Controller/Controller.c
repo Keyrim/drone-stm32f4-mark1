@@ -8,18 +8,19 @@
 #include "Controller.h"
 #include "../Complementary_Filter/Complementary_Filter.h"
 #include "../Motor_Mixer/Motor_Mixer.h"
+#include "../Sensors/Mpu.h"
 
 static controller_t controller =
 {
 		/* Pid Configuration 	 Roll 		Pitch 		Yaw*/
-		.angle_kp = 			{10.0f, 	10.0f, 		0},
-		.angle_speed_kp = 		{3.0f, 		3.0f, 		10.0f},
+		.angle_kp = 			{1.0f, 		1.0f, 		0},
+		.angle_speed_kp = 		{1.0f, 		1.0f, 		1.0f},
 };
 
 void CONTROLLER_Init(void)
 {
-	controller.angle = COMPLEMENTARY_FILTER_Get_Filter()->angle;
-	controller.angle_speed = COMPLEMENTARY_FILTER_Get_Filter()->gyro;
+	controller.angle = COMPLEMENTARY_FILTER_Get_Angles();
+	controller.angle_speed = MPU_Get_Gyro_Ptr();
 	controller.output = MOTOR_MIXER_Get_Angle_Input_Ptr();
 
 	controller.state = controller_state_eDISABLED;

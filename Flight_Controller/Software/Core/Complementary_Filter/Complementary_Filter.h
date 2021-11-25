@@ -32,6 +32,7 @@ typedef struct
 
 void COMPLEMENTARY_FILTER_Init(void);
 void COMPLEMENTARY_FILTER_Process(void);
-complementary_filter_t * COMPLEMENTARY_FILTER_Get_Filter(void);
+float * COMPLEMENTARY_FILTER_Get_Angles(void);
+float * COMPLEMENTARY_FILTER_Get_Angles_Acc(void);
 
 #endif /* COMPLEMENTARY_FILTER_H_ */

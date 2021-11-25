@@ -54,7 +54,18 @@ void TASK_MANAGER_It_ms(void)
 	}
 }
 
-void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), void(*it)(void))
+void TASK_MANAGER_Gyro_Data_Ready(void)
+{
+	for(uint8_t t = 0; t < task_count; t++)
+	{
+		if(task[t].gyro_data_ready.call)
+		{
+			task[t].gyro_data_ready.call();
+		}
+	}
+}
+
+void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), void(*it)(void), void(*gyro)(void))
 {
 	if(task_count == MAX_NUMBER_OF_TASK)
 	{
@@ -64,7 +75,8 @@ void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), vo
 	task[task_count].name_len = sizeof(name) - 1;
 	task[task_count].init.call = init;
 	task[task_count].main.call = main;
-	task[task_count++].it.call = it;
+	task[task_count].it.call = it;
+	task[task_count++].gyro_data_ready.call = gyro;
 }
 
 

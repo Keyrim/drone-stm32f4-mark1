@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "../Peripherals/Uart.h"
 #include "../Task_Manager/Task_Manager.h"
+#include "../Sensors/Mpu.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -332,5 +333,12 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 	}
 }
 
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	if(MPU_Rx_Complete_Callback())
+	{
+	  TASK_MANAGER_Gyro_Data_Ready();
+	}
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

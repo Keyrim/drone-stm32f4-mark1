@@ -167,6 +167,25 @@ void MPU_Read_All(void)
 	MPU_Convert_Gyro_Data();
 }
 
+void MPU_Read_All_Dma(void)
+{
+	if(mpu.state == mpu_state_eERROR)
+	{
+		return;
+	}
+#if USE_SPI
+	uint8_t registers [14] = {MPU6050_ACCEL_XOUT_H | MPU6050_READ};
+	SPI_Transmit_Receive(SPI_MPU, CS_MPU, registers, mpu.data, 14);
+#else
+	if(I2C_Mem_Read_Dma(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_XOUT_H, mpu.data, 14))
+	{
+		mpu.state = mpu_state_eERROR;
+		return;
+	}
+	mpu.dma_state = dma_state_eIN_PORGRESS_ALL;
+#endif
+}
+
 void Gyro_Read(void)
 {
 	if(mpu.state == mpu_state_eERROR)
@@ -205,6 +224,35 @@ void MPU_Convert_Gyro_Data(void)
 	mpu.gyro[1] = (int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion;
 	mpu.gyro[2] = (int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion;
 }
+
+/*
+ * @brief Called back on half rx cplt it
+ */
+bool_e MPU_Rx_Complete_Callback(void)
+{
+	if(mpu.dma_state)
+	{
+		switch(mpu.dma_state)
+		{
+			case dma_state_eIN_PROGRESS_GYRO:
+				MPU_Convert_Gyro_Data();
+				break;
+			case dma_state_eIN_PROGRESS_ACC:
+				MPU_Convert_Acc_Data();
+				break;
+			case dma_state_eIN_PORGRESS_ALL:
+				MPU_Convert_Acc_Data();
+				MPU_Convert_Gyro_Data();
+				break;
+			default:
+				break;
+		}
+		mpu.dma_state = dma_state_eIDLE;
+		return TRUE;
+	}
+	return FALSE;
+}
+
 
 
 

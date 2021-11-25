@@ -14,7 +14,7 @@
 #define DEG_TO_RAD ((float)0.01745329f)
 
 #define FREQUENCY	100
-#define ALPHA		((float)0.98f)
+#define ALPHA		((float)0.998f)
 
 static complementary_filter_t filter =
 {
@@ -87,9 +87,14 @@ void COMPLEMENTARY_FILTER_Process(void)
 
 }
 
-complementary_filter_t * COMPLEMENTARY_FILTER_Get_Filter(void)
+float * COMPLEMENTARY_FILTER_Get_Angles(void)
 {
-	return &filter;
+	return filter.angle;
+}
+
+float * COMPLEMENTARY_FILTER_Get_Angles_Acc(void)
+{
+	return filter.angle_acc;
 }
 
 static void angle_180(float * x)

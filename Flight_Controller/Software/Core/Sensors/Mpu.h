@@ -8,6 +8,8 @@
 #ifndef SENSORS_MPU_H_
 #define SENSORS_MPU_H_
 
+#include "../Task_Manager/macro_types.h"
+
 #define USE_SPI	0	/* If we dont use SPI, then we use I2C */
 
 #if USE_SPI
@@ -94,6 +96,17 @@ typedef enum
 } gyro_range_e;
 
 /*
+ * @brief Define the current dma state
+ */
+typedef enum
+{
+	dma_state_eIDLE,
+	dma_state_eIN_PROGRESS_GYRO,
+	dma_state_eIN_PROGRESS_ACC,
+	dma_state_eIN_PORGRESS_ALL
+}dma_state_e;
+
+/*
  * @brief MPU State enumeration definition
  */
 typedef enum
@@ -101,6 +114,8 @@ typedef enum
 	mpu_state_eOK = 0,
 	mpu_state_eERROR
 }mpu_state_e;
+
+
 
 typedef struct
 {
@@ -117,12 +132,19 @@ typedef struct
 	acc_range_e acc_range;
 	float acc_conversion;
 	float acc[3];
+	/* Dma state */
+	dma_state_e dma_state;
 }mpu_t;
+
 
 void MPU_Init(void);
 void MPU_Read_All(void);
+void MPU_Read_All_Dma(void);
+void Gyro_Read(void);
 float * MPU_Get_Gyro_Ptr(void);
 float * MPU_Get_Acc_Ptr(void);
-void Gyro_Read(void);
+bool_e MPU_Rx_Complete_Callback(void);
+
+
 
 #endif /* SENSORS_MPU_H_ */

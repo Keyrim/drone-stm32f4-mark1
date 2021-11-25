@@ -1,4 +1,5 @@
 Complementary_Filter.c:28:6:COMPLEMENTARY_FILTER_Init	8	static
 Complementary_Filter.c:37:6:COMPLEMENTARY_FILTER_Process	32	static
-Complementary_Filter.c:90:26:COMPLEMENTARY_FILTER_Get_Filter	4	static
-Complementary_Filter.c:95:13:angle_180	16	static
+Complementary_Filter.c:90:9:COMPLEMENTARY_FILTER_Get_Angles	4	static
+Complementary_Filter.c:95:9:COMPLEMENTARY_FILTER_Get_Angles_Acc	4	static
+Complementary_Filter.c:100:13:angle_180	16	static

@@ -33,7 +33,11 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
  ../Core/Src/../Peripherals/../Inc/usart.h \
  ../Core/Src/../Peripherals/../Inc/main.h \
  ../Core/Src/../Peripherals/../Task_Manager/macro_types.h \
- ../Core/Src/../Task_Manager/Task_Manager.h
+ ../Core/Src/../Task_Manager/Task_Manager.h ../Core/Src/../Sensors/Mpu.h \
+ ../Core/Src/../Sensors/../Task_Manager/macro_types.h \
+ ../Core/Src/../Sensors/../Peripherals/I2c.h \
+ ../Core/Src/../Sensors/../Peripherals/../Inc/i2c.h \
+ ../Core/Src/../Sensors/../Peripherals/../Inc/main.h
 
 ../Core/Inc/main.h:
 
@@ -108,3 +112,13 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
 ../Core/Src/../Peripherals/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Task_Manager/Task_Manager.h:
+
+../Core/Src/../Sensors/Mpu.h:
+
+../Core/Src/../Sensors/../Task_Manager/macro_types.h:
+
+../Core/Src/../Sensors/../Peripherals/I2c.h:
+
+../Core/Src/../Sensors/../Peripherals/../Inc/i2c.h:
+
+../Core/Src/../Sensors/../Peripherals/../Inc/main.h:

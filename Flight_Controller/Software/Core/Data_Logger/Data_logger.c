@@ -9,11 +9,21 @@
 #include "string.h"
 #include "../Peripherals/Uart.h"
 
+/* The files needed to include the data must be included */
+#include "../Sensors/Mpu.h"
+#include "../Complementary_Filter/Complementary_Filter.h"
+#include "../Radio/Radio.h"
+#include "../Peripherals/Timer.h"
+#include "../Motors/Motors.h"
+#include "../Task_Manager/Task_Manager.h"
+#include "../Controller/Controller.h"
+#include "../High_Level/High_Level.h"
+#include "../Motor_Mixer/Motor_Mixer.h"
 
 
 #define PERIODE_PING 			500
 #define PERIODE_CONFIG_SEND 	100
-#define PERIODE_SEND			10
+#define PERIODE_SEND			100
 #define UART_TELEMETRY			uart_e1
 
 /*
@@ -78,28 +88,26 @@ static void parse_uart(void);
  */
 void DATA_LOGGER_Init(void)
 {
+	/* Retrieve structure from modules */
+	float * gyro = MPU_Get_Gyro_Ptr();
+	float * acc = MPU_Get_Acc_Ptr();
+	float * angle = COMPLEMENTARY_FILTER_Get_Angles();
+
 	/* -------------- Outputs ----------------- */
-	DEFINE_DATA(data_id_eMCU_LOAD,
-				NULL,
-				data_format_e16B_FLOAT_2D,
-				"Mcu Load",
-				use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],	data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],	data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],	data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],	data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],	data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],		data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eACC_ROLL,				(void*)&acc[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eACC_PITCH,				(void*)&acc[axe_ePITCH],	data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eACC_YAW,				(void*)&acc[axe_eYAW],		data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eAS_OUTPUT);
+
 	/* -------------- Inputs ----------------- */
-	DEFINE_DATA(data_id_eCONFIG_REQUEST,
-				NULL,
-				data_format_e0B_BUTTON,
-				"Send Configuration",
-				use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eSTART_TRANSFER,
-				NULL,
-				data_format_e0B_BUTTON,
-				"Start Transfer",
-				use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eSTOP_TRANSFER,
-				NULL,
-				data_format_e0B_BUTTON,
-				"Stop Transfer",
-				use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eCONFIG_REQUEST,		NULL,	data_format_e0B_BUTTON,		"Send Configuration",	use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eSTART_TRANSFER,		NULL,	data_format_e0B_BUTTON,		"Start Transfer",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eSTOP_TRANSFER,			NULL,	data_format_e0B_BUTTON,		"Stop Transfer",		use_format_eAS_INPUT);
 }
 /*
  * @brief Request to start logging data

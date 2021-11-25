@@ -35,7 +35,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../Peripherals/../Task_Manager/macro_types.h \
  ../Core/Src/../Data_Logger/Data_logger.h \
  ../Core/Src/../Data_Logger/../Task_Manager/macro_types.h \
- ../Core/Src/../Sensors/Mpu.h ../Core/Src/../Sensors/../Peripherals/I2c.h \
+ ../Core/Src/../Sensors/Mpu.h \
+ ../Core/Src/../Sensors/../Task_Manager/macro_types.h \
+ ../Core/Src/../Sensors/../Peripherals/I2c.h \
  ../Core/Src/../Sensors/../Peripherals/../Inc/i2c.h \
  ../Core/Src/../Complementary_Filter/Complementary_Filter.h \
  ../Core/Src/../Complementary_Filter/../Task_Manager/macro_types.h \
@@ -139,6 +141,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../Data_Logger/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Sensors/Mpu.h:
+
+../Core/Src/../Sensors/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Sensors/../Peripherals/I2c.h:
 

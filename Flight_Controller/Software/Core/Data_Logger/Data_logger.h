@@ -15,10 +15,27 @@
  */
 typedef enum
 {
+	/* Buttons */
 	data_id_eCONFIG_REQUEST,
 	data_id_eSTART_TRANSFER,
 	data_id_eSTOP_TRANSFER,
-	data_id_eMCU_LOAD,
+
+	/* Angles */
+	data_id_eANGLE_ROLL,
+	data_id_eANGLE_PITCH,
+	data_id_eANGLE_YAW,
+	/* Gyro */
+	data_id_eGYRO_ROLL,
+	data_id_eGYRO_PITCH,
+	data_id_eGYRO_YAW,
+	/* Gyro raw */
+	data_id_eGYRO_ROLL_DATA,
+	data_id_eGYRO_PITCH_DATA,
+	data_id_eGYRO_YAW_DATA,
+	/* Acc */
+	data_id_eACC_ROLL,
+	data_id_eACC_PITCH,
+	data_id_eACC_YAW,
 	data_id_eCOUNT
 }data_id_e;
 

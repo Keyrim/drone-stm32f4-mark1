@@ -38,7 +38,12 @@ Core/Controller/Controller.o: ../Core/Controller/Controller.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Controller/../Motor_Mixer/../Motors/../Task_Manager/macro_types.h
+ ../Core/Controller/../Motor_Mixer/../Motors/../Task_Manager/macro_types.h \
+ ../Core/Controller/../Sensors/Mpu.h \
+ ../Core/Controller/../Sensors/../Task_Manager/macro_types.h \
+ ../Core/Controller/../Sensors/../Peripherals/I2c.h \
+ ../Core/Controller/../Sensors/../Peripherals/../Inc/i2c.h \
+ ../Core/Controller/../Sensors/../Peripherals/../Inc/main.h
 
 ../Core/Controller/Controller.h:
 
@@ -121,3 +126,13 @@ Core/Controller/Controller.o: ../Core/Controller/Controller.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Core/Controller/../Motor_Mixer/../Motors/../Task_Manager/macro_types.h:
+
+../Core/Controller/../Sensors/Mpu.h:
+
+../Core/Controller/../Sensors/../Task_Manager/macro_types.h:
+
+../Core/Controller/../Sensors/../Peripherals/I2c.h:
+
+../Core/Controller/../Sensors/../Peripherals/../Inc/i2c.h:
+
+../Core/Controller/../Sensors/../Peripherals/../Inc/main.h:

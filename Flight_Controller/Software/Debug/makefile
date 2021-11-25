@@ -71,8 +71,8 @@ all: main-build
 main-build: Mark_I.elf secondary-outputs
 
 # Tool invocations
-Mark_I.elf: $(OBJS) $(USER_OBJS) C:\GitHub\Mark-I\Flight_Controller\Software\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Mark_I.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\GitHub\Mark-I\Flight_Controller\Software\STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Mark_I.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Mark_I.elf: $(OBJS) $(USER_OBJS) D:\GitHub\Mark-I\Flight_Controller\Software\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Mark_I.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\GitHub\Mark-I\Flight_Controller\Software\STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Mark_I.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -1,4 +1,5 @@
 Core/Sensors/Mpu.o: ../Core/Sensors/Mpu.c ../Core/Sensors/Mpu.h \
+ ../Core/Sensors/../Task_Manager/macro_types.h \
  ../Core/Sensors/../Peripherals/I2c.h \
  ../Core/Sensors/../Peripherals/../Inc/i2c.h \
  ../Core/Sensors/../Peripherals/../Inc/main.h \
@@ -35,6 +36,8 @@ Core/Sensors/Mpu.o: ../Core/Sensors/Mpu.c ../Core/Sensors/Mpu.h \
  ../Core/Inc/main.h
 
 ../Core/Sensors/Mpu.h:
+
+../Core/Sensors/../Task_Manager/macro_types.h:
 
 ../Core/Sensors/../Peripherals/I2c.h:
 

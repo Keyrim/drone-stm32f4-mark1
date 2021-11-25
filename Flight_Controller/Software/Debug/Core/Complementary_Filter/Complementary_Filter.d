@@ -3,9 +3,10 @@ Core/Complementary_Filter/Complementary_Filter.o: \
  ../Core/Complementary_Filter/Complementary_Filter.h \
  ../Core/Complementary_Filter/../Task_Manager/macro_types.h \
  ../Core/Complementary_Filter/../Sensors/Mpu.h \
+ ../Core/Complementary_Filter/../Sensors/../Task_Manager/macro_types.h \
  ../Core/Complementary_Filter/../Sensors/../Peripherals/I2c.h \
- c:\github\mark-i\flight_controller\software\core\inc\i2c.h \
- c:\github\mark-i\flight_controller\software\core\inc\main.h \
+ d:\github\mark-i\flight_controller\software\core\inc\i2c.h \
+ d:\github\mark-i\flight_controller\software\core\inc\main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -43,11 +44,13 @@ Core/Complementary_Filter/Complementary_Filter.o: \
 
 ../Core/Complementary_Filter/../Sensors/Mpu.h:
 
+../Core/Complementary_Filter/../Sensors/../Task_Manager/macro_types.h:
+
 ../Core/Complementary_Filter/../Sensors/../Peripherals/I2c.h:
 
-c:\github\mark-i\flight_controller\software\core\inc\i2c.h:
+d:\github\mark-i\flight_controller\software\core\inc\i2c.h:
 
-c:\github\mark-i\flight_controller\software\core\inc\main.h:
+d:\github\mark-i\flight_controller\software\core\inc\main.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 

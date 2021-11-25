@@ -34,7 +34,30 @@ Core/Data_Logger/Data_logger.o: ../Core/Data_Logger/Data_logger.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Data_Logger/../Peripherals/../Task_Manager/macro_types.h
+ ../Core/Data_Logger/../Peripherals/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Sensors/Mpu.h \
+ ../Core/Data_Logger/../Sensors/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Sensors/../Peripherals/I2c.h \
+ ../Core/Data_Logger/../Sensors/../Peripherals/../Inc/i2c.h \
+ ../Core/Data_Logger/../Sensors/../Peripherals/../Inc/main.h \
+ ../Core/Data_Logger/../Complementary_Filter/Complementary_Filter.h \
+ ../Core/Data_Logger/../Complementary_Filter/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Radio/Radio.h \
+ ../Core/Data_Logger/../Radio/../Peripherals/Uart.h \
+ ../Core/Data_Logger/../Radio/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Peripherals/Timer.h ../Core/Inc/tim.h \
+ ../Core/Inc/main.h ../Core/Data_Logger/../Motors/Motors.h \
+ ../Core/Data_Logger/../Motors/../Peripherals/Timer.h \
+ ../Core/Data_Logger/../Motors/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Task_Manager/Task_Manager.h \
+ ../Core/Data_Logger/../Controller/Controller.h \
+ ../Core/Data_Logger/../Controller/Controller.h \
+ ../Core/Data_Logger/../Controller/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../High_Level/High_Level.h \
+ ../Core/Data_Logger/../High_Level/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Motor_Mixer/Motor_Mixer.h \
+ ../Core/Data_Logger/../Motor_Mixer/../Task_Manager/macro_types.h \
+ ../Core/Data_Logger/../Motor_Mixer/../Motors/Motors.h
 
 ../Core/Data_Logger/Data_logger.h:
 
@@ -107,3 +130,53 @@ Core/Data_Logger/Data_logger.o: ../Core/Data_Logger/Data_logger.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Core/Data_Logger/../Peripherals/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Sensors/Mpu.h:
+
+../Core/Data_Logger/../Sensors/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Sensors/../Peripherals/I2c.h:
+
+../Core/Data_Logger/../Sensors/../Peripherals/../Inc/i2c.h:
+
+../Core/Data_Logger/../Sensors/../Peripherals/../Inc/main.h:
+
+../Core/Data_Logger/../Complementary_Filter/Complementary_Filter.h:
+
+../Core/Data_Logger/../Complementary_Filter/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Radio/Radio.h:
+
+../Core/Data_Logger/../Radio/../Peripherals/Uart.h:
+
+../Core/Data_Logger/../Radio/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Peripherals/Timer.h:
+
+../Core/Inc/tim.h:
+
+../Core/Inc/main.h:
+
+../Core/Data_Logger/../Motors/Motors.h:
+
+../Core/Data_Logger/../Motors/../Peripherals/Timer.h:
+
+../Core/Data_Logger/../Motors/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Task_Manager/Task_Manager.h:
+
+../Core/Data_Logger/../Controller/Controller.h:
+
+../Core/Data_Logger/../Controller/Controller.h:
+
+../Core/Data_Logger/../Controller/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../High_Level/High_Level.h:
+
+../Core/Data_Logger/../High_Level/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Motor_Mixer/Motor_Mixer.h:
+
+../Core/Data_Logger/../Motor_Mixer/../Task_Manager/macro_types.h:
+
+../Core/Data_Logger/../Motor_Mixer/../Motors/Motors.h:

@@ -30,11 +30,13 @@ typedef struct
 	process_t init;
 	process_t main;
 	process_t it;
+	process_t gyro_data_ready;
 }task_t;
 
 void TASK_MANAGER_Init(void);
 void TASK_MANAGER_Main(void);
 void TASK_MANAGER_It_ms(void);
-void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), void(*it)(void));
+void TASK_MANAGER_Gyro_Data_Ready(void);
+void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), void(*it)(void), void(*gyro)(void));
 
 #endif /* TASK_MANAGER_H_ */
