@@ -45,7 +45,12 @@ Core/High_Level/High_Level.o: ../Core/High_Level/High_Level.c \
  ../Core/High_Level/../Motor_Mixer/../Motors/Motors.h \
  ../Core/High_Level/../Motor_Mixer/../Motors/../Peripherals/Timer.h \
  ../Core/Inc/tim.h ../Core/Inc/main.h \
- ../Core/High_Level/../Motor_Mixer/../Motors/../Task_Manager/macro_types.h
+ ../Core/High_Level/../Motor_Mixer/../Motors/../Task_Manager/macro_types.h \
+ ../Core/High_Level/../Sensors/Mpu.h \
+ ../Core/High_Level/../Sensors/../Task_Manager/macro_types.h \
+ ../Core/High_Level/../Sensors/../Peripherals/I2c.h \
+ ../Core/High_Level/../Sensors/../Peripherals/../Inc/i2c.h \
+ ../Core/High_Level/../Sensors/../Peripherals/../Inc/main.h
 
 ../Core/High_Level/High_Level.h:
 
@@ -142,3 +147,13 @@ Core/High_Level/High_Level.o: ../Core/High_Level/High_Level.c \
 ../Core/Inc/main.h:
 
 ../Core/High_Level/../Motor_Mixer/../Motors/../Task_Manager/macro_types.h:
+
+../Core/High_Level/../Sensors/Mpu.h:
+
+../Core/High_Level/../Sensors/../Task_Manager/macro_types.h:
+
+../Core/High_Level/../Sensors/../Peripherals/I2c.h:
+
+../Core/High_Level/../Sensors/../Peripherals/../Inc/i2c.h:
+
+../Core/High_Level/../Sensors/../Peripherals/../Inc/main.h:

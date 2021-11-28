@@ -6,6 +6,6 @@ Data_logger.c:139:6:DATA_LOGGER_Reception	24	static
 Data_logger.c:204:9:DATA_LOGGER_Get_Data_Value	32	static
 Data_logger.c:269:9:DATA_LOGGER_Get_Data_Config	24	static
 Data_logger.c:295:10:DATA_LOGGER_Get_Data	16	static
-Data_logger.c:307:6:push_data_to_uart	72	static
+Data_logger.c:307:6:push_data_to_uart	104	static
 Data_logger.c:324:13:state_machine	24	static
 Data_logger.c:438:13:parse_uart	16	static

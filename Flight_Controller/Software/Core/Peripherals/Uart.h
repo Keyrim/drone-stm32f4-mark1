@@ -29,6 +29,7 @@ typedef enum
 typedef enum
 {
 	uart_e1 = 0,
+	uart_e3,
 	uart_e4,
 	uart_eCOUNT,
 }uart_e;

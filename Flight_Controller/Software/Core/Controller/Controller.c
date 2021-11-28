@@ -13,8 +13,8 @@
 static controller_t controller =
 {
 		/* Pid Configuration 	 Roll 		Pitch 		Yaw*/
-		.angle_kp = 			{1.0f, 		1.0f, 		0},
-		.angle_speed_kp = 		{1.0f, 		1.0f, 		1.0f},
+		.angle_kp = 			{2.0f, 		2.0f, 		0},
+		.angle_speed_kp = 		{1.0f, 		1.0f, 		3.0f},
 };
 
 void CONTROLLER_Init(void)
@@ -25,6 +25,7 @@ void CONTROLLER_Init(void)
 
 	controller.state = controller_state_eDISABLED;
 }
+
 void CONTROLLER_Process(void)
 {
 	if(controller.new_state != controller.state)

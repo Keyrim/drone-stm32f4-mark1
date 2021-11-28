@@ -141,6 +141,7 @@ void MPU_Init(void);
 void MPU_Read_All(void);
 void MPU_Read_All_Dma(void);
 void Gyro_Read(void);
+bool_e MPU_Is_Ok(void);
 float * MPU_Get_Gyro_Ptr(void);
 float * MPU_Get_Acc_Ptr(void);
 bool_e MPU_Rx_Complete_Callback(void);

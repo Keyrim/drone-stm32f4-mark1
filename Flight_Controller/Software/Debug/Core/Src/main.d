@@ -54,7 +54,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../High_Level/../Task_Manager/macro_types.h \
  ../Core/Src/../Motor_Mixer/Motor_Mixer.h \
  ../Core/Src/../Motor_Mixer/../Task_Manager/macro_types.h \
- ../Core/Src/../Motor_Mixer/../Motors/Motors.h
+ ../Core/Src/../Motor_Mixer/../Motors/Motors.h ../Core/Src/../Led/Led.h \
+ ../Core/Src/../Led/../Peripherals/Gpio.h \
+ ../Core/Src/../Led/../Peripherals/../Inc/gpio.h \
+ ../Core/Src/../Led/../Peripherals/../Task_Manager/macro_types.h \
+ ../Core/Src/../Supervisor/Supervisor.h
 
 ../Core/Inc/main.h:
 
@@ -183,3 +187,13 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../Motor_Mixer/../Task_Manager/macro_types.h:
 
 ../Core/Src/../Motor_Mixer/../Motors/Motors.h:
+
+../Core/Src/../Led/Led.h:
+
+../Core/Src/../Led/../Peripherals/Gpio.h:
+
+../Core/Src/../Led/../Peripherals/../Inc/gpio.h:
+
+../Core/Src/../Led/../Peripherals/../Task_Manager/macro_types.h:
+
+../Core/Src/../Supervisor/Supervisor.h:

@@ -39,3 +39,8 @@ HAL_StatusTypeDef I2C_Mem_Read_Dma(i2c_e i2c_id, uint8_t device_address, uint8_t
 {
 	return HAL_I2C_Mem_Read_DMA(i2c[i2c_id].hi2c, device_address, mem_address, I2C_MEMADD_SIZE_8BIT, data, size);
 }
+
+HAL_StatusTypeDef I2C_Is_Device_Ready(i2c_e i2c_id, uint8_t device_address)
+{
+	return HAL_I2C_IsDeviceReady(i2c[i2c_id].hi2c, device_address, 10, 10);
+}

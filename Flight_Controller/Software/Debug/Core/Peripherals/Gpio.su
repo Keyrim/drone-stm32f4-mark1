@@ -1,0 +1,2 @@
+Gpio.c:16:6:GPIO_Write_Pin	16	static
+Gpio.c:27:14:GPIO_Read_Pin	16	static

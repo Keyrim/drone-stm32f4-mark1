@@ -1,5 +1,5 @@
 Controller.c:20:6:CONTROLLER_Init	8	static
-Controller.c:28:6:CONTROLLER_Process	4	static
-Controller.c:67:6:CONTROLLER_Set_State	16	static
-Controller.c:72:9:CONTROLLER_Get_Angle_Target	4	static
-Controller.c:77:9:CONTROLLER_Get_Angle_Speed_Target	4	static
+Controller.c:29:6:CONTROLLER_Process	4	static
+Controller.c:68:6:CONTROLLER_Set_State	16	static
+Controller.c:73:9:CONTROLLER_Get_Angle_Target	4	static
+Controller.c:78:9:CONTROLLER_Get_Angle_Speed_Target	4	static

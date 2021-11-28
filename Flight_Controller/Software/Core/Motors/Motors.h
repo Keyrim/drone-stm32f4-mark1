@@ -13,11 +13,11 @@
 
 typedef enum
 {
-	motor_eFRONT_LEFT = 0,
-	motor_eFRONT_RIGHT,
-	motor_eBACK_RIGHT,
-	motor_eBACK_LEFT,
-	motor_eCOUNT
+	motor_eFRONT_LEFT 	= 3,
+	motor_eFRONT_RIGHT	= 1,
+	motor_eBACK_RIGHT	= 0,
+	motor_eBACK_LEFT	= 2,
+	motor_eCOUNT		= 4
 }motor_e;
 
 typedef struct

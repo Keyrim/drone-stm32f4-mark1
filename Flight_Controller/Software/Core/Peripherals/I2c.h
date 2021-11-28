@@ -31,5 +31,6 @@ void I2C_Init(void);
 HAL_StatusTypeDef I2C_Mem_Write(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
 HAL_StatusTypeDef I2C_Mem_Read(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
 HAL_StatusTypeDef I2C_Mem_Read_Dma(i2c_e i2c_id, uint8_t device_address, uint8_t mem_address, uint8_t * data, uint8_t size);
+HAL_StatusTypeDef I2C_Is_Device_Ready(i2c_e i2c_id, uint8_t device_address);
 
 #endif /* I2C_H_ */

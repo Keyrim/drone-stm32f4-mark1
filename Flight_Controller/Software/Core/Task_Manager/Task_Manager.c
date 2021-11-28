@@ -9,7 +9,7 @@
 #include "time.h"
 #include "Task_Manager.h"
 
-#define MAX_NUMBER_OF_TASK	10
+#define MAX_NUMBER_OF_TASK	15
 
 static task_t task[MAX_NUMBER_OF_TASK] = { 0 };
 static bool_e is_initialized = FALSE;

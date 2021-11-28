@@ -11,7 +11,7 @@
 
 #if USE_IBUS
 
-#define UART_IBUS uart_e4
+#define UART_IBUS uart_e3
 #define NB_BYTE_MAX_PER_PROCESS		50
 
 static ibus_t ibus = { 0 };

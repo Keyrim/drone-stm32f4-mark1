@@ -58,6 +58,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LED_STATE_Pin GPIO_PIN_13
+#define LED_STATE_GPIO_Port GPIOC
+#define LED_STATE2_Pin GPIO_PIN_14
+#define LED_STATE2_GPIO_Port GPIOC
 #define MPU_POWER_Pin GPIO_PIN_12
 #define MPU_POWER_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
@@ -69,5 +73,3 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

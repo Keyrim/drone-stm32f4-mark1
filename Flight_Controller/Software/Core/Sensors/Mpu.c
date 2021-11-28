@@ -8,7 +8,6 @@
 #include "Mpu.h"
 #include "main.h"
 
-
 /* MPU6000 use configuration */
 static mpu_t mpu =
 {
@@ -47,6 +46,12 @@ void MPU_Init(void)
 	SPI_Transmit(SPI_MPU, CS_MPU, mpu_disable_i2c, 2);
 	HAL_Delay(150);
 #else
+	/* Check is the mpu responds */
+	if(I2C_Is_Device_Ready(I2C_MPU, MPU6050_I2C_ADDR))
+	{
+		mpu.state = mpu_state_eERROR;
+		return;
+	}
 	/* Power up the mpu an wait for it to start */
 	HAL_GPIO_WritePin(MPU_POWER_GPIO_Port, MPU_POWER_Pin, GPIO_PIN_SET);
 	HAL_Delay(200);
@@ -177,7 +182,8 @@ void MPU_Read_All_Dma(void)
 	uint8_t registers [14] = {MPU6050_ACCEL_XOUT_H | MPU6050_READ};
 	SPI_Transmit_Receive(SPI_MPU, CS_MPU, registers, mpu.data, 14);
 #else
-	if(I2C_Mem_Read_Dma(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_XOUT_H, mpu.data, 14))
+	HAL_StatusTypeDef state = I2C_Mem_Read_Dma(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_XOUT_H, mpu.data, 14);
+	if(state)
 	{
 		mpu.state = mpu_state_eERROR;
 		return;
@@ -223,6 +229,14 @@ void MPU_Convert_Gyro_Data(void)
 	mpu.gyro[0] = (int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion;
 	mpu.gyro[1] = (int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion;
 	mpu.gyro[2] = (int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion;
+}
+
+/*
+ * @brief get state of the mpu
+ */
+bool_e MPU_Is_Ok(void)
+{
+	return mpu.state == mpu_state_eOK;
 }
 
 /*

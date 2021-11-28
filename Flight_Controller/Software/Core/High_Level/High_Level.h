@@ -22,6 +22,7 @@ typedef struct
 	high_level_e state;
 	high_level_e previous_state;
 	uint16_t * radio;
+	float * power;
 	float * target_angle;
 	float * target_angle_speed;
 }high_level_t;

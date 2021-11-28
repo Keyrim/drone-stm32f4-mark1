@@ -87,6 +87,7 @@ void UART_Init(void)
 {
 	/* Link  huarts to the right uarts structures */
 	uart[uart_e1].huart = &huart1;
+	uart[uart_e3].huart = &huart3;
 	uart[uart_e4].huart = &huart4;
 
 	/* Initialization */
