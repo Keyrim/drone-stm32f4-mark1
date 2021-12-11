@@ -28,14 +28,16 @@ typedef enum
 	data_id_eGYRO_ROLL,
 	data_id_eGYRO_PITCH,
 	data_id_eGYRO_YAW,
-	/* Gyro raw */
-	data_id_eGYRO_ROLL_DATA,
-	data_id_eGYRO_PITCH_DATA,
-	data_id_eGYRO_YAW_DATA,
+	data_id_eGYRO_RAW_ROLL,
+	data_id_eGYRO_RAW_PITCH,
+	data_id_eGYRO_RAW_YAW,
 	/* Acc */
 	data_id_eACC_ROLL,
 	data_id_eACC_PITCH,
 	data_id_eACC_YAW,
+	data_id_eACC_RAW_ROLL,
+	data_id_eACC_RAW_PITCH,
+	data_id_eACC_RAW_YAW,
 	data_id_eCOUNT
 }data_id_e;
 

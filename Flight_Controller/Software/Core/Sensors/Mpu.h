@@ -127,11 +127,14 @@ typedef struct
 	uint8_t * gyro_data;
 	float gyro_conversion;
 	float gyro[3];
+	float gyro_raw[3];
+	float gyro_raw_last[3];
 	/* Accelerometer */
 	uint8_t * acc_data;
 	acc_range_e acc_range;
 	float acc_conversion;
 	float acc[3];
+	float acc_raw[3];
 	/* Dma state */
 	dma_state_e dma_state;
 }mpu_t;
@@ -143,7 +146,9 @@ void MPU_Read_All_Dma(void);
 void Gyro_Read(void);
 bool_e MPU_Is_Ok(void);
 float * MPU_Get_Gyro_Ptr(void);
+float * MPU_Get_Gyro_Raw_Ptr(void);
 float * MPU_Get_Acc_Ptr(void);
+float * MPU_Get_Acc_Raw_Ptr(void);
 bool_e MPU_Rx_Complete_Callback(void);
 
 

@@ -13,7 +13,7 @@
 #define RAD_TO_DEG ((float)57.2957795f)
 #define DEG_TO_RAD ((float)0.01745329f)
 
-#define FREQUENCY	100
+#define FREQUENCY	1000
 #define ALPHA		((float)0.998f)
 
 static complementary_filter_t filter =

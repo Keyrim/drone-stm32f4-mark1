@@ -12,9 +12,9 @@
 #include "../Motor_Mixer/Motor_Mixer.h"
 #include "../Sensors/Mpu.h"
 
-#define RADIO_TO_ANGLE			((float)0.05f)
-#define RADIO_TO_ANGLE_RATE 	((float)0.2f)
-#define RADIO_TO_ANGLE_RATE_YAW	((float)1.0f)
+#define RADIO_TO_ANGLE			((float)0.1f)
+#define RADIO_TO_ANGLE_RATE 	((float)0.5f)
+#define RADIO_TO_ANGLE_RATE_YAW	((float)0.7f)
 
 static high_level_t high_level = { 0 };
 

@@ -36,7 +36,7 @@ void UART_Transfer_Complete_Callback(uart_e id)
 	if(uart[id].index_write_tx != uart[id].index_read_tx)
 	{
 		uint16_t nb_bytes_to_read = 0;
-		if(uart[id].index_write_tx > uart[id].index_read_rx)
+		if(uart[id].index_write_tx > uart[id].index_read_tx)
 		{
 			nb_bytes_to_read = uart[id].index_write_tx - uart[id].index_read_tx;
 		}

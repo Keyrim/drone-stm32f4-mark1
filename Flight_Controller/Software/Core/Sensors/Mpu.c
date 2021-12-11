@@ -8,6 +8,9 @@
 #include "Mpu.h"
 #include "main.h"
 
+#define COEF_GYRO_FILTERING	(0.9f)
+#define COEF_ACC_FILTERING	(0.9f)
+
 /* MPU6000 use configuration */
 static mpu_t mpu =
 {
@@ -147,9 +150,19 @@ float * MPU_Get_Gyro_Ptr(void)
 	return mpu.gyro;
 }
 
+float * MPU_Get_Gyro_Raw_Ptr(void)
+{
+	return mpu.gyro_raw;
+}
+
 float * MPU_Get_Acc_Ptr(void)
 {
 	return mpu.acc;
+}
+
+float * MPU_Get_Acc_Raw_Ptr(void)
+{
+	return mpu.acc_raw;
 }
 
 void MPU_Read_All(void)
@@ -216,9 +229,13 @@ void Gyro_Read(void)
  */
 void MPU_Convert_Acc_Data(void)
 {
-	mpu.acc[0] = (int16_t)(mpu.acc_data[1] | (mpu.acc_data[0] << 8)) * mpu.acc_conversion;
-	mpu.acc[1] = (int16_t)(mpu.acc_data[3] | (mpu.acc_data[2] << 8)) * mpu.acc_conversion;
-	mpu.acc[2] = (int16_t)(mpu.acc_data[5] | (mpu.acc_data[4] << 8)) * mpu.acc_conversion;
+	mpu.acc_raw[0] = (int16_t)(mpu.acc_data[1] | (mpu.acc_data[0] << 8)) * mpu.acc_conversion;
+	mpu.acc_raw[1] = (int16_t)(mpu.acc_data[3] | (mpu.acc_data[2] << 8)) * mpu.acc_conversion;
+	mpu.acc_raw[2] = (int16_t)(mpu.acc_data[5] | (mpu.acc_data[4] << 8)) * mpu.acc_conversion;
+	/* Filtering */
+	mpu.acc[0] = (mpu.acc[0] * COEF_ACC_FILTERING) + (mpu.acc_raw[0] * (float)(1-COEF_ACC_FILTERING));
+	mpu.acc[1] = (mpu.acc[1] * COEF_ACC_FILTERING) + (mpu.acc_raw[1] * (float)(1-COEF_ACC_FILTERING));
+	mpu.acc[2] = (mpu.acc[2] * COEF_ACC_FILTERING) + (mpu.acc_raw[2] * (float)(1-COEF_ACC_FILTERING));
 }
 
 /*
@@ -226,9 +243,14 @@ void MPU_Convert_Acc_Data(void)
  */
 void MPU_Convert_Gyro_Data(void)
 {
-	mpu.gyro[0] = (int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion;
-	mpu.gyro[1] = (int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion;
-	mpu.gyro[2] = (int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion;
+	/* Data convertion */
+	mpu.gyro_raw[0] = (int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion;
+	mpu.gyro_raw[1] = (int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion;
+	mpu.gyro_raw[2] = (int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion;
+	/* Filtering */
+	mpu.gyro[0] = (mpu.gyro[0] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[0] * (float)(1-COEF_GYRO_FILTERING));
+	mpu.gyro[1] = (mpu.gyro[1] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[1] * (float)(1-COEF_GYRO_FILTERING));
+	mpu.gyro[2] = (mpu.gyro[2] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[2] * (float)(1-COEF_GYRO_FILTERING));
 }
 
 /*
