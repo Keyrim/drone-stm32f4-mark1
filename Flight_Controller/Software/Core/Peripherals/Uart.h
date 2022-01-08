@@ -12,7 +12,7 @@
 #include "../Inc/usart.h"
 #include "../Task_Manager/macro_types.h"
 
-#define LEN_BUFFER	512
+#define LEN_BUFFER	1024
 
 /*
  * @brief transmission state enumeration definition

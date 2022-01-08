@@ -12,8 +12,8 @@
 
 static controller_t controller =
 {
-		/* Pid Configuration 	 Roll 		Pitch 		Yaw*/
-		.angle_kp = 			{5.0f, 		5.0f, 		0},
+		/* Pid Configuration 	 Roll 		Pitch 		Yaw */
+		.angle_kp = 			{4.0f, 		4.0f, 		0},
 		.angle_speed_kp = 		{0.8f, 		0.8f, 		1.2f},
 };
 
