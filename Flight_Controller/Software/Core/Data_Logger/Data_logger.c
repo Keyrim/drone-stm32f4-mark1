@@ -486,6 +486,10 @@ static void parse_uart(void)
 						state = parser_state_eCHECKSUM;
 					}
 				}
+				else
+				{
+					state = parser_state_eSTART_BYTE;
+				}
 				break;
 			case parser_state_eDATA:
 				trame[1+buffer_counter++] = c;

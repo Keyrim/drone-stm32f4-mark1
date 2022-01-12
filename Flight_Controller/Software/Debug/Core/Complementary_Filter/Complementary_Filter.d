@@ -36,7 +36,8 @@ Core/Complementary_Filter/Complementary_Filter.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ ../Core/Complementary_Filter/../../Drivers/CMSIS/DSP/Include/arm_math.h
 
 ../Core/Complementary_Filter/Complementary_Filter.h:
 
@@ -111,3 +112,5 @@ c:\github\mark-i\flight_controller\software\core\inc\main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+
+../Core/Complementary_Filter/../../Drivers/CMSIS/DSP/Include/arm_math.h:
