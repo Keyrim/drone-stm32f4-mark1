@@ -229,9 +229,9 @@ void Gyro_Read(void)
  */
 void MPU_Convert_Acc_Data(void)
 {
-	mpu.acc_raw[0] = ((int16_t)(mpu.acc_data[1] | (mpu.acc_data[0] << 8)) * mpu.acc_conversion) - 0.12f;
-	mpu.acc_raw[1] = ((int16_t)(mpu.acc_data[3] | (mpu.acc_data[2] << 8)) * mpu.acc_conversion) - 0.54f;
-	mpu.acc_raw[2] = ((int16_t)(mpu.acc_data[5] | (mpu.acc_data[4] << 8)) * mpu.acc_conversion) - 0.66f;
+	mpu.acc_raw[0] = ((int16_t)(mpu.acc_data[1] | (mpu.acc_data[0] << 8)) * mpu.acc_conversion);
+	mpu.acc_raw[1] = ((int16_t)(mpu.acc_data[3] | (mpu.acc_data[2] << 8)) * mpu.acc_conversion);
+	mpu.acc_raw[2] = ((int16_t)(mpu.acc_data[5] | (mpu.acc_data[4] << 8)) * mpu.acc_conversion);
 	/* Filtering */
 	mpu.acc[0] = (mpu.acc[0] * COEF_ACC_FILTERING) + (mpu.acc_raw[0] * (float)(1-COEF_ACC_FILTERING));
 	mpu.acc[1] = (mpu.acc[1] * COEF_ACC_FILTERING) + (mpu.acc_raw[1] * (float)(1-COEF_ACC_FILTERING));

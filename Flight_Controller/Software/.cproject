@@ -84,7 +84,7 @@
 					</folderInfo>
 					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.915959408.123619586" name="Spi.h" rcbsApplicability="disable" resourcePath="Core/Peripherals/Spi.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="System|OS|Peripherals/Spi.h|Peripherals/Spi.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
+						<entry excluding="OS|Peripherals/Spi.h|Peripherals/Spi.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 					</sourceEntries>
 				</configuration>

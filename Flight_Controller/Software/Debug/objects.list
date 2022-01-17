@@ -25,6 +25,8 @@
 "./Core/Src/usart.o"
 "./Core/Startup/startup_stm32f405rgtx.o"
 "./Core/Supervisor/Supervisor.o"
+"./Core/System/Orientation.o"
+"./Core/System/State_Space_Model.o"
 "./Core/Task_Manager/Task_Manager.o"
 "./Core/Task_Manager/time.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"

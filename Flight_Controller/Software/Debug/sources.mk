@@ -33,6 +33,7 @@ Core/Sensors \
 Core/Src \
 Core/Startup \
 Core/Supervisor \
+Core/System \
 Core/Task_Manager \
 Drivers/STM32F4xx_HAL_Driver/Src \
 

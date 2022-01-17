@@ -8,7 +8,7 @@
 #ifndef STATE_SPACE_MODEL_STATE_SPACE_MODEL_H_
 #define STATE_SPACE_MODEL_STATE_SPACE_MODEL_H_
 
-#include "Drivers/CMSIS/DSP/Include/arm_math.h"
+#include "../../Drivers/CMSIS/DSP/Include/arm_math.h"
 #include "stdint.h"
 
 #define STATE_VECTOR_MAX_SIZE 	3	//n

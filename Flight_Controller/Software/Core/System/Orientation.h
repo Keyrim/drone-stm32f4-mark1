@@ -10,18 +10,51 @@
 
 #include "State_Space_Model.h"
 
-//typedef enum
-//{
-//	orientation_eROLL = 0,
-//	orientation_e
-//	orientation_ePITCH,
-//	orientation_eYAW,
-//	orientation_eROLL_RATE,
-//}orientation_state_vector_e;
+/*
+ * @brief orientation state vector enumeration definition
+ */
+typedef enum
+{
+	orien_state_vector_eANGLE_ROLL = 0,
+	orien_state_vector_eANGLE_PITCH,
+	orien_state_vector_eANGLE_YAW,
+	orien_state_vector_eVELOCITY_ROLL,
+	orien_state_vector_eVELOCITY_PITCH,
+	orien_state_vector_eVELOCITY_YAW,
+	orien_state_vector_eCOUNT
+}orientation_state_vector_e;
+
+
+/*
+ * @brief orientation control vector enumeration definition
+ */
+typedef enum
+{
+	orien_control_vector_eMOTOR_FL = 0,
+	orien_control_vector_eMOTOR_FR,
+	orien_control_vector_eMOTOR_BR,
+	orien_control_vector_eMOTOR_BL,
+	orien_control_vector_eCOUNT
+}orientation_control_vector_e;
+
+/*
+ * @brief orientation measurement vector enumeration definition
+ */
+typedef enum
+{
+	orien_meas_vector_eANGLE_ROLL = 0,
+	orien_meas_vector_eANGLE_PITCH,
+	orien_meas_vector_eVELOCITY_ROLL,
+	orien_meas_vector_eVELOCITY_PITCH,
+	orien_meas_vector_eVELOCITY_YAW,
+	orien_meas_vector_eCOUNT,
+}orientation_measurement_vector_e;
 
 typedef struct
 {
-	ABSTRACT_STATE_SPACE_MODEL_T()
+	ABSTRACT_STATE_SPACE_MODEL_T(orien_state_vector_eCOUNT,
+								 orien_control_vector_eCOUNT,
+								 orien_meas_vector_eCOUNT)
 }orientation_model_t;
 
 #endif /* SYSTEM_ORIENTATION_H_ */

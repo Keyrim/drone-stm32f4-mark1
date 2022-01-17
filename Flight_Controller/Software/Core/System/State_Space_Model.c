@@ -7,14 +7,12 @@
 
 
 #include "State_Space_Model.h"
-#include "Drivers/CMSIS/DSP/Include/arm_math.h"
 
 State_Space_Model_t ss;
 
 
 void STATE_SPACE_MODEL_Init(State_Space_Model_t * ss_model, arm_matrix_instance_f32 * F,arm_matrix_instance_f32 * B, arm_matrix_instance_f32 * H)
 {
-	ss.
 	//Dimensions
 	ss_model->x_size = F->numCols;
 	ss_model->u_size = B->numCols;
