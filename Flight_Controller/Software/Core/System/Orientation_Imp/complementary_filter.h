@@ -10,5 +10,12 @@
 
 #include "../Orientation.h"
 
+/*
+ * TODO Define the complementary filter configuration structure
+ */
+
+
+//void COMPLEMENTARY_FILTER_Init(void);
+//void COMPLEMENTARY_FILTER_Process(orientation_model_t * model);
 
 #endif /* ORIENTATION_IMP_COMPLEMENTARY_FILTER_H_ */

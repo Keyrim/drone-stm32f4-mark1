@@ -54,7 +54,8 @@ typedef struct
 {
 	ABSTRACT_STATE_SPACE_MODEL_T(orien_state_vector_eCOUNT,
 								 orien_control_vector_eCOUNT,
-								 orien_meas_vector_eCOUNT)
+								 orien_meas_vector_eCOUNT);
+
 	uint32_t frequency;				/* [Hz] Frequency at which the filter is ran */
 	float period;					/* [s] */
 
