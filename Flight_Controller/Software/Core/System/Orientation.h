@@ -50,15 +50,23 @@ typedef enum
 	orien_meas_vector_eCOUNT,
 }orientation_measurement_vector_e;
 
+/*
+ * @brief Orientation regulators enumeration definition
+ */
+typedef enum
+{
+	orien_regulator_eCOMPLEMENTARY_FILTER =0,
+	orien_regulator_eKALMAN_FILTER
+}orientation_regulator_e;
+
 typedef struct
 {
 	ABSTRACT_STATE_SPACE_MODEL_T(orien_state_vector_eCOUNT,
 								 orien_control_vector_eCOUNT,
 								 orien_meas_vector_eCOUNT);
 
-	uint32_t frequency;				/* [Hz] Frequency at which the filter is ran */
-	float period;					/* [s] */
-
 }orientation_model_t;
+
+void ORIENTATION_Init(void);
 
 #endif /* SYSTEM_ORIENTATION_H_ */
