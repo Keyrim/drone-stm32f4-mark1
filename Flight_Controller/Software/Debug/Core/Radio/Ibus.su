@@ -1,3 +1,0 @@
-Ibus.c:19:6:IBUS_Init	16	static
-Ibus.c:31:8:IBUS_Process	24	static
-Ibus.c:89:10:check_sum_f	24	static

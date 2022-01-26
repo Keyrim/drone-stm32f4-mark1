@@ -12,7 +12,7 @@
 #include "stdint.h"
 
 #define STATE_VECTOR_MAX_SIZE 	3	//n
-#define INPUT_MAX_SIZE 			2	//m
+#define INPUT_MAX_SIZE 			4	//m
 #define OUTPUT_MAX_SIZE 		3	//l
 
 /*

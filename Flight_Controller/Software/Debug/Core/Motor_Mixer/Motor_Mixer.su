@@ -1,3 +1,0 @@
-Motor_Mixer.c:12:6:MOTOR_MIXER_Process	8	static
-Motor_Mixer.c:21:9:MOTOR_MIXER_Get_Angle_Input_Ptr	4	static
-Motor_Mixer.c:25:9:MOTOR_MIXER_Get_Power_Input_Ptr	4	static
