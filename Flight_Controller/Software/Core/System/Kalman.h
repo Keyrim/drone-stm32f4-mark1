@@ -17,46 +17,60 @@ typedef enum kalman_state_e{
 	KALMAN_OK
 }kalman_state_e;
 
-typedef struct kalman_t{
+/*
+ * @brief abstract kalman model
+ * x_predict_tmp state_vector_size
+ * x_predict state_vector_size
+ * innovation output_size
+ * P state_vector_size * state_vector_size
+ * S output_size * output_size
+ * S_inverse output_size * output_size
+ * S_tmp output_size * state_vector_size
+ * K state_vector_size * output_size
+ * I state_vector_size * state_vector_size
+ */
+#define ABSTRACT_KALMAN_MODEL_T(state_vector_size_, output_size_) \
+		State_Space_Model_t * ss ;	\
+		\
+		arm_matrix_instance_f32 x_predict_tmp;	\
+		float x_predict_tmp_array [state_vector_size_];	\
+		\
+		arm_matrix_instance_f32 x_predict;	\
+		float x_predict_array [state_vector_size_]; \
+		\
+		arm_matrix_instance_f32 inovation; \
+		float inovation_array[output_size_]; \
+		\
+		arm_matrix_instance_f32 P ;	\
+		float P_array[state_vector_size_ * state_vector_size_]; \
+		arm_matrix_instance_f32 * P_predict;	\
+		\
+		arm_matrix_instance_f32 * Q;	\
+		\
+		arm_matrix_instance_f32 * R;	\
+		\
+		arm_matrix_instance_f32 S;	\
+		float S_array[output_size_ * output_size_];	\
+		\
+		arm_matrix_instance_f32 S_inversed;	\
+		float S_inversed_array[output_size_ * output_size_];	\
+		\
+		arm_matrix_instance_f32 S_tmp;	\
+		float S_tmp_array[state_vector_size_ * output_size_];	\
+		\
+		arm_matrix_instance_f32 K;	\
+		float K_array[state_vector_size_ * output_size_];	\
+		\
+		arm_matrix_instance_f32 I_n;	\
+		float I_n_array[state_vector_size_ * state_vector_size_];	\
+		\
+		kalman_state_e state;	\
+		arm_status arm_result;	\
 
-	State_Space_Model_t * ss ;
 
-	arm_matrix_instance_f32 x_predict_tmp;
-	float x_predict_tmp_array [STATE_VECTOR_MAX_SIZE];
-
-	arm_matrix_instance_f32 x_predict;
-	float x_predict_array [STATE_VECTOR_MAX_SIZE];
-
-	arm_matrix_instance_f32 inovation;
-	float inovation_array[OUTPUT_MAX_SIZE];
-
-	arm_matrix_instance_f32 P ;	//Covariance estimation
-	float P_array[STATE_VECTOR_MAX_SIZE * STATE_VECTOR_MAX_SIZE];
-	arm_matrix_instance_f32 * P_predict;
-
-
-	arm_matrix_instance_f32 * Q;	//Covariance système (process noise)
-
-	arm_matrix_instance_f32 * R;	//Covariance mesure
-
-	arm_matrix_instance_f32 S;	//Covariance innovation
-	float S_array[OUTPUT_MAX_SIZE * OUTPUT_MAX_SIZE];
-
-	arm_matrix_instance_f32 S_inversed;	//Covariance innovation
-	float S_inversed_array[OUTPUT_MAX_SIZE * OUTPUT_MAX_SIZE];
-
-	arm_matrix_instance_f32 S_tmp;	//Calcul intérmédiaire cov. inovation
-	float S_tmp_array[STATE_VECTOR_MAX_SIZE * OUTPUT_MAX_SIZE];
-
-	arm_matrix_instance_f32 K;	//Kalman gain
-	float K_array[STATE_VECTOR_MAX_SIZE * OUTPUT_MAX_SIZE];
-
-	arm_matrix_instance_f32 I_n ;	//Identité de taille n
-	float I_n_array[STATE_VECTOR_MAX_SIZE*STATE_VECTOR_MAX_SIZE] ;
-
-	kalman_state_e state;
-	arm_status arm_result;
-
+typedef struct kalman_t
+{
+	ABSTRACT_KALMAN_MODEL_T(STATE_VECTOR_MAX_SIZE,OUTPUT_MAX_SIZE);
 }kalman_t;
 
 kalman_state_e KALMAN_Init(kalman_t *kalman, State_Space_Model_t * ss ,arm_matrix_instance_f32 * P_predict, arm_matrix_instance_f32 * Q, arm_matrix_instance_f32 * R);

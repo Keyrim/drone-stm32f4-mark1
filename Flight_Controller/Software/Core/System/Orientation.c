@@ -7,8 +7,11 @@
 
 
 #include "Orientation.h"
+#include "../Sensors/Mpu.h"
 
-orientation_model_t orientation;
+static orientation_model_t orientation;
+static orientation_kalman_t kalman;
+
 /* --------------- State Space Model matrices --------------- */
 /* F Matrix definition */
 static arm_matrix_instance_f32 F = {0};
@@ -37,7 +40,7 @@ static float H_array[orien_meas_vector_eCOUNT * orien_state_vector_eCOUNT] =
 		0, 0, 1
 };
 
-/* --------------- State Space Model matrices --------------- */
+/* --------------- Kalman Model matrices --------------- */
 /* Measurement covariance matrix */
 static arm_matrix_instance_f32 R ;
 static float R_array[orien_meas_vector_eCOUNT*orien_meas_vector_eCOUNT] =
@@ -65,6 +68,9 @@ static float P_array[orien_state_vector_eCOUNT*orien_state_vector_eCOUNT] =
 
 void ORIENTATION_Init(void)
 {
+	/* "Link" the gyroscope to the model by changing the measurement vector ptr */
+	orientation.z_array = MPU_Get_Gyro_Ptr();
+//	orientation.u_array = motor
 	/* State space model initialization */
 	arm_mat_init_f32(&F, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, F_array);
 	arm_mat_init_f32(&B, orien_state_vector_eCOUNT, orien_control_vector_eCOUNT, B_array);
@@ -74,13 +80,12 @@ void ORIENTATION_Init(void)
 	arm_mat_init_f32(&R, orien_meas_vector_eCOUNT, orien_meas_vector_eCOUNT, R_array);
 	arm_mat_init_f32(&Q, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, Q_array);
 	arm_mat_init_f32(&P_predict, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, P_array);
-	KALMAN_Init(&orientation.kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
+	KALMAN_Init(&kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
 
 }
 
 void ORIENTATION_Update(void)
 {
-	KALMAN_Update(&orientation.kalman);
-	KALMAN_Predict(&orientation.kalman);
-
+	KALMAN_Update(&kalman);
+	KALMAN_Predict(&kalman);
 }

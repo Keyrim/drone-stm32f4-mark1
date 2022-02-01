@@ -35,6 +35,7 @@ void STATE_SPACE_MODEL_Init(State_Space_Model_t * ss_model, arm_matrix_instance_
 	arm_mat_init_f32(&ss_model->x_tmp, ss_model->x_size, 1, ss_model->x_tmp_array);
 	arm_mat_init_f32(&ss_model->x_ref, ss_model->x_size, 1, ss_model->x_ref_array);
 
+
 	//u vector init
 	arm_mat_init_f32(&ss_model->u, ss_model->u_size, 1, ss_model->u_array);
 

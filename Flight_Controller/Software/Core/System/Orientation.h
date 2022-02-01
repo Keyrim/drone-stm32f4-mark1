@@ -57,10 +57,15 @@ typedef struct
 
 typedef struct
 {
+	ABSTRACT_KALMAN_MODEL_T(orien_state_vector_eCOUNT,
+							orien_meas_vector_eCOUNT);
+}orientation_kalman_t;
+
+typedef struct
+{
 	ABSTRACT_STATE_SPACE_MODEL_T(orien_state_vector_eCOUNT,
 								 orien_control_vector_eCOUNT,
 								 orien_meas_vector_eCOUNT);
-	kalman_t kalman;
 	orientation_config_t config;
 
 }orientation_model_t;

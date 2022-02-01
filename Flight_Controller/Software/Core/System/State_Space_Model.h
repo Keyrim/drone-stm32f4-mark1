@@ -21,7 +21,7 @@
  * u_size m
  * z_size l
  * F system's dynamic matrix
- * B
+ * B control matrix
  * H Observation matrix
  */
 
@@ -52,10 +52,9 @@
 	arm_matrix_instance_f32 z; \
 	float z_array [output_size_]; \
 
-typedef struct State_Space_Model_t{
-
+typedef struct State_Space_Model_t
+{
 	ABSTRACT_STATE_SPACE_MODEL_T(STATE_VECTOR_MAX_SIZE, INPUT_MAX_SIZE, OUTPUT_MAX_SIZE);
-
 }State_Space_Model_t;
 
 void STATE_SPACE_MODEL_Init(State_Space_Model_t * ss_model, arm_matrix_instance_f32 * F,arm_matrix_instance_f32 * B, arm_matrix_instance_f32 * H);
