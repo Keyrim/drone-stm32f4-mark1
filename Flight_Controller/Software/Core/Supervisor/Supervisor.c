@@ -12,11 +12,12 @@
 
 void SUPERVISOR_Process_Ms(void)
 {
-	if(!MPU_Is_Ok())
-	{
-		Led_Set_Sequence(led_eSTATE, led_sequence_eGYRO_OFF);
-	}
-	else if(RADIO_Get_State() == radio_state_eTIMEOUT)
+//	if(!MPU_Is_Ok())
+//	{
+//		Led_Set_Sequence(led_eSTATE, led_sequence_eGYRO_OFF);
+//	}
+//	else
+		if(RADIO_Get_State() == radio_state_eTIMEOUT)
 	{
 		Led_Set_Sequence(led_eSTATE, led_sequence_eRADIO_TIMEOUT);
 	}

@@ -73,25 +73,17 @@ void MOTOR_Disable(void)
  * @brief update motor target values
  * @param array of new float values
  */
-void MOTOR_Set(float * target)
+void MOTOR_Set(float target)
 {
-	target[0] = (uint16_t)MAX(target[0], 0);
-	target[1] = (uint16_t)MAX(target[1], 0);
-	target[2] = (uint16_t)MAX(target[2], 0);
-	target[3] = (uint16_t)MAX(target[3], 0);
+	target = (uint16_t)MAX(target, 0);
 
-	target[0] = (uint16_t)MIN(target[0], MOTOR_SIGNAL_MAX);
-	target[1] = (uint16_t)MIN(target[1], MOTOR_SIGNAL_MAX);
-	target[2] = (uint16_t)MIN(target[2], MOTOR_SIGNAL_MAX);
-	target[3] = (uint16_t)MIN(target[3], MOTOR_SIGNAL_MAX);
+	target = (uint16_t)MIN(target, MOTOR_SIGNAL_MAX);
 
-	target[0] = sqrtf(1000*target[0]);
-	target[1] = sqrtf(1000*target[1]);
-	target[2] = sqrtf(1000*target[2]);
-	target[3] = sqrtf(1000*target[3]);
+	target = sqrtf(1000*target);
+	uint16_t target_int = target + 999;
 
-	motor.output[0] = (uint16_t)target[0]+999;
-	motor.output[1] = (uint16_t)target[1]+999;
-	motor.output[2] = (uint16_t)target[2]+999;
-	motor.output[3] = (uint16_t)target[3]+999;
+	motor.output[0] = target_int;
+	motor.output[1] = target_int;
+	motor.output[2] = target_int;
+	motor.output[3] = target_int;
 }

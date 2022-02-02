@@ -30,5 +30,5 @@ void MOTOR_Init(void);
 void MOTOR_Process(void);
 void MOTOR_Enable(void);
 void MOTOR_Disable(void);
-void MOTOR_Set(float * target);
+void MOTOR_Set(float target);
 #endif /* MOTORS_H_ */

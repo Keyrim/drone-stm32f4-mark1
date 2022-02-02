@@ -13,8 +13,7 @@
 typedef enum
 {
 	high_level_eGROUND,
-	high_level_eACCRO,
-	high_level_eANGLE
+	high_level_eON
 }high_level_e;
 
 typedef struct
