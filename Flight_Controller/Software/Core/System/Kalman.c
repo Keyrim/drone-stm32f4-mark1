@@ -39,7 +39,8 @@ kalman_state_e KALMAN_Init(kalman_t *kalman, State_Space_Model_t * ss ,arm_matri
 	return KALMAN_OK ;
 }
 
-kalman_state_e KALMAN_Update(kalman_t * kalman){
+kalman_state_e KALMAN_Update(kalman_t * kalman)
+{
 
 	//	---------------	Update ----------------
 	State_Space_Model_t * ss = kalman->ss ;
@@ -69,7 +70,8 @@ kalman_state_e KALMAN_Update(kalman_t * kalman){
 	return KALMAN_OK;
 }
 
-kalman_state_e KALMAN_Predict(kalman_t * kalman){
+kalman_state_e KALMAN_Predict(kalman_t * kalman)
+{
 
 	//Predict next state
 	arm_mat_mult_f32(kalman->ss->B, &kalman->ss->u, &kalman->x_predict_tmp);

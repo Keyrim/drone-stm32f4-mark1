@@ -47,27 +47,43 @@ typedef enum
 }orientation_measurement_vector_e;
 
 /*
+ * @brief motor configuration structure definition
+ */
+typedef struct
+{
+	float x;
+	float y;
+}motor_config_t;
+
+/*
  * @brief Orientation configuration structure definition
  */
 typedef struct
 {
-	float frequency;
-	float period;
+	uint8_t prescaler;	/* Prescaler relatively to the gyroscope update frequency */
+	motor_config_t motor[4];	/* Motors positions */
+	float inertia_matrix[9];	/* Moment of inertia matrix */
 }orientation_config_t;
 
+/*
+ * @brief Orientation kalman structure inherited from kalman abstract structure
+ */
 typedef struct
 {
 	ABSTRACT_KALMAN_MODEL_T(orien_state_vector_eCOUNT,
 							orien_meas_vector_eCOUNT);
 }orientation_kalman_t;
 
+/*
+ * @brief Orientation kalman structure inherited from kalman abstract structure
+ */
 typedef struct
 {
 	ABSTRACT_STATE_SPACE_MODEL_T(orien_state_vector_eCOUNT,
 								 orien_control_vector_eCOUNT,
 								 orien_meas_vector_eCOUNT);
 	orientation_config_t config;
-
+	float period;	/* update period in seconds */
 }orientation_model_t;
 
 void ORIENTATION_Init(void);

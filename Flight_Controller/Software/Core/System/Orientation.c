@@ -12,6 +12,25 @@
 static orientation_model_t orientation;
 static orientation_kalman_t kalman;
 
+/* --------------- Default Configuration --------------- */
+static const orientation_config_t default_orientation_config =
+{
+		.prescaler = 1,
+		.inertia_matrix =
+		{
+				15, 	0.4f, 	0.2f,
+				0.4f,	20, 	0,
+				0.2f, 	0, 		30
+		},
+		.motor =
+		{	/*	x	y	*/
+				{0, 0},
+				{0, 0},
+				{0, 0},
+				{0, 0}
+		}
+};
+
 /* --------------- State Space Model matrices --------------- */
 /* F Matrix definition */
 static arm_matrix_instance_f32 F = {0};
@@ -45,17 +64,17 @@ static float H_array[orien_meas_vector_eCOUNT * orien_state_vector_eCOUNT] =
 static arm_matrix_instance_f32 R ;
 static float R_array[orien_meas_vector_eCOUNT*orien_meas_vector_eCOUNT] =
 {
-		100, 0, 0,
-		0, 100, 0,
-		0, 0, 100
+		10, 0, 0,
+		0, 10, 0,
+		0, 0, 10
 };
 /* system model covariance matrix */
 static arm_matrix_instance_f32 Q ;
 static float Q_array[orien_state_vector_eCOUNT*orien_state_vector_eCOUNT] =
 {
-		0.01, 	0, 		0,
-		0,		0.01, 	0,
-		0,		0,		0.01
+		100, 0, 0,
+		0, 100, 0,
+		0, 0, 100
 };
 /* P Matrix definition */
 static arm_matrix_instance_f32 P_predict ;
@@ -68,9 +87,13 @@ static float P_array[orien_state_vector_eCOUNT*orien_state_vector_eCOUNT] =
 
 void ORIENTATION_Init(void)
 {
-	/* "Link" the gyroscope to the model by changing the measurement vector ptr */
-	orientation.z_array = MPU_Get_Gyro_Ptr();
-//	orientation.u_array = motor
+	/* Get the configuration for the state space model */
+	orientation.config = default_orientation_config;
+	/* Get the gyroscope period */
+	float gyro_period = MPU_Get_Period();
+	orientation.period = (float)orientation.config.prescaler * gyro_period;
+	/* Compute the B matrix */
+	// TODO Code to make
 	/* State space model initialization */
 	arm_mat_init_f32(&F, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, F_array);
 	arm_mat_init_f32(&B, orien_state_vector_eCOUNT, orien_control_vector_eCOUNT, B_array);
@@ -80,12 +103,14 @@ void ORIENTATION_Init(void)
 	arm_mat_init_f32(&R, orien_meas_vector_eCOUNT, orien_meas_vector_eCOUNT, R_array);
 	arm_mat_init_f32(&Q, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, Q_array);
 	arm_mat_init_f32(&P_predict, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, P_array);
-	KALMAN_Init(&kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
+	KALMAN_Init((kalman_t*)&kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
+	/* "Link" the gyroscope to the model by changing the measurement vector ptr */
+	orientation.z.pData = MPU_Get_Gyro_Ptr();
 
 }
 
 void ORIENTATION_Update(void)
 {
-	KALMAN_Update(&kalman);
-	KALMAN_Predict(&kalman);
+	KALMAN_Update((kalman_t*)&kalman);
+	KALMAN_Predict((kalman_t*)&kalman);
 }

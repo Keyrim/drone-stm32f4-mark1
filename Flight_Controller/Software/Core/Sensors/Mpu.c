@@ -12,11 +12,14 @@
 #define COEF_ACC_FILTERING	(0.9f)
 
 /* MPU6000 use configuration */
-static mpu_t mpu =
+static const mpu_config_t default_mpu_configuration =
 {
+		.period = 1,
 		.gyro_range = MPU_GYRO_2000s,
 		.acc_range = MPU_ACC_8G
 };
+
+static mpu_t mpu = { 0 };
 
 /* Static functions prototypes */
 void MPU_Convert_Acc_Data(void);
@@ -28,6 +31,8 @@ void MPU_Convert_Gyro_Data(void);
  */
 void MPU_Init(void)
 {
+	/* Set the configuration */
+	mpu.config = default_mpu_configuration;
 	/* Set the Gyroscope and Accelerometer data buffer */
 	mpu.gyro_data = &mpu.data[8];
 	mpu.acc_data = &mpu.data[0];
@@ -81,17 +86,17 @@ void MPU_Init(void)
 	}
 	/* Sensitivity configuration */
 	temp_write[0] = MPU6050_GYRO_CONFIG;
-	temp_write[1] = (temp_read[1] & 0xE7) | (uint8_t)mpu.gyro_range << 3;
+	temp_write[1] = (temp_read[1] & 0xE7) | (uint8_t)mpu.config.gyro_range << 3;
 	SPI_Transmit(SPI_MPU, CS_MPU, temp_write, 2);
 	HAL_Delay(150);
 #else
 	/* Sensitivity configuration */
 	uint8_t temp;
 	I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_GYRO_CONFIG, &temp, 1);
-	temp = (temp & 0xE7) | (uint8_t)mpu.gyro_range << 3;
+	temp = (temp & 0xE7) | (uint8_t)mpu.config.gyro_range << 3;
 	I2C_Mem_Write(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_GYRO_CONFIG, &temp, 1);
 #endif
-	switch(mpu.gyro_range)
+	switch(mpu.config.gyro_range)
 	{
 		case MPU_GYRO_250s :
 			mpu.gyro_conversion = (float)1 / MPU6050_GYRO_SENS_250 ;
@@ -126,10 +131,10 @@ void MPU_Init(void)
 #else
 	/* Sensitivity configuration */
 	I2C_Mem_Read(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_CONFIG, &temp, 1);
-	temp = (temp & 0xE7) | (uint8_t)mpu.acc_range << 3;
+	temp = (temp & 0xE7) | (uint8_t)mpu.config.acc_range << 3;
 	I2C_Mem_Write(I2C_MPU, MPU6050_I2C_ADDR, MPU6050_ACCEL_CONFIG, &temp, 1);
 #endif
-	switch(mpu.acc_range)
+	switch(mpu.config.acc_range)
 	{
 		case MPU_ACC_2G :
 			mpu.acc_conversion = (float)1 / MPU6050_ACCE_SENS_2 ;
@@ -163,6 +168,32 @@ float * MPU_Get_Acc_Ptr(void)
 float * MPU_Get_Acc_Raw_Ptr(void)
 {
 	return mpu.acc_raw;
+}
+
+/*
+ * @brief Get the period
+ * @return The period in seconds
+ */
+float MPU_Get_Period(void)
+{
+	return (float)mpu.config.period * 0.001f;
+}
+
+/*
+ * @brief Call this function every ms
+ * 		  It will send a dma request for the gyro & acc data
+ */
+void MPU_Process_Ms(void)
+{
+	if(mpu.counter)
+	{
+		mpu.counter--;
+	}
+	else
+	{
+		mpu.counter = mpu.config.period-1;
+		MPU_Read_All_Dma();
+	}
 }
 
 void MPU_Read_All(void)

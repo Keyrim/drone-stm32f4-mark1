@@ -111,7 +111,7 @@ int main(void)
   /* Peripherals initialization */
   UART_Init();
   /* Task definition 	Name						Init process					Main process						1ms it process						Gyro data callback process */
-  TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Read_All_Dma,  					NULL);
+  TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Process_Ms,  					NULL);
   TASK_MANAGER_Add_Task("Complementary Filter", 	COMPLEMENTARY_FILTER_Init, 		NULL, 								NULL,								COMPLEMENTARY_FILTER_Process);
   TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								NULL, 								CONTROLLER_Process);
   TASK_MANAGER_Add_Task("Motor Mixer", 				NULL, 							NULL, 								MOTOR_MIXER_Process, 				MOTOR_MIXER_Process);
