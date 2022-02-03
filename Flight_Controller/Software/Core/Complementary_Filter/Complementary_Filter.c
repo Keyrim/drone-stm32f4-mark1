@@ -8,7 +8,7 @@
 #include "Complementary_Filter.h"
 #include "../Sensors/Mpu.h"
 #include "math.h"
-
+#include "../../Drivers/CMSIS/DSP/Include/arm_math.h"
 
 #define RAD_TO_DEG ((float)57.2957795f)
 #define DEG_TO_RAD ((float)0.01745329f)

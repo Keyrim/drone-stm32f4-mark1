@@ -115,15 +115,21 @@ typedef enum
 	mpu_state_eERROR
 }mpu_state_e;
 
-
+typedef struct
+{
+	gyro_range_e gyro_range;
+	acc_range_e acc_range;
+	uint32_t period;	/* [ms] */
+}mpu_config_t;
 
 typedef struct
 {
 	/* MPU globals */
 	mpu_state_e state;
 	uint8_t data[14];
+	mpu_config_t config;
+	uint8_t counter;
 	/* Gyroscope */
-	gyro_range_e gyro_range;
 	uint8_t * gyro_data;
 	float gyro_conversion;
 	float gyro[3];
@@ -131,7 +137,6 @@ typedef struct
 	float gyro_raw_last[3];
 	/* Accelerometer */
 	uint8_t * acc_data;
-	acc_range_e acc_range;
 	float acc_conversion;
 	float acc[3];
 	float acc_raw[3];
@@ -141,6 +146,7 @@ typedef struct
 
 
 void MPU_Init(void);
+void MPU_Process_Ms(void);
 void MPU_Read_All(void);
 void MPU_Read_All_Dma(void);
 void Gyro_Read(void);
@@ -149,6 +155,7 @@ float * MPU_Get_Gyro_Ptr(void);
 float * MPU_Get_Gyro_Raw_Ptr(void);
 float * MPU_Get_Acc_Ptr(void);
 float * MPU_Get_Acc_Raw_Ptr(void);
+float MPU_Get_Period(void);
 bool_e MPU_Rx_Complete_Callback(void);
 
 

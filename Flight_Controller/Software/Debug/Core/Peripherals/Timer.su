@@ -1,6 +1,0 @@
-Timer.c:35:6:TIMER_Start	16	static
-Timer.c:44:6:TIMER_Start_All_Channels	16	static
-Timer.c:57:6:TIMER_Stop	16	static
-Timer.c:66:6:TIMER_Stop_All_Channels	16	static
-Timer.c:79:6:TIMER_Set_ARR	16	static
-Timer.c:89:6:TIMER_Set_All_CCR	16	static

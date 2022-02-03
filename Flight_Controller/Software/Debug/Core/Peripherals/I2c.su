@@ -1,5 +1,0 @@
-I2c.c:25:6:I2C_Init	4	static
-I2c.c:28:19:I2C_Mem_Write	40	static
-I2c.c:33:19:I2C_Mem_Read	40	static
-I2c.c:38:19:I2C_Mem_Read_Dma	24	static
-I2c.c:43:19:I2C_Is_Device_Ready	16	static
