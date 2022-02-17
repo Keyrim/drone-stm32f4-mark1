@@ -22,18 +22,18 @@ motorsPositionAbsolute = [0.12689 0.10421 0.009599;
     -0.1058 -0.07516 0.009599;
     -0.1058 0.10421 0.009599];
 % Positions des moteurs relativement au centre de gravité du drone
-mPos = motorsPositionAbsolute - centerOfMass
+mPos = motorsPositionAbsolute - centerOfMass;
 % Matrice pour obtenir les moments générer par les moteurs
 M = k*[mPos(1, 2) mPos(2, 2) mPos(3, 2) mPos(4, 2);
     -mPos(1, 1) -mPos(2, 1) -mPos(3, 1) -mPos(4, 1)
-    -C/f C/f -C/f C/f];
+    -C/k C/k -C/k C/k];
 dt = 0.01;
 
 %% Définition des matrices du système
 A = [-f    0       0;
     0       -f     0;
     0       0       -f];
-B = eye(3)/I * M;
+B = iInv * M
 C = eye(3);
 D = zeros(3, 4);
 sys = ss(A, B, C, D);

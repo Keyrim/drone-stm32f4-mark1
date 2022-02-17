@@ -22,9 +22,9 @@ static const orientation_config_t default_orientation_config =
 		.prescaler = 1,
 		.inertia_matrix =
 		{
-				15, 	0.4f, 	0.2f,
-				0.4f,	20, 	0,
-				0.2f, 	0, 		30
+				0.001862f, 		0.0f, 		0.0001549f,
+				0.0f,			0.001593f, 	0.0f,
+				0.0001549f, 	0.0f, 		0.002606f
 		},
 		.motor_pos =
 		{	/*					x			y	*/
@@ -126,6 +126,7 @@ void ORIENTATION_Update(void)
 
 static void compute_b_matrix(void)
 {
+	arm_status result;
 	/* To compute the B matrix, we use and intermediate matrix called M to express
 	 * the moments resulting from the motors on each axis */
 	arm_matrix_instance_f32 M = { 0 };
@@ -148,5 +149,5 @@ static void compute_b_matrix(void)
 	arm_mat_init_f32(&inertia_inverse, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, inertia_inverse_array);
 	arm_mat_inverse_f32(&inertia, &inertia_inverse);
 	/* Then by multiplying the inverse of the moment of inertia by this matrix M, We obtain the B matrix */
-	arm_mat_mult_f32(&inertia_inverse, &M, orientation.B);
+	arm_mat_mult_f32(&inertia_inverse, &M, &B);
 }
