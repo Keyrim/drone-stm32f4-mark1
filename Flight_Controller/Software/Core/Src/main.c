@@ -40,6 +40,7 @@
 #include "../Motor_Mixer/Motor_Mixer.h"
 #include "../Led/Led.h"
 #include "../Supervisor/Supervisor.h"
+#include "../System/Orientation.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,15 +113,15 @@ int main(void)
   UART_Init();
   /* Task definition 	Name						Init process					Main process						1ms it process						Gyro data callback process */
   TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Process_Ms,  					NULL);
-  TASK_MANAGER_Add_Task("Complementary Filter", 	COMPLEMENTARY_FILTER_Init, 		NULL, 								NULL,								COMPLEMENTARY_FILTER_Process);
-  TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								NULL, 								CONTROLLER_Process);
-  TASK_MANAGER_Add_Task("Motor Mixer", 				NULL, 							NULL, 								MOTOR_MIXER_Process, 				MOTOR_MIXER_Process);
-  TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL, 								NULL, 								MOTOR_Process);
+  TASK_MANAGER_Add_Task("Orientation", 				ORIENTATION_Init, 				NULL, 								ORIENTATION_Process_Ms,				ORIENTATION_Process_Gyro_Callback);
+  TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								NULL, 								NULL);
+  TASK_MANAGER_Add_Task("Motor Mixer", 				NULL, 							NULL, 								NULL, 								NULL);
+  TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL, 								NULL, 								NULL);
   TASK_MANAGER_Add_Task("Radio", 					RADIO_Process_Init, 			RADIO_Process_Main, 				NULL, 								NULL);
   TASK_MANAGER_Add_Task("Data Logger", 				DATA_LOGGER_Init, 				DATA_LOGGER_Main, 					NULL, 								NULL);
   TASK_MANAGER_Add_Task("High Level", 				HIGH_LEVEL_Init, 				HIGH_LEVEL_Process_Main, 			NULL, 								NULL);
-  TASK_MANAGER_Add_Task("Led", 						NULL, 							NULL, 								Led_main_ms, NULL);
-  TASK_MANAGER_Add_Task("Supervisor", 				NULL, 							NULL, 								SUPERVISOR_Process_Ms, NULL);
+  TASK_MANAGER_Add_Task("Led", 						NULL, 							NULL, 								Led_main_ms, 						NULL);
+  TASK_MANAGER_Add_Task("Supervisor", 				NULL, 							NULL, 								SUPERVISOR_Process_Ms,				NULL);
 
   /* System initialization */
   TASK_MANAGER_Init();

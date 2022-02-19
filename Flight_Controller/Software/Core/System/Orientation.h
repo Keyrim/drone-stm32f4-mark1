@@ -10,6 +10,7 @@
 
 #include "State_Space_Model.h"
 #include "Kalman.h"
+#include "../Task_Manager/macro_types.h"
 
 /*
  * @brief orientation state vector enumeration definition
@@ -56,23 +57,27 @@ typedef struct
 }motor_config_t;
 
 /*
+ * @brief orientation mode enumeration definition
+ */
+typedef enum
+{
+	orien_mode_eREAL = 0,
+	orien_mode_eSIMULATION
+}orien_mode_e;
+
+/*
  * @brief Orientation configuration structure definition
  */
 typedef struct
 {
-	uint8_t prescaler;	/* Prescaler relatively to the gyroscope update frequency */
-	motor_config_t motor[4];	/* Motors positions */
-	float inertia_matrix[9];	/* Moment of inertia matrix */
+	uint8_t prescaler;				/* 						Prescaler relatively to the gyroscope update frequency */
+	motor_config_t motor_pos[4];	/* [m] 					Motors positions */
+	float inertia_matrix[9];		/* [kg.m^2] 			Moment of inertia matrix */
+	float yaw_moment;				/* [kg.m^2.s^-2]		Constant to translate the yaw moment resulting from the motors */
+	float motor_to_newton;			/* [kg.m.s^-2]			Coef to convert the signals sent to the motors into Newton */
+	float f[axe_eCOUNT];			/* [kg.m.s^-3.rad^-1]	Moments resulting from the angular speed of the drone on each axis */
+	orien_mode_e mode;
 }orientation_config_t;
-
-/*
- * @brief Orientation kalman structure inherited from kalman abstract structure
- */
-typedef struct
-{
-	ABSTRACT_KALMAN_MODEL_T(orien_state_vector_eCOUNT,
-							orien_meas_vector_eCOUNT);
-}orientation_kalman_t;
 
 /*
  * @brief Orientation kalman structure inherited from kalman abstract structure
@@ -86,6 +91,17 @@ typedef struct
 	float period;	/* update period in seconds */
 }orientation_model_t;
 
+/*
+ * @brief Orientation kalman structure inherited from kalman abstract structure
+ */
+typedef struct
+{
+	ABSTRACT_KALMAN_MODEL_T(orien_state_vector_eCOUNT,
+							orien_meas_vector_eCOUNT);
+}orientation_kalman_t;
+
 void ORIENTATION_Init(void);
+void ORIENTATION_Process_Ms(void);
+void ORIENTATION_Process_Gyro_Callback();
 
 #endif /* SYSTEM_ORIENTATION_H_ */
