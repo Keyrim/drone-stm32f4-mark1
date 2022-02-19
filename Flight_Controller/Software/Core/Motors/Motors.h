@@ -20,6 +20,15 @@ typedef enum
 	motor_eCOUNT		= 4
 }motor_e;
 
+/*
+ * motor configuration structure definition
+ */
+typedef struct
+{
+	uint16_t output_max;
+	bool_e use_min_max_check;
+};
+
 typedef struct
 {
 	bool_e is_enabled;

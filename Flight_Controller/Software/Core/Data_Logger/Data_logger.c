@@ -83,7 +83,6 @@ static void state_machine(void);
 static void parse_uart(void);
 /*
  * @brief Declare every data
- * @param mark1_ pointer to a system_t structure
  */
 void DATA_LOGGER_Init(void)
 {
