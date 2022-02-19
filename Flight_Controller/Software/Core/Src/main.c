@@ -37,7 +37,6 @@
 #include "../Task_Manager/Task_Manager.h"
 #include "../Controller/Controller.h"
 #include "../High_Level/High_Level.h"
-#include "../Motor_Mixer/Motor_Mixer.h"
 #include "../Led/Led.h"
 #include "../Supervisor/Supervisor.h"
 #include "../System/Orientation.h"
@@ -115,7 +114,6 @@ int main(void)
   TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Process_Ms,  					NULL);
   TASK_MANAGER_Add_Task("Orientation", 				ORIENTATION_Init, 				NULL, 								ORIENTATION_Process_Ms,				ORIENTATION_Process_Gyro_Callback);
   TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								NULL, 								NULL);
-  TASK_MANAGER_Add_Task("Motor Mixer", 				NULL, 							NULL, 								NULL, 								NULL);
   TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL, 								NULL, 								NULL);
   TASK_MANAGER_Add_Task("Radio", 					RADIO_Process_Init, 			RADIO_Process_Main, 				NULL, 								NULL);
   TASK_MANAGER_Add_Task("Data Logger", 				DATA_LOGGER_Init, 				DATA_LOGGER_Main, 					NULL, 								NULL);

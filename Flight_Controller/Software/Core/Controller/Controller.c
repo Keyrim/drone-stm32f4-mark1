@@ -7,7 +7,6 @@
 
 #include "Controller.h"
 #include "../Complementary_Filter/Complementary_Filter.h"
-#include "../Motor_Mixer/Motor_Mixer.h"
 #include "../Sensors/Mpu.h"
 
 static controller_t controller =
@@ -21,7 +20,7 @@ void CONTROLLER_Init(void)
 {
 	controller.angle = COMPLEMENTARY_FILTER_Get_Angles();
 	controller.angle_speed = MPU_Get_Gyro_Ptr();
-	controller.output = MOTOR_MIXER_Get_Angle_Input_Ptr();
+//	controller.output =
 
 	controller.state = controller_state_eDISABLED;
 }

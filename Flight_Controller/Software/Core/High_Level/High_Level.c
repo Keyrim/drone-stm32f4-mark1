@@ -9,7 +9,6 @@
 #include "High_Level.h"
 #include "../Controller/Controller.h"
 #include "../Radio/Radio.h"
-#include "../Motor_Mixer/Motor_Mixer.h"
 #include "../Sensors/Mpu.h"
 
 #define RADIO_TO_ANGLE			((float)0.1f)
@@ -23,7 +22,6 @@ void HIGH_LEVEL_Init(void)
 	high_level.radio = RADIO_Get_Channel();
 	high_level.target_angle = CONTROLLER_Get_Angle_Target();
 	high_level.target_angle_speed = CONTROLLER_Get_Angle_Speed_Target();
-	high_level.power = MOTOR_MIXER_Get_Power_Input_Ptr();
 	high_level.state = high_level_eGROUND;
 	high_level.previous_state = high_level_eACCRO;
 }
