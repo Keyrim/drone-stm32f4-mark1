@@ -113,7 +113,7 @@ int main(void)
   UART_Init();
   /* Task definition 	Name						Init process					Main process						1ms it process						Gyro data callback process */
   TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Process_Ms,  					NULL);
-  TASK_MANAGER_Add_Task("Orientation", 				ORIENTATION_Init, 				NULL, 								NULL,								ORIENTATION_Update);
+  TASK_MANAGER_Add_Task("Orientation", 				ORIENTATION_Init, 				NULL, 								ORIENTATION_Process_Ms,				ORIENTATION_Process_Gyro_Callback);
   TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								NULL, 								NULL);
   TASK_MANAGER_Add_Task("Motor Mixer", 				NULL, 							NULL, 								NULL, 								NULL);
   TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL, 								NULL, 								NULL);

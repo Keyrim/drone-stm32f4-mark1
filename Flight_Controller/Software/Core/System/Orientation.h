@@ -56,7 +56,14 @@ typedef struct
 	float y;
 }motor_config_t;
 
-
+/*
+ * @brief orientation mode enumeration definition
+ */
+typedef enum
+{
+	orien_mode_eREAL = 0,
+	orien_mode_eSIMULATION
+}orien_mode_e;
 
 /*
  * @brief Orientation configuration structure definition
@@ -69,6 +76,7 @@ typedef struct
 	float yaw_moment;				/* [kg.m^2.s^-2]		Constant to translate the yaw moment resulting from the motors */
 	float motor_to_newton;			/* [kg.m.s^-2]			Coef to convert the signals sent to the motors into Newton */
 	float f[axe_eCOUNT];			/* [kg.m.s^-3.rad^-1]	Moments resulting from the angular speed of the drone on each axis */
+	orien_mode_e mode;
 }orientation_config_t;
 
 /*
@@ -93,6 +101,7 @@ typedef struct
 }orientation_kalman_t;
 
 void ORIENTATION_Init(void);
-void ORIENTATION_Update(void);
+void ORIENTATION_Process_Ms(void);
+void ORIENTATION_Process_Gyro_Callback();
 
 #endif /* SYSTEM_ORIENTATION_H_ */

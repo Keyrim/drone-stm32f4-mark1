@@ -20,6 +20,9 @@ static void compute_b_matrix(void);
 static const orientation_config_t default_orientation_config =
 {
 		.prescaler = 1,
+		.mode = orien_mode_eSIMULATION,
+		.yaw_moment = 0.01f,
+		.motor_to_newton = 1.0f,
 		.inertia_matrix =
 		{
 				0.001862f, 		0.0f, 		0.0001549f,
@@ -33,8 +36,6 @@ static const orientation_config_t default_orientation_config =
 			(motor_config_t){-0.1549f, 	-0.0897f},
 			(motor_config_t){-0.1549f,	 0.0897f}
 		},
-		.yaw_moment = 0.01f,
-		.motor_to_newton = 1.0f,
 		.f =
 		{
 				0.2f,
@@ -53,7 +54,7 @@ static float F_array[orien_state_vector_eCOUNT * orien_state_vector_eCOUNT] =
 		0, 0, 1
 };
 
-/* B Matrix definition TODO compute the true value (constant at least) */
+/* B Matrix definition */
 static arm_matrix_instance_f32 B = {0};
 static float B_array[orien_state_vector_eCOUNT * orien_control_vector_eCOUNT] =
 {
@@ -118,15 +119,25 @@ void ORIENTATION_Init(void)
 	orientation.z.pData = MPU_Get_Gyro_Ptr();
 }
 
-void ORIENTATION_Update(void)
+void ORIENTATION_Process_Ms(void)
 {
-	KALMAN_Update((kalman_t*)&kalman);
-	KALMAN_Predict((kalman_t*)&kalman);
+	if(orientation.config.mode == orien_mode_eSIMULATION)
+	{
+		STATE_SPACE_MODEL_Step((State_Space_Model_t*)&orientation);
+	}
+}
+
+void ORIENTATION_Process_Gyro_Callback(void)
+{
+	if(orientation.config.mode == orien_mode_eREAL)
+	{
+		KALMAN_Update((kalman_t*)&kalman);
+		KALMAN_Predict((kalman_t*)&kalman);
+	}
 }
 
 static void compute_b_matrix(void)
 {
-	arm_status result;
 	/* To compute the B matrix, we use and intermediate matrix called M to express
 	 * the moments resulting from the motors on each axis */
 	arm_matrix_instance_f32 M = { 0 };
