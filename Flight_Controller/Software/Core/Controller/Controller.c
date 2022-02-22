@@ -30,17 +30,22 @@ void CONTROLLER_Init(void)
 
 void CONTROLLER_Process_Gyro(void)
 {
-	/* We don t the "process gyro" if we are in simulation */
+	/* We don t run the "gyro process" if we are in simulation */
 	if(controller.state == controller_state_eSIMULATION)
 	{
 		return;
+
 	}
 	/* Check for a new state */
 	if(controller.new_state != controller.state)
 	{
 		controller.state = controller.new_state;
-	}
+		if(controller.state == controller_state_eSIMULATION)
+		{
+			return;
 
+		}
+	}
 	/* If controller is in angle mode, start with the angle pid */
 	if(controller.state == controller_state_eANGLE)
 	{
@@ -58,12 +63,12 @@ void CONTROLLER_Process_Gyro(void)
 		controller.angle_speed_error[axe_ePITCH] = controller.target_angle_speed[axe_ePITCH] - controller.angle_speed[axe_ePITCH];
 		controller.angle_speed_error[axe_eYAW] = controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
 		/* Now, PID's time ! */
-		controller.output[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
-		controller.output[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
-		controller.output[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
+		controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
+		controller.output_pid[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
+		controller.output_pid[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
 	}
 	/* Angular speed regulation */
-	if(controller.state == controller_state_eSPEED)
+	else if(controller.state == controller_state_eSPEED)
 	{
 		/* First thing first, errors */
 		controller.angle_speed_error[axe_eROLL] = controller.target_angle_speed[axe_eROLL] - controller.angle_speed[axe_eROLL];
@@ -71,10 +76,15 @@ void CONTROLLER_Process_Gyro(void)
 		controller.angle_speed_error[axe_eYAW] = controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
 
 		/* Now, PID's time ! */
-		controller.output[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
-		controller.output[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
-		controller.output[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
+		controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
+		controller.output_pid[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
+		controller.output_pid[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
 	}
+	controller.output_motor[motor_eFRONT_LEFT] = 	controller.global_thrust + controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
+	controller.output_motor[motor_eFRONT_RIGHT] = 	controller.global_thrust - controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
+	controller.output_motor[motor_eBACK_RIGHT] = 	controller.global_thrust - controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
+	controller.output_motor[motor_eBACK_LEFT] = 	controller.global_thrust + controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
+	MOTOR_Set(controller.output_motor);
 }
 
 void CONTROLLER_Process_ms(void)
@@ -91,6 +101,15 @@ void CONTROLLER_Process_ms(void)
 		return;
 	}
 	/* TODO Controller simulation mode => is it recquiered ? Can be done by the motors */
+}
+
+/*
+ * @brief set the global thrust
+ * @param thrust New thrust value
+ */
+void CONTROLLER_Set_Thrust(float thrust)
+{
+	controller.global_thrust = thrust;
 }
 
 void CONTROLLER_Set_State(controller_state_e new_state)

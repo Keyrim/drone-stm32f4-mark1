@@ -42,7 +42,9 @@ typedef struct
 	float target_angle_speed[axe_eCOUNT];	/*	[degree / s]	Angular speed target */
 	float angle_speed_error[axe_eCOUNT];	/*	[degree / s]	Angular speed error */
 	/* Controller state */
-	float output[motor_eCOUNT];
+	float global_thrust;
+	float output_pid[axe_eCOUNT];
+	float output_motor[motor_eCOUNT];
 	controller_state_e state;
 	controller_state_e new_state;
 }controller_t;
@@ -50,6 +52,7 @@ typedef struct
 void CONTROLLER_Init(void);
 void CONTROLLER_Process(void);
 void CONTROLLER_Set_State(controller_state_e new_state);
+void CONTROLLER_Set_Thrust(float thrust);
 float * CONTROLLER_Get_Angle_Target(void);
 float * CONTROLLER_Get_Angle_Speed_Target(void);
 
