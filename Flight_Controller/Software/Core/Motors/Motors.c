@@ -82,7 +82,6 @@ void MOTOR_Disable(void)
  */
 void MOTOR_Set(float * target)
 {
-
 	if(motor.config.use_min_max_check)
 	{
 		target[0] = (uint16_t)MAX(target[0], 0);

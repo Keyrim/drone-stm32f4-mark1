@@ -24,7 +24,7 @@ void CONTROLLER_Init(void)
 	controller.config = default_controller_config;
 	controller.angle = COMPLEMENTARY_FILTER_Get_Angles();
 	controller.angle_speed = MPU_Get_Gyro_Ptr();
-	/* Initialize state to disabled by default */
+	/* Initialize controller's state to "disabled" by default */
 	controller.state = controller_state_eDISABLED;
 }
 

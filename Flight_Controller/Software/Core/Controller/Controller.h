@@ -17,7 +17,7 @@ typedef enum
 	controller_state_eDISABLED,
 	controller_state_eSIMULATION,
 	controller_state_eSPEED,
-	controller_state_eANGLE
+	controller_state_eANGLE			/* DO NOT USE FOR THE MOMENT */
 }controller_state_e;
 
 /*
