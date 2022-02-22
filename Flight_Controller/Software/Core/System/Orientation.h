@@ -54,7 +54,7 @@ typedef struct
 {
 	float x;
 	float y;
-}motor_config_t;
+}motor_pos_t;
 
 /*
  * @brief orientation mode enumeration definition
@@ -71,7 +71,7 @@ typedef enum
 typedef struct
 {
 	uint8_t prescaler;				/* 						Prescaler relatively to the gyroscope update frequency */
-	motor_config_t motor_pos[4];	/* [m] 					Motors positions */
+	motor_pos_t motor_pos[4];		/* [m] 					Motors positions */
 	float inertia_matrix[9];		/* [kg.m^2] 			Moment of inertia matrix */
 	float yaw_moment;				/* [kg.m^2.s^-2]		Constant to translate the yaw moment resulting from the motors */
 	float motor_to_newton;			/* [kg.m.s^-2]			Coef to convert the signals sent to the motors into Newton */

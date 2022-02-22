@@ -17,7 +17,7 @@ static uint8_t counter[led_eCOUNT] = { 0 };
 /*
  * @brief called by main_ms, turn the led on or off to follow the sequence
  */
-void Led_main_ms(void)
+void LED_Process_ms(void)
 {
 	for (uint8_t led = 0; led < led_eCOUNT; led++)
 	{

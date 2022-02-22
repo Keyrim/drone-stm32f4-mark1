@@ -30,11 +30,11 @@ static const orientation_config_t default_orientation_config =
 				0.0001549f, 	0.0f, 		0.002606f
 		},
 		.motor_pos =
-		{	/*					x			y	*/
-			(motor_config_t){0.0778f,	 0.0897f},
-			(motor_config_t){0.0778f, 	-0.0897f},
-			(motor_config_t){-0.1549f, 	-0.0897f},
-			(motor_config_t){-0.1549f,	 0.0897f}
+		{	/*				x				y	*/
+			(motor_pos_t){0.0778f,	 	0.0897f},
+			(motor_pos_t){0.0778f, 		-0.0897f},
+			(motor_pos_t){-0.1549f, 	-0.0897f},
+			(motor_pos_t){-0.1549f,	 	0.0897f}
 		},
 		.f =
 		{

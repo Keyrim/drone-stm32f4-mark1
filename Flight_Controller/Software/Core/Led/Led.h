@@ -41,7 +41,7 @@ typedef enum led_sequence_e
 } led_sequence_e;
 
 void Led_Set(led_t led, LED_state_e state);
-void Led_main_ms(void);
+void LED_Process_ms(void);
 void Led_Set_Sequence(led_t led, led_sequence_e sequence);
 
 #endif /* LED_H_ */
