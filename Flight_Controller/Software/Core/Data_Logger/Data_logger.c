@@ -18,7 +18,6 @@
 #include "../Task_Manager/Task_Manager.h"
 #include "../Controller/Controller.h"
 #include "../High_Level/High_Level.h"
-#include "../Motor_Mixer/Motor_Mixer.h"
 
 
 #define PERIODE_PING 			500
@@ -84,7 +83,6 @@ static void state_machine(void);
 static void parse_uart(void);
 /*
  * @brief Declare every data
- * @param mark1_ pointer to a system_t structure
  */
 void DATA_LOGGER_Init(void)
 {
