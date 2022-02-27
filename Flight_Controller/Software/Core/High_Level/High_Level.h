@@ -18,7 +18,8 @@
  */
 typedef enum
 {
-	high_level_eGROUND,
+	high_level_eIDLE = 0,		/* Startup state */
+	high_level_eIDLE_NO_GYRO,
 	high_level_eACCRO,
 	high_level_eSIMU,
 	high_level_eCOUNT
@@ -43,13 +44,22 @@ typedef struct
 typedef struct
 {
 	controller_state_e controller_state;
-	void (*init)(void);
-	void (*main)(void);
-	void (*on_leave)(void);
+	motor_state_e motor_state;
+	orien_mode_e orientation_state;
+	void (*entrance)(high_level_t * high_level);
+	void (*main)(high_level_t * high_level);
+	void (*on_leave)(high_level_t * high_level);
 	uint8_t * name;
 }high_level_state_t;
 
 void HIGH_LEVEL_Init(void);
 void HIGH_LEVEL_Process_Main(void);
+
+/* States functions */
+void IDLE_Main(high_level_t * high_level);
+
+void IDLE_NO_GYRO_Main(high_level_t * high_level);
+
+void SIMULATION_Main(high_level_t * high_level);
 
 #endif /* HIGH_LEVEL_H_ */

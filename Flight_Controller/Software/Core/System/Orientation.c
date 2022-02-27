@@ -8,13 +8,13 @@
 
 #include "Orientation.h"
 #include "../Sensors/Mpu.h"
-
+#include "../Motors/Motors.h"
 
 static orientation_model_t orientation;
 static orientation_kalman_t kalman;
 
 /* Private functions prototype declaration */
-static void compute_b_matrix(void);
+static void compute_matrix(void);
 
 /* --------------- Default Configuration --------------- */
 static const orientation_config_t default_orientation_config =
@@ -22,7 +22,7 @@ static const orientation_config_t default_orientation_config =
 		.prescaler = 1,
 		.mode = orien_mode_eSIMULATION,
 		.yaw_moment = 0.01f,
-		.motor_to_newton = 1.0f,
+		.motor_to_newton = 0.04f,
 		.inertia_matrix =
 		{
 				0.001862f, 		0.0f, 		0.0001549f,
@@ -38,9 +38,9 @@ static const orientation_config_t default_orientation_config =
 		},
 		.f =
 		{
-				0.2f,
-				0.2f,
-				0.5f,
+				0.8f,
+				0.8f,
+				1.0f,
 		}
 };
 
@@ -104,11 +104,12 @@ void ORIENTATION_Init(void)
 	orientation.config = default_orientation_config;
 	float gyro_period = MPU_Get_Period();
 	orientation.period = (float)orientation.config.prescaler * gyro_period;
+	orientation.mode = orientation.config.mode;
 	/* -------------- INIT THE STATE SPACE MODEL MATRIX ACCORDING TO THE CONFIGURATION ---------------- */
 	arm_mat_init_f32(&F, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, F_array);
 	arm_mat_init_f32(&B, orien_state_vector_eCOUNT, orien_control_vector_eCOUNT, B_array);
 	arm_mat_init_f32(&H, orien_meas_vector_eCOUNT, orien_state_vector_eCOUNT, H_array);
-	compute_b_matrix();
+	compute_matrix();
 	STATE_SPACE_MODEL_Init((State_Space_Model_t*)&orientation, &F, &B, &H);
 	/* --------------- INIT THE KALMAN FILTER MATRIX ACCORDING TO THE CONFIGURATION ------------------- */
 	arm_mat_init_f32(&R, orien_meas_vector_eCOUNT, orien_meas_vector_eCOUNT, R_array);
@@ -117,11 +118,12 @@ void ORIENTATION_Init(void)
 	KALMAN_Init((kalman_t*)&kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
 	/* "Link" the gyroscope to the model by changing the measurement vector ptr */
 	orientation.z.pData = MPU_Get_Gyro_Ptr();
+	orientation.u.pData = MOTOR_Get_Output_Float();
 }
 
 void ORIENTATION_Process_Ms(void)
 {
-	if(orientation.config.mode == orien_mode_eSIMULATION)
+	if(orientation.mode == orien_mode_eSIMULATION)
 	{
 		STATE_SPACE_MODEL_Step((State_Space_Model_t*)&orientation);
 	}
@@ -129,15 +131,21 @@ void ORIENTATION_Process_Ms(void)
 
 void ORIENTATION_Process_Gyro_Callback(void)
 {
-	if(orientation.config.mode == orien_mode_eREAL)
+	if(orientation.mode == orien_mode_eREAL)
 	{
 		KALMAN_Update((kalman_t*)&kalman);
 		KALMAN_Predict((kalman_t*)&kalman);
 	}
 }
 
-static void compute_b_matrix(void)
+void ORIENTATION_Set_Mode(orien_mode_e new_mode)
 {
+	orientation.mode = new_mode;
+}
+
+static void compute_matrix(void)
+{
+	/* ---------------------------------- B MATRIX -------------------------------- */
 	/* To compute the B matrix, we use and intermediate matrix called M to express
 	 * the moments resulting from the motors on each axis */
 	arm_matrix_instance_f32 M = { 0 };
@@ -161,4 +169,18 @@ static void compute_b_matrix(void)
 	arm_mat_inverse_f32(&inertia, &inertia_inverse);
 	/* Then by multiplying the inverse of the moment of inertia by this matrix M, We obtain the B matrix */
 	arm_mat_mult_f32(&inertia_inverse, &M, &B);
+	/* Finaly take the period into account */
+	for(uint8_t i = 0; i < orien_control_vector_eCOUNT * orien_state_vector_eCOUNT; i++)
+	{
+		B_array[i] = orientation.period * B_array[i];
+	}
+	/* ---------------------------------- F MATRIX -------------------------------- */
+	F_array[0] = 1.0f - orientation.period * orientation.config.f[0];
+	F_array[4] = 1.0f - orientation.period * orientation.config.f[1];
+	F_array[8] = 1.0f - orientation.period * orientation.config.f[2];
+}
+
+float * ORIENTATION_Get_State_Vector(void)
+{
+	return orientation.x_array;
 }

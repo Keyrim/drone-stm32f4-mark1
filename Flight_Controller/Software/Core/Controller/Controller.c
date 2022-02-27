@@ -8,6 +8,10 @@
 #include "Controller.h"
 #include "../Complementary_Filter/Complementary_Filter.h"
 #include "../Sensors/Mpu.h"
+#include "../System/Orientation.h"
+
+/* Private function prototypes */
+static inline void CONTROLLER_Process(void);
 
 static const controller_config_t default_controller_config =
 {
@@ -23,7 +27,7 @@ void CONTROLLER_Init(void)
 	/* Load configuration */
 	controller.config = default_controller_config;
 	controller.angle = COMPLEMENTARY_FILTER_Get_Angles();
-	controller.angle_speed = MPU_Get_Gyro_Ptr();
+	controller.angle_speed = ORIENTATION_Get_State_Vector();
 	/* Initialize controller's state to "disabled" by default */
 	controller.state = controller_state_eDISABLED;
 }
@@ -31,76 +35,19 @@ void CONTROLLER_Init(void)
 void CONTROLLER_Process_Gyro(void)
 {
 	/* We don t run the "gyro process" if we are in simulation */
-	if(controller.state == controller_state_eSIMULATION)
+	if(controller.state == controller_state_eENABLE_P_GYRO)
 	{
-		return;
-
+		CONTROLLER_Process();
 	}
-	/* Check for a new state */
-	if(controller.new_state != controller.state)
-	{
-		controller.state = controller.new_state;
-		if(controller.state == controller_state_eSIMULATION)
-		{
-			return;
-
-		}
-	}
-	/* If controller is in angle mode, start with the angle pid */
-	if(controller.state == controller_state_eANGLE)
-	{
-		/* Compute angle errors */
-		controller.angle_error[axe_eROLL] = controller.target_angle[axe_eROLL] - controller.angle[axe_eROLL];
-		controller.angle_error[axe_ePITCH] = controller.target_angle[axe_ePITCH] - controller.angle[axe_ePITCH];
-		/* Handle angle continuity at -PI and + PI */
-		//TODO ASAP angle error continuity
-		/* Compute PID on angles */
-		controller.target_angle_speed[axe_eROLL] = controller.config.angle_kp[axe_eROLL] * controller.angle_error[axe_eROLL];
-		controller.target_angle_speed[axe_ePITCH] = controller.config.angle_kp[axe_ePITCH] * controller.angle_error[axe_ePITCH];
-		/* Angular speed regulation */
-		/* First thing first, errors */
-		controller.angle_speed_error[axe_eROLL] = controller.target_angle_speed[axe_eROLL] - controller.angle_speed[axe_eROLL];
-		controller.angle_speed_error[axe_ePITCH] = controller.target_angle_speed[axe_ePITCH] - controller.angle_speed[axe_ePITCH];
-		controller.angle_speed_error[axe_eYAW] = controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
-		/* Now, PID's time ! */
-		controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
-		controller.output_pid[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
-		controller.output_pid[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
-	}
-	/* Angular speed regulation */
-	else if(controller.state == controller_state_eSPEED)
-	{
-		/* First thing first, errors */
-		controller.angle_speed_error[axe_eROLL] = controller.target_angle_speed[axe_eROLL] - controller.angle_speed[axe_eROLL];
-		controller.angle_speed_error[axe_ePITCH] = controller.target_angle_speed[axe_ePITCH] - controller.angle_speed[axe_ePITCH];
-		controller.angle_speed_error[axe_eYAW] = controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
-
-		/* Now, PID's time ! */
-		controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
-		controller.output_pid[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
-		controller.output_pid[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
-	}
-	controller.output_motor[motor_eFRONT_LEFT] = 	controller.global_thrust + controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
-	controller.output_motor[motor_eFRONT_RIGHT] = 	controller.global_thrust - controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
-	controller.output_motor[motor_eBACK_RIGHT] = 	controller.global_thrust - controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
-	controller.output_motor[motor_eBACK_LEFT] = 	controller.global_thrust + controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
-	MOTOR_Set(controller.output_motor);
 }
 
 void CONTROLLER_Process_ms(void)
 {
 	/* If we are not in simulation mode, we run in the "process gyro" */
-	if(controller.state != controller_state_eSIMULATION)
+	if(controller.state == controller_state_eENABLE_P_MS)
 	{
-		return;
+		CONTROLLER_Process();
 	}
-	/* Does the state has to change ? */
-	if(controller.new_state != controller.state)
-	{
-		controller.state = controller.new_state;
-		return;
-	}
-	/* TODO Controller simulation mode => is it recquiered ? Can be done by the motors */
 }
 
 /*
@@ -114,7 +61,7 @@ void CONTROLLER_Set_Thrust(float thrust)
 
 void CONTROLLER_Set_State(controller_state_e new_state)
 {
-	controller.new_state = new_state;
+	controller.state = new_state;
 }
 
 float * CONTROLLER_Get_Angle_Target(void)
@@ -125,6 +72,31 @@ float * CONTROLLER_Get_Angle_Target(void)
 float * CONTROLLER_Get_Angle_Speed_Target(void)
 {
 	return controller.target_angle_speed;
+}
+
+/* Static functions definition */
+
+
+/*
+ * @brief Controller compute pid
+ */
+static inline void CONTROLLER_Process()
+{
+	/* First thing first, errors */
+	controller.angle_speed_error[axe_eROLL] = controller.target_angle_speed[axe_eROLL] - controller.angle_speed[axe_eROLL];
+	controller.angle_speed_error[axe_ePITCH] = controller.target_angle_speed[axe_ePITCH] - controller.angle_speed[axe_ePITCH];
+	controller.angle_speed_error[axe_eYAW] = controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
+
+	/* Now, PID's time ! */
+	controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
+	controller.output_pid[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speep_kp[axe_ePITCH];
+	controller.output_pid[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speep_kp[axe_eYAW];
+	/* Mix each pid output */
+	controller.output_motor[orien_control_vector_eMOTOR_FL] = 	controller.global_thrust + controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
+	controller.output_motor[orien_control_vector_eMOTOR_FR] = 	controller.global_thrust - controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
+	controller.output_motor[orien_control_vector_eMOTOR_BR] = 	controller.global_thrust - controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
+	controller.output_motor[orien_control_vector_eMOTOR_BL] = 	controller.global_thrust + controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
+	MOTOR_Set(controller.output_motor);
 }
 
 

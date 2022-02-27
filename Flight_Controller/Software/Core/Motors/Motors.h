@@ -47,13 +47,16 @@ typedef struct
 {
 	motor_config_t config;
 	motor_state_e state;
-	bool_e is_enabled;	//TODO remove is_enabled with "state" and adapt the code in the .c file
+	motor_state_e previous_state;
+	float output_float[motor_eCOUNT];
 	uint16_t output[motor_eCOUNT];
 }motor_t;
 
 void MOTOR_Init(void);
-void MOTOR_Process_Main(void);
-void MOTOR_Enable(void);
-void MOTOR_Disable(void);
+void MOTOR_Process_Ms(void);
+void MOTOR_Process_Gyro(void);
+void MOTOR_Set_State(motor_state_e new_state);
 void MOTOR_Set(float * target);
+uint16_t * MOTOR_Get_Output(void);
+float * MOTOR_Get_Output_Float(void);
 #endif /* MOTORS_H_ */

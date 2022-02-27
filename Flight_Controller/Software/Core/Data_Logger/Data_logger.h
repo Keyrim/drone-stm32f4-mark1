@@ -19,11 +19,23 @@ typedef enum
 	data_id_eCONFIG_REQUEST,
 	data_id_eSTART_TRANSFER,
 	data_id_eSTOP_TRANSFER,
-
+	/* State vector */
+	data_id_eSTATE_VELOCITY_ROLL,
+	data_id_eSTATE_VELOCITY_PITCH,
+	data_id_eSTATE_VELOCITY_YAW,
 	/* Angles */
 	data_id_eANGLE_ROLL,
 	data_id_eANGLE_PITCH,
 	data_id_eANGLE_YAW,
+	/* Controller */
+	data_id_eTARGET_ANGLE_SPEED_ROLL,
+	data_id_eTARGET_ANGLE_SPEED_PITCH,
+	data_id_eTARGET_ANGLE_SPEED_YAW,
+	/* Motors */
+	data_id_eMOTOR_FL,
+	data_id_eMOTOR_FR,
+	data_id_eMOTOR_BR,
+	data_id_eMOTOR_BL,
 	/* Gyro */
 	data_id_eGYRO_ROLL,
 	data_id_eGYRO_PITCH,
