@@ -16,89 +16,62 @@
 #define RADIO_TO_ANGLE_RATE_YAW	((float)0.7f)
 
 static high_level_t high_level = { 0 };
+static high_level_state_t states[high_level_eCOUNT] =
+{
+		[high_level_eIDLE] =
+		{
+				.main = IDLE_Main,
+				.controller_state = controller_state_eDISABLED,
+				.motor_state = motor_state_eENABLED,
+				.orientation_state = orien_mode_eREAL
+		},
+		[high_level_eIDLE_NO_GYRO] =
+		{
+				.main = IDLE_NO_GYRO_Main,
+				.controller_state = controller_state_eDISABLED,
+				.motor_state = motor_state_eDISABLED,
+				.orientation_state = orien_mode_eSIMULATION
+		},
+		[high_level_eSIMU] =
+		{
+				.main = SIMULATION_Main,
+				.controller_state = controller_state_eENABLE_P_MS,
+				.motor_state = motor_state_eSIMULATION,
+				.orientation_state = orien_mode_eSIMULATION
+		}
+};
 
 void HIGH_LEVEL_Init(void)
 {
 	high_level.radio = RADIO_Get_Channel();
 	high_level.target_angle = CONTROLLER_Get_Angle_Target();
 	high_level.target_angle_speed = CONTROLLER_Get_Angle_Speed_Target();
-	high_level.state = high_level_eGROUND;
-	high_level.previous_state = high_level_eACCRO;
+	high_level.state = high_level_eIDLE;
+	high_level.previous_state = high_level_eIDLE;
 }
 
 void HIGH_LEVEL_Process_Main(void)
 {
-	/* entrance is used to know if we changed of state */
-	bool_e entrance = high_level.state == high_level.previous_state;
-	high_level.previous_state = high_level.state;
-	/* state machine */
-	bool_e is_fly_allowed = MPU_Is_Ok();						/* We need the gyro to fly */
-	is_fly_allowed &= high_level.radio[4] > 1500;				/* And the "Arm" switch */
-	is_fly_allowed &= (RADIO_Get_State() == radio_state_eOK);	/* We also need a working radio so it doesn't fly away */
-	switch(high_level.state)
+	if(high_level.state != high_level.previous_state)
 	{
-		case high_level_eGROUND:
-			if(entrance)
-			{
-				CONTROLLER_Set_State(controller_state_eDISABLED);
-				*high_level.power = 0;
-			}
-
-			/* Switch 1 and throttle low to arm the drone */
-			if(is_fly_allowed && high_level.radio[2] < 1050)
-			{
-				/* Switch 2 to switch between ANGLE or ACCRO mode */
-				if(high_level.radio[5] < 1300)
-				{
-					high_level.state = high_level_eANGLE;
-				}
-				else if(high_level.radio[5] > 1300)
-				{
-					high_level.state = high_level_eACCRO;
-				}
-			}
-			break;
-
-		case high_level_eANGLE:
-			if(entrance)
-			{
-				CONTROLLER_Set_State(controller_state_eANGLE);
-			}
-			high_level.target_angle[axe_eROLL] = (float)(high_level.radio[0]-1500) * RADIO_TO_ANGLE;
-			high_level.target_angle[axe_ePITCH] = (float)(high_level.radio[1]-1500) * RADIO_TO_ANGLE;
-			high_level.target_angle_speed[axe_eYAW] = -(float)(high_level.radio[3]-1500) * RADIO_TO_ANGLE_RATE_YAW;
-			*high_level.power = high_level.radio[2]-1000;
-			/* Can we still fly ? */
-			if(!is_fly_allowed)
-			{
-				high_level.state = high_level_eGROUND;
-			}
-			/* Switch 2 to go in angle mode */
-			else if(high_level.radio[5] > 1300)
-			{
-				high_level.state = high_level_eACCRO;
-			}
-			break;
-		case high_level_eACCRO:
-			if(entrance)
-			{
-				CONTROLLER_Set_State(controller_state_eSPEED);
-			}
-			high_level.target_angle_speed[axe_eROLL] = (float)(high_level.radio[0]-1500) * RADIO_TO_ANGLE_RATE;
-			high_level.target_angle_speed[axe_ePITCH] = (float)(high_level.radio[1]-1500) * RADIO_TO_ANGLE_RATE;
-			high_level.target_angle_speed[axe_eYAW] = -(float)(high_level.radio[3]-1500) * RADIO_TO_ANGLE_RATE_YAW;
-			*high_level.power = high_level.radio[2]-1000;
-			/* Can we still fly ? */
-			if(!is_fly_allowed)
-			{
-				high_level.state = high_level_eGROUND;
-			}
-			/* Switch 2 to go in angle mode */
-			else if(high_level.radio[5] < 1300)
-			{
-				high_level.state = high_level_eANGLE;
-			}
-			break;
+		if(states[high_level.previous_state].on_leave != NULL)
+		{
+			states[high_level.previous_state].on_leave(&high_level);
+		}
+		if(states[high_level.state].entrance != NULL)
+		{
+			states[high_level.state].entrance(&high_level);
+		}
+		__disable_irq();
+		CONTROLLER_Set_State(states[high_level.state].controller_state);
+		MOTOR_Set_State(states[high_level.state].motor_state);
+		ORIENTATION_Set_Mode(states[high_level.state].orientation_state);
+		__enable_irq();
+		high_level.previous_state = high_level.state;
+	}
+	if(states[high_level.state].main != NULL)
+	{
+		states[high_level.state].main(&high_level);
 	}
 }
 

@@ -20,11 +20,11 @@ static const motor_config_t default_motor_config =
 };
 
 static motor_t motor = { 0 };
-static bool_e flag_start = TRUE;
-static bool_e flag_stop = FALSE;
 
 
-
+/*
+ * @brief Motor initialization process
+ */
 void MOTOR_Init(void)
 {
 	/* Load configuration */
@@ -33,47 +33,60 @@ void MOTOR_Init(void)
 	TIMER_Start_All_Channels(motor.config.timer);
 }
 
-void MOTOR_Process_Main(void)
+/*
+ * @brief Motor main ms process
+ */
+void MOTOR_Process_Ms(void)
 {
-	if(flag_stop)
+	if(motor.state == motor_state_eENABLED)
 	{
-		/* Clear flag */
-		flag_stop = FALSE;
-		/* Stop pwm on every channel */
-		TIMER_Stop_All_Channels(motor.config.timer);
-		motor.is_enabled = FALSE;
+		return;
 	}
-	else if(flag_start)
+	bool_e entrance = motor.state != motor.previous_state;
+	switch(motor.state)
 	{
-		/* Clear flag */
-		flag_start = FALSE;
-		/* Reset target to 0 */
+		case motor_state_eDISABLED:
+			TIMER_Stop_All_Channels(motor.config.timer);
+			break;
+		case motor_state_eSIMULATION:
+			if(entrance)
+			{
+				TIMER_Stop_All_Channels(motor.config.timer);
+			}
+			break;
+		case motor_state_eENABLED:
+			/* We can not end here theoretically */
+			break;
+	}
+	motor.previous_state = motor.state;
+}
+
+void MOTOR_Process_Gyro(void)
+{
+	if(motor.state != motor_state_eENABLED)
+	{
+		return;
+	}
+	bool_e entrance = motor.state != motor.previous_state;
+	if(entrance)
+	{
 		motor.output[0] = 1000;
 		motor.output[1] = 1000;
 		motor.output[2] = 1000;
 		motor.output[3] = 1000;
-		/* Set the output to zero and start the timer */
 		TIMER_Set_All_CCR(motor.config.timer, motor.output);
 		TIMER_Start_All_Channels(motor.config.timer);
-		motor.is_enabled = TRUE;
 	}
-}
-
-
-/*
- * @brief Request to start the motors
- */
-void MOTOR_Enable(void)
-{
-	flag_start = TRUE;
+	motor.previous_state = motor.state;
 }
 
 /*
- * @brief Request to stop the motors
+ * @brief Change motor's module state
+ * @param [in] new_state new motor's state
  */
-void MOTOR_Disable(void)
+void MOTOR_Set_State(motor_state_e new_state)
 {
-	flag_stop = TRUE;
+	motor.state = new_state;
 }
 
 /*
@@ -82,22 +95,40 @@ void MOTOR_Disable(void)
  */
 void MOTOR_Set(float * target)
 {
-
-	if(motor.config.use_min_max_check)
+	if(motor.state != motor_state_eDISABLED)
 	{
-		target[0] = (uint16_t)MAX(target[0], 0);
-		target[1] = (uint16_t)MAX(target[1], 0);
-		target[2] = (uint16_t)MAX(target[2], 0);
-		target[3] = (uint16_t)MAX(target[3], 0);
+		if(motor.config.use_min_max_check)
+		{
+			motor.output_float[0] = (uint16_t)MAX(target[0], 0);
+			motor.output_float[1] = (uint16_t)MAX(target[1], 0);
+			motor.output_float[2] = (uint16_t)MAX(target[2], 0);
+			motor.output_float[3] = (uint16_t)MAX(target[3], 0);
 
-		target[0] = (uint16_t)MIN(target[0], motor.config.output_max);
-		target[1] = (uint16_t)MIN(target[1], motor.config.output_max);
-		target[2] = (uint16_t)MIN(target[2], motor.config.output_max);
-		target[3] = (uint16_t)MIN(target[3], motor.config.output_max);
+			motor.output_float[0] = (uint16_t)MIN(motor.output_float[0], motor.config.output_max);
+			motor.output_float[1] = (uint16_t)MIN(motor.output_float[1], motor.config.output_max);
+			motor.output_float[2] = (uint16_t)MIN(motor.output_float[2], motor.config.output_max);
+			motor.output_float[3] = (uint16_t)MIN(motor.output_float[3], motor.config.output_max);
+		}
+		else
+		{
+			motor.output_float[0] = target[0];
+			motor.output_float[1] = target[1];
+			motor.output_float[2] = target[2];
+			motor.output_float[3] = target[3];
+		}
+		motor.output[0] = (uint16_t)motor.output_float[0]+999;
+		motor.output[1] = (uint16_t)motor.output_float[1]+999;
+		motor.output[2] = (uint16_t)motor.output_float[2]+999;
+		motor.output[3] = (uint16_t)motor.output_float[3]+999;
 	}
-	motor.output[0] = (uint16_t)target[0]+999;
-	motor.output[1] = (uint16_t)target[1]+999;
-	motor.output[2] = (uint16_t)target[2]+999;
-	motor.output[3] = (uint16_t)target[3]+999;
-	TIMER_Set_All_CCR(motor.config.timer, motor.output);
+}
+
+uint16_t * MOTOR_Get_Output(void)
+{
+	return motor.output;
+}
+
+float * MOTOR_Get_Output_Float(void)
+{
+	return motor.output_float;
 }

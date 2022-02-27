@@ -88,6 +88,7 @@ typedef struct
 								 orien_control_vector_eCOUNT,
 								 orien_meas_vector_eCOUNT);
 	orientation_config_t config;
+	orien_mode_e mode;
 	float period;	/* update period in seconds */
 }orientation_model_t;
 
@@ -102,6 +103,8 @@ typedef struct
 
 void ORIENTATION_Init(void);
 void ORIENTATION_Process_Ms(void);
-void ORIENTATION_Process_Gyro_Callback();
+void ORIENTATION_Process_Gyro_Callback(void);
+float * ORIENTATION_Get_State_Vector(void);
+void ORIENTATION_Set_Mode(orien_mode_e new_mode);
 
 #endif /* SYSTEM_ORIENTATION_H_ */

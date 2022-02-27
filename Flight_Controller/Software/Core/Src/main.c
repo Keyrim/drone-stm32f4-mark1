@@ -113,8 +113,8 @@ int main(void)
   /* Task definition 	Name						Init process					Main process						1ms it process						Gyro data callback process */
   TASK_MANAGER_Add_Task("Gyro", 					MPU_Init, 						NULL, 								MPU_Process_Ms,  					NULL);
   TASK_MANAGER_Add_Task("Orientation", 				ORIENTATION_Init, 				NULL, 								ORIENTATION_Process_Ms,				ORIENTATION_Process_Gyro_Callback);
-  TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								NULL, 								NULL);
-  TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					MOTOR_Process_Main,					NULL, 								NULL);
+  TASK_MANAGER_Add_Task("Controller", 				CONTROLLER_Init, 				NULL, 								CONTROLLER_Process_ms, 				CONTROLLER_Process_Gyro);
+  TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL,								MOTOR_Process_Ms, 					MOTOR_Process_Gyro);
   TASK_MANAGER_Add_Task("Radio", 					RADIO_Process_Init, 			RADIO_Process_Main, 				NULL, 								NULL);
   TASK_MANAGER_Add_Task("Data Logger", 				DATA_LOGGER_Init, 				DATA_LOGGER_Main, 					NULL, 								NULL);
   TASK_MANAGER_Add_Task("High Level", 				HIGH_LEVEL_Init, 				HIGH_LEVEL_Process_Main, 			NULL, 								NULL);

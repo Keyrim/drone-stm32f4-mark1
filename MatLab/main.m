@@ -38,6 +38,8 @@ C = eye(3);
 D = zeros(3, 4);
 sys = ss(A, B, C, D);
 
+dis_sts = c2d(sys, 0.001)
+
 %% open loop simulation to step impulse
 t = dt:dt:20;
 u = [0*t.' 0*t.' 0*t.' 0*t.'];
