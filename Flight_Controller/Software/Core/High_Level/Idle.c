@@ -16,4 +16,11 @@ void IDLE_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_eIDLE_NO_GYRO;
 	}
+	else if(high_level->radio[4] > 1500)
+	{
+		if(high_level->radio[5] < 1300)
+		{
+			high_level->state = high_level_eSIMU_OPEN_LOOP;
+		}
+	}
 }
