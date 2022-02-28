@@ -38,7 +38,16 @@ static high_level_state_t states[high_level_eCOUNT] =
 				.controller_state = controller_state_eENABLE_P_MS,
 				.motor_state = motor_state_eSIMULATION,
 				.orientation_state = orien_mode_eSIMULATION
+		},
+		[high_level_eSIMU_OPEN_LOOP] =
+		{
+				.main = SIMULATION_Main,
+				.controller_state = controller_state_eENABLE_P_MS,
+				.motor_state = motor_state_eSIMULATION,
+				.orientation_state = orien_mode_eSIMULATION
 		}
+
+
 };
 
 void HIGH_LEVEL_Init(void)
@@ -75,6 +84,15 @@ void HIGH_LEVEL_Process_Main(void)
 	}
 }
 
+/*
+ * @brief change high level control registers values
+ * @param control Control register id
+ * @param value The new value
+ */
+void HIGH_LEVEL_Set_Control(high_level_control_e control, uint16_t value)
+{
+	high_level.control[control] = value;
+}
 
 
 
