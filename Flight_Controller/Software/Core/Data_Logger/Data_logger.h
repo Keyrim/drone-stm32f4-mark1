@@ -16,9 +16,14 @@
 typedef enum
 {
 	/* Buttons */
-	data_id_eCONFIG_REQUEST,
+	data_id_eCONFIG_REQUEST = 0,
 	data_id_eSTART_TRANSFER,
 	data_id_eSTOP_TRANSFER,
+	/* High level controls */
+	data_id_eHIGH_LEVEL_CONTROL1,
+	data_id_eHIGH_LEVEL_CONTROL2,
+	data_id_eHIGH_LEVEL_CONTROL3,
+	data_id_eHIGH_LEVEL_CONTROL4,
 	/* State vector */
 	data_id_eSTATE_VELOCITY_ROLL,
 	data_id_eSTATE_VELOCITY_PITCH,

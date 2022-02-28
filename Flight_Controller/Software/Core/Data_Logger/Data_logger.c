@@ -115,8 +115,6 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eAS_OUTPUT);
 
-
-
 	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eNOT_USED);
@@ -132,9 +130,14 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eNOT_USED);
 
 	/* -------------- Inputs ----------------- */
-	DEFINE_DATA(data_id_eCONFIG_REQUEST,		NULL,	data_format_e0B_BUTTON,		"Send Configuration",	use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eSTART_TRANSFER,		NULL,	data_format_e0B_BUTTON,		"Start Transfer",		use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eSTOP_TRANSFER,			NULL,	data_format_e0B_BUTTON,		"Stop Transfer",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eCONFIG_REQUEST,				NULL,	data_format_e0B_BUTTON,		"Send Configuration",	use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eSTART_TRANSFER,				NULL,	data_format_e0B_BUTTON,		"Start Transfer",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eSTOP_TRANSFER,					NULL,	data_format_e0B_BUTTON,		"Stop Transfer",		use_format_eAS_INPUT);
+
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL1,			NULL,	data_format_e16B_INT16,		"HighLevel 1",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL2,			NULL,	data_format_e16B_INT16,		"HighLevel 2",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL3,			NULL,	data_format_e16B_INT16,		"HighLevel 3",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL4,			NULL,	data_format_e16B_INT16,		"HighLevel 4",		use_format_eAS_INPUT);
 }
 /*
  * @brief Request to start logging data
@@ -201,25 +204,46 @@ void DATA_LOGGER_Reception(uint8_t * input_buffer)
 			tmp_int_16 += (int16_t)input_buffer[2];
 			switch(id)
 			{
+				case data_id_eHIGH_LEVEL_CONTROL1:
+					HIGH_LEVEL_Set_Control(high_level_control_e1, tmp_int_16);
+					break;
+				case data_id_eHIGH_LEVEL_CONTROL2:
+					HIGH_LEVEL_Set_Control(high_level_control_e2, tmp_int_16);
+					break;
+				case data_id_eHIGH_LEVEL_CONTROL3:
+					HIGH_LEVEL_Set_Control(high_level_control_e3, tmp_int_16);
+					break;
+				case data_id_eHIGH_LEVEL_CONTROL4:
+					HIGH_LEVEL_Set_Control(high_level_control_e4, tmp_int_16);
+					break;
 				default:
 					break;
 			}
-
 			break;
 		case data_format_e16B_UINT16:
 			tmp_uint_16 = (uint16_t)input_buffer[1] << 8;
 			tmp_uint_16 += (uint16_t)input_buffer[2];
 			switch(id)
 			{
+				case data_id_eHIGH_LEVEL_CONTROL1:
+					HIGH_LEVEL_Set_Control(high_level_control_e1, (int16_t)tmp_uint_16);
+					break;
+				case data_id_eHIGH_LEVEL_CONTROL2:
+					HIGH_LEVEL_Set_Control(high_level_control_e2, (int16_t)tmp_uint_16);
+					break;
+				case data_id_eHIGH_LEVEL_CONTROL3:
+					HIGH_LEVEL_Set_Control(high_level_control_e3, (int16_t)tmp_uint_16);
+					break;
+				case data_id_eHIGH_LEVEL_CONTROL4:
+					HIGH_LEVEL_Set_Control(high_level_control_e4, (int16_t)tmp_uint_16);
+					break;
 				default:
 					break;
 			}
-
 		case data_format_e16B_FLOAT_1D:
 			break;
 		default:
 			break;
-
 	}
 }
 /*
