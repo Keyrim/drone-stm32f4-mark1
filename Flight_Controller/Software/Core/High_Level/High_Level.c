@@ -43,7 +43,7 @@ static high_level_state_t states[high_level_eCOUNT] =
 		{
 				.main = SIMULATION_OPEN_LOOP_Main,
 				.controller_state = controller_state_eDISABLED,
-				.motor_state = motor_state_eENABLED,
+				.motor_state = motor_state_eSIMULATION,
 				.orientation_state = orien_mode_eREAL
 		}
 
@@ -55,8 +55,19 @@ void HIGH_LEVEL_Init(void)
 	high_level.radio = RADIO_Get_Channel();
 	high_level.target_angle = CONTROLLER_Get_Angle_Target();
 	high_level.target_angle_speed = CONTROLLER_Get_Angle_Speed_Target();
-	high_level.state = high_level_eIDLE;
-	high_level.previous_state = high_level_eIDLE;
+	high_level.state = high_level_eSIMU_OPEN_LOOP;
+	high_level.previous_state = high_level_eSIMU_OPEN_LOOP;
+
+	/* Entrance and module config according to the default state */
+	__disable_irq();
+	CONTROLLER_Set_State(states[high_level.state].controller_state);
+	MOTOR_Set_State(states[high_level.state].motor_state);
+	ORIENTATION_Set_Mode(states[high_level.state].orientation_state);
+	__enable_irq();
+	if(states[high_level.state].entrance != NULL)
+	{
+		states[high_level.state].entrance(&high_level);
+	}
 }
 
 void HIGH_LEVEL_Process_Main(void)
@@ -71,11 +82,6 @@ void HIGH_LEVEL_Process_Main(void)
 		{
 			states[high_level.state].entrance(&high_level);
 		}
-		__disable_irq();
-		CONTROLLER_Set_State(states[high_level.state].controller_state);
-		MOTOR_Set_State(states[high_level.state].motor_state);
-		ORIENTATION_Set_Mode(states[high_level.state].orientation_state);
-		__enable_irq();
 		high_level.previous_state = high_level.state;
 	}
 	if(states[high_level.state].main != NULL)
