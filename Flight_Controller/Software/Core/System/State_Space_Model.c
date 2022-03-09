@@ -5,8 +5,9 @@
  *      Author: Théo
  */
 
-
+#include "stm32f4xx.h"
 #include "State_Space_Model.h"
+
 
 State_Space_Model_t ss;
 

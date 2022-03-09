@@ -4,7 +4,7 @@
  *  Created on: 10 mai 2021
  *      Author: Théo
  */
-
+#include "stm32f4xx.h"
 #include "Kalman.h"
 
 

@@ -5,7 +5,7 @@
  *      Author: Théo Magne
  */
 
-
+#include "stm32f4xx.h"
 #include "Orientation.h"
 #include "../Sensors/Mpu.h"
 #include "../Motors/Motors.h"
