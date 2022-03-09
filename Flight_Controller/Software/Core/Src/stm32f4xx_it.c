@@ -212,8 +212,6 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
 
-
-bool_e start_fourrier = FALSE;
 /**
   * @brief This function handles DMA1 stream0 global interrupt.
   */

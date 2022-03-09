@@ -20,7 +20,7 @@
 #include "../High_Level/High_Level.h"
 #include "../System/Orientation.h"
 
-
+#define MAX_TRAME_RX_SIZE		30
 #define PERIODE_PING 			500
 #define PERIODE_CONFIG_SEND 	10
 #define PERIODE_SEND			10
@@ -491,7 +491,7 @@ static void parse_uart(void)
 	/* state machine state variable */
 	static parser_state_e state = parser_state_eSTART_BYTE;
 
-	static uint8_t trame[20] = { 0 };
+	static uint8_t trame[MAX_TRAME_RX_SIZE] = { 0 };
 	static uint8_t nb_byte_to_buffer = 0;
 	static uint8_t buffer_counter = 0;
 	static uint16_t checksum = 0;
@@ -505,6 +505,7 @@ static void parse_uart(void)
 			case parser_state_eSTART_BYTE:
 				if(c == '$')
 				{
+					buffer_counter = 0;
 					state = parser_state_eID;
 				}
 				break;
@@ -533,11 +534,15 @@ static void parse_uart(void)
 				}
 				break;
 			case parser_state_eDATA:
-				trame[1+buffer_counter++] = c;
+				trame[1 + buffer_counter++] = c;
 				checksum += c;
 				if(buffer_counter == nb_byte_to_buffer)
 				{
 					state = parser_state_eCHECKSUM;
+				}
+				else if(buffer_counter == MAX_TRAME_RX_SIZE)
+				{
+					state = parser_state_eSTART_BYTE;
 				}
 				break;
 			case parser_state_eCHECKSUM:
