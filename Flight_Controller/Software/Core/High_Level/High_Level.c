@@ -20,6 +20,7 @@ static high_level_state_t states[high_level_eCOUNT] =
 {
 		[high_level_eIDLE] =
 		{
+				.entrance = IDLE_Init,
 				.main = IDLE_Main,
 				.controller_state = controller_state_eDISABLED,
 				.motor_state = motor_state_eENABLED,
@@ -43,11 +44,9 @@ static high_level_state_t states[high_level_eCOUNT] =
 		{
 				.main = SIMULATION_OPEN_LOOP_Main,
 				.controller_state = controller_state_eDISABLED,
-				.motor_state = motor_state_eSIMULATION,
+				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
 		}
-
-
 };
 
 void HIGH_LEVEL_Init(void)
@@ -72,6 +71,11 @@ void HIGH_LEVEL_Init(void)
 
 void HIGH_LEVEL_Process_Main(void)
 {
+	if(!high_level.flag_ms)
+	{
+		return;
+	}
+	high_level.flag_ms = FALSE;
 	if(high_level.state != high_level.previous_state)
 	{
 		if(states[high_level.previous_state].on_leave != NULL)
@@ -88,6 +92,14 @@ void HIGH_LEVEL_Process_Main(void)
 	{
 		states[high_level.state].main(&high_level);
 	}
+}
+
+/*
+ * @brief rise the "flag_ms" once every ms
+ */
+void HIGH_LEVEL_Process_Ms(void)
+{
+	high_level.flag_ms = TRUE;
 }
 
 /*

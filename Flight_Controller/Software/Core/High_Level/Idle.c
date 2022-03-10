@@ -8,6 +8,14 @@
 
 #include "High_Level.h"
 #include "../Sensors/Mpu.h"
+#include "../Motors/Motors.h"
+
+static float motor_zeros[motor_eCOUNT] = { 0 };
+
+void IDLE_Init(high_level_t * high_level)
+{
+	MOTOR_Set(motor_zeros);
+}
 
 void IDLE_Main(high_level_t * high_level)
 {

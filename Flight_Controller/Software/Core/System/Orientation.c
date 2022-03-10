@@ -117,7 +117,7 @@ void ORIENTATION_Init(void)
 	arm_mat_init_f32(&P_predict, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, P_array);
 	KALMAN_Init((kalman_t*)&kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
 	/* "Link" the gyroscope to the model by changing the measurement vector ptr */
-	orientation.z.pData = MPU_Get_Gyro_Ptr();
+	orientation.z.pData = MPU_Get_Gyro_Raw_Ptr();
 	orientation.u.pData = MOTOR_Get_Output_Float();
 }
 

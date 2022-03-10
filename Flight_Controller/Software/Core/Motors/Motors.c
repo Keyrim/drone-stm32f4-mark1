@@ -14,7 +14,7 @@
  */
 static const motor_config_t default_motor_config =
 {
-		.output_max = 700,
+		.output_max = 500,
 		.timer = timer_e3,
 		.use_min_max_check = TRUE
 };
@@ -77,6 +77,7 @@ void MOTOR_Process_Gyro(void)
 		TIMER_Set_All_CCR(motor.config.timer, motor.output);
 		TIMER_Start_All_Channels(motor.config.timer);
 	}
+	TIMER_Set_All_CCR(motor.config.timer, motor.output);
 	motor.previous_state = motor.state;
 }
 
@@ -116,10 +117,10 @@ void MOTOR_Set(float * target)
 			motor.output_float[2] = target[2];
 			motor.output_float[3] = target[3];
 		}
-		motor.output[0] = (uint16_t)motor.output_float[0]+999;
-		motor.output[1] = (uint16_t)motor.output_float[1]+999;
-		motor.output[2] = (uint16_t)motor.output_float[2]+999;
-		motor.output[3] = (uint16_t)motor.output_float[3]+999;
+		motor.output[motor_eFRONT_LEFT] = (uint16_t)motor.output_float[0]+999;
+		motor.output[motor_eFRONT_RIGHT] = (uint16_t)motor.output_float[1]+999;
+		motor.output[motor_eBACK_RIGHT] = (uint16_t)motor.output_float[2]+999;
+		motor.output[motor_eBACK_LEFT] = (uint16_t)motor.output_float[3]+999;
 	}
 }
 

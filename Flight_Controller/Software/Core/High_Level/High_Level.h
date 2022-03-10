@@ -43,6 +43,7 @@ typedef enum
  */
 typedef struct
 {
+	volatile bool_e flag_ms;
 	high_level_e state;
 	high_level_e previous_state;
 	int16_t control[high_level_control_eCOUNT];
@@ -68,9 +69,11 @@ typedef struct
 
 void HIGH_LEVEL_Init(void);
 void HIGH_LEVEL_Process_Main(void);
+void HIGH_LEVEL_Process_Ms(void);
 void HIGH_LEVEL_Set_Control(high_level_control_e control, int16_t value);
 
 /* States functions */
+void IDLE_Init(high_level_t * high_level);
 void IDLE_Main(high_level_t * high_level);
 
 void IDLE_NO_GYRO_Main(high_level_t * high_level);
