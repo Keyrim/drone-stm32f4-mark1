@@ -96,6 +96,7 @@ void DATA_LOGGER_Init(void)
 	float * state_vector = ORIENTATION_Get_State_Vector();
 	float * motors = MOTOR_Get_Output_Float();
 	float * target_vel = CONTROLLER_Get_Angle_Speed_Target();
+	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
 	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eAS_OUTPUT);
@@ -128,6 +129,21 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eACC_RAW_ROLL,			(void*)&acc_raw[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Acc Roll Raw",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eAS_OUTPUT);
+
+	DEFINE_DATA(data_id_eRADIO1, 				(void*)&radio[0],					data_format_e16B_UINT16,		"Radio 1",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO2, 				(void*)&radio[1],					data_format_e16B_UINT16,		"Radio 2",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO3, 				(void*)&radio[2],					data_format_e16B_UINT16,		"Radio 3",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO4, 				(void*)&radio[3],					data_format_e16B_UINT16,		"Radio 4",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO5, 				(void*)&radio[4],					data_format_e16B_UINT16,		"Radio 5",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO6, 				(void*)&radio[5],					data_format_e16B_UINT16,		"Radio 6",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO7, 				(void*)&radio[6],					data_format_e16B_UINT16,		"Radio 7",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO8, 				(void*)&radio[7],					data_format_e16B_UINT16,		"Radio 8",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO9, 				(void*)&radio[8],					data_format_e16B_UINT16,		"Radio 9",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO10, 				(void*)&radio[9],					data_format_e16B_UINT16,		"Radio 10",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO11, 				(void*)&radio[10],					data_format_e16B_UINT16,		"Radio 11",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO12, 				(void*)&radio[11],					data_format_e16B_UINT16,		"Radio 12",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO13, 				(void*)&radio[12],					data_format_e16B_UINT16,		"Radio 13",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO14, 				(void*)&radio[13],					data_format_e16B_UINT16,		"Radio 14",		use_format_eAS_OUTPUT);
 
 	/* -------------- Inputs ----------------- */
 	DEFINE_DATA(data_id_eCONFIG_REQUEST,				NULL,	data_format_e0B_BUTTON,		"Send Configuration",	use_format_eAS_INPUT);
