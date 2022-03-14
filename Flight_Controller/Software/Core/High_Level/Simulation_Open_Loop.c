@@ -4,10 +4,7 @@
  *  Created on: 28 févr. 2022
  *      Author: Théo Magne
  */
-#define	HL_ROLL 	high_level->control[0]
-#define HL_PITCH 	high_level->control[1]
-#define HL_YAW 		high_level->control[2]
-#define HL_POWER 	high_level->control[3]
+
 
 #include "High_Level.h"
 #include "../Motors/Motors.h"

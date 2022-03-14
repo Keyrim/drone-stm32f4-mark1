@@ -22,24 +22,24 @@ static const orientation_config_t default_orientation_config =
 		.prescaler = 1,
 		.mode = orien_mode_eSIMULATION,
 		.yaw_moment = 0.01f,
-		.motor_to_newton = 0.04f,
+		.motor_to_newton = 0.008f,
 		.inertia_matrix =
 		{
-				0.001862f, 		0.0f, 		0.0001549f,
-				0.0f,			0.001593f, 	0.0f,
-				0.0001549f, 	0.0f, 		0.002606f
+				0.001985f, 		0.0f, 		0.0f,
+				0.0f,			0.00233f, 	0.0f,
+				0.0f, 			0.0f, 		0.003242f
 		},
 		.motor_pos =
 		{	/*				x				y	*/
-			(motor_pos_t){0.0778f,	 	0.0897f},
-			(motor_pos_t){0.0778f, 		-0.0897f},
-			(motor_pos_t){-0.1549f, 	-0.0897f},
-			(motor_pos_t){-0.1549f,	 	0.0897f}
+			(motor_pos_t){0.068671f,	 	0.089684f},
+			(motor_pos_t){0.068942f,	 	-0.089684f},
+			(motor_pos_t){-0.068942f,	 	-0.089684f},
+			(motor_pos_t){-0.068942f,	 	0.089684f},
 		},
 		.f =
 		{
-				0.8f,
-				0.8f,
+				0.17f,
+				0.17f,
 				1.0f,
 		}
 };
@@ -77,17 +77,17 @@ static float H_array[orien_meas_vector_eCOUNT * orien_state_vector_eCOUNT] =
 static arm_matrix_instance_f32 R ;
 static float R_array[orien_meas_vector_eCOUNT*orien_meas_vector_eCOUNT] =
 {
-		10, 0, 0,
-		0, 10, 0,
-		0, 0, 10
+		1000, 0, 0,
+		0, 1000, 0,
+		0, 0, 1000
 };
 /* system model covariance matrix */
 static arm_matrix_instance_f32 Q ;
 static float Q_array[orien_state_vector_eCOUNT*orien_state_vector_eCOUNT] =
 {
-		100, 0, 0,
-		0, 100, 0,
-		0, 0, 100
+		0.001f, 0, 0,
+		0, 0.001f, 0,
+		0, 0, 0.001f
 };
 /* P Matrix definition */
 static arm_matrix_instance_f32 P_predict ;

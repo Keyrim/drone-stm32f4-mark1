@@ -36,7 +36,7 @@ static high_level_state_t states[high_level_eCOUNT] =
 		[high_level_eSIMU] =
 		{
 				.main = SIMULATION_Main,
-				.controller_state = controller_state_eENABLE_P_MS,
+				.controller_state = controller_state_eDISABLED,
 				.motor_state = motor_state_eSIMULATION,
 				.orientation_state = orien_mode_eSIMULATION
 		},
@@ -82,6 +82,11 @@ void HIGH_LEVEL_Process_Main(void)
 		{
 			states[high_level.previous_state].on_leave(&high_level);
 		}
+		__disable_irq();
+		CONTROLLER_Set_State(states[high_level.state].controller_state);
+		MOTOR_Set_State(states[high_level.state].motor_state);
+		ORIENTATION_Set_Mode(states[high_level.state].orientation_state);
+		__enable_irq();
 		if(states[high_level.state].entrance != NULL)
 		{
 			states[high_level.state].entrance(&high_level);
