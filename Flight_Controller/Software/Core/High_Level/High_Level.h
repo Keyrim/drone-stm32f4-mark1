@@ -13,6 +13,11 @@
 #include "../Controller/Controller.h"
 #include "../System/Orientation.h"
 
+#define	HL_ROLL 	high_level->control[0]
+#define HL_PITCH 	high_level->control[1]
+#define HL_YAW 		high_level->control[2]
+#define HL_POWER 	high_level->control[3]
+
 /*
  * @brief high level state enumeration definition
  */

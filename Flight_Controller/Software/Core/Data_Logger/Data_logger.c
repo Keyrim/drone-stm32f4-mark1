@@ -23,7 +23,7 @@
 #define MAX_TRAME_RX_SIZE		30
 #define PERIODE_PING 			500
 #define PERIODE_CONFIG_SEND 	100
-#define PERIODE_SEND			100
+#define PERIODE_SEND			10
 #define UART_TELEMETRY			uart_e1
 
 /*
@@ -99,51 +99,51 @@ void DATA_LOGGER_Init(void)
 	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
-	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_1D,		"Velocity Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_1D,		"Velocity Pitch",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_1D,		"Velocity Yaw",			use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_3D,		"Velocity Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_3D,		"Velocity Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_3D,		"Velocity Yaw",			use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eMOTOR_BR,				(void*)&motors[orien_control_vector_eMOTOR_BR],			data_format_e16B_FLOAT_1D,		"Motor Back Right",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eMOTOR_BL,				(void*)&motors[orien_control_vector_eMOTOR_BL],			data_format_e16B_FLOAT_1D,		"Motor Back Left",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_BR,				(void*)&motors[orien_control_vector_eMOTOR_BR],			data_format_e16B_FLOAT_1D,		"Motor Back Right",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_BL,				(void*)&motors[orien_control_vector_eMOTOR_BL],			data_format_e16B_FLOAT_1D,		"Motor Back Left",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_ROLL,	(void*)&target_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"Target Vel ROLL",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_ROLL,	(void*)&target_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"Target Vel ROLL",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_3D,		"Gyro Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_3D,		"Gyro Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_3D,		"Gyro Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eACC_ROLL,				(void*)&acc[axe_eROLL],				data_format_e16B_FLOAT_2D,		"Acc Roll",			use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eACC_PITCH,				(void*)&acc[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Acc Pitch",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eACC_YAW,				(void*)&acc[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Acc Yaw",			use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eACC_RAW_ROLL,			(void*)&acc_raw[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Acc Roll Raw",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eACC_ROLL,				(void*)&acc[axe_eROLL],				data_format_e16B_FLOAT_2D,		"Acc Roll",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eACC_PITCH,				(void*)&acc[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Acc Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eACC_YAW,				(void*)&acc[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Acc Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eACC_RAW_ROLL,			(void*)&acc_raw[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Acc Roll Raw",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eRADIO1, 				(void*)&radio[0],					data_format_e16B_UINT16,		"Radio 1",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO2, 				(void*)&radio[1],					data_format_e16B_UINT16,		"Radio 2",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO3, 				(void*)&radio[2],					data_format_e16B_UINT16,		"Radio 3",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO4, 				(void*)&radio[3],					data_format_e16B_UINT16,		"Radio 4",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO5, 				(void*)&radio[4],					data_format_e16B_UINT16,		"Radio 5",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO6, 				(void*)&radio[5],					data_format_e16B_UINT16,		"Radio 6",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO7, 				(void*)&radio[6],					data_format_e16B_UINT16,		"Radio 7",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO8, 				(void*)&radio[7],					data_format_e16B_UINT16,		"Radio 8",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO9, 				(void*)&radio[8],					data_format_e16B_UINT16,		"Radio 9",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO10, 				(void*)&radio[9],					data_format_e16B_UINT16,		"Radio 10",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO11, 				(void*)&radio[10],					data_format_e16B_UINT16,		"Radio 11",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO12, 				(void*)&radio[11],					data_format_e16B_UINT16,		"Radio 12",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO13, 				(void*)&radio[12],					data_format_e16B_UINT16,		"Radio 13",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eRADIO14, 				(void*)&radio[13],					data_format_e16B_UINT16,		"Radio 14",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eRADIO1, 				(void*)&radio[0],					data_format_e16B_UINT16,		"Radio 1",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO2, 				(void*)&radio[1],					data_format_e16B_UINT16,		"Radio 2",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO3, 				(void*)&radio[2],					data_format_e16B_UINT16,		"Radio 3",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO4, 				(void*)&radio[3],					data_format_e16B_UINT16,		"Radio 4",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO5, 				(void*)&radio[4],					data_format_e16B_UINT16,		"Radio 5",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO6, 				(void*)&radio[5],					data_format_e16B_UINT16,		"Radio 6",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO7, 				(void*)&radio[6],					data_format_e16B_UINT16,		"Radio 7",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO8, 				(void*)&radio[7],					data_format_e16B_UINT16,		"Radio 8",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO9, 				(void*)&radio[8],					data_format_e16B_UINT16,		"Radio 9",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO10, 				(void*)&radio[9],					data_format_e16B_UINT16,		"Radio 10",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO11, 				(void*)&radio[10],					data_format_e16B_UINT16,		"Radio 11",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO12, 				(void*)&radio[11],					data_format_e16B_UINT16,		"Radio 12",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO13, 				(void*)&radio[12],					data_format_e16B_UINT16,		"Radio 13",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eRADIO14, 				(void*)&radio[13],					data_format_e16B_UINT16,		"Radio 14",		use_format_eNOT_USED);
 
 	/* -------------- Inputs ----------------- */
 	DEFINE_DATA(data_id_eCONFIG_REQUEST,				NULL,	data_format_e0B_BUTTON,		"Send Configuration",	use_format_eAS_INPUT);
