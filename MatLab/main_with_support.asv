@@ -5,13 +5,13 @@ I = [1.985E+06 62.968	-2454.008;
 	62.968 2.330E+06 12.322;
 	-2454.008 12.322 3.242E+06];
 % Matrice d'inertie du drone kg.m^2
-I = I * 1E-9
+I = I * 1E-9;
 % Inverse de la matrice d'inertie du drone
 iInv = inv(I);
 % Coef force de frottement quand le drone tourne en kg*m*s^-2 / s * rad
 f = 0.17;
 % Conversion signal moteur =>force en Newton(kg*m*s^-2)
-k = 0.009;
+k = 0.008;
 % Constance de couple en yaw
 C = 0.01;
 % Position du centre de gravité du drone en mm (converti après en m)
@@ -43,22 +43,18 @@ sys = ss(A, B, C, D);
 dis_sts = c2d(sys, 0.001)
 
 %% open loop simulation to step impulse
-t = dt:dt:1200;
+t = dt:dt:120;
 u = [0*t.' 0*t.' 0*t.' 0*t.'];
-aza = 8000;
-u(1:aza,1) = 6.4;
-u(1:aza,4) = 6.4;
-[x, t] = lsim(sys, u, t);
+aza = 80000;
+u(2000:aza,1) = 10;
+u(2000:aza,4) = 10;
+[x, t] = lsim(dis_sts, u, t);
 
 hold on
 plot(t, x(:,1), 'r', 'LineWidth', 2.0);
-plot(t, x(:,2), 'b', 'LineWidth', 2.0);
-plot(t, x(:,3), 'g', 'LineWidth', 2.0);
+%plot(t, x(:,2), 'b', 'LineWidth', 2.0);
+%plot(t, x(:,3), 'g', 'LineWidth', 2.0);
 
 hold off
-
-dis_sts.B * [10 ;0 ;0 ;10]
-[31 ;0; 0] - dis_sts.A * [31 ;0; 0]
-
 
 

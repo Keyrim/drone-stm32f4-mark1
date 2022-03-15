@@ -45,9 +45,9 @@ dis_sts = c2d(sys, 0.001)
 %% open loop simulation to step impulse
 t = dt:dt:120;
 u = [0*t.' 0*t.' 0*t.' 0*t.'];
-aza = 80000;
-u(1:aza,1) = 10;
-u(1:aza,4) = 10;
+aza = 000;
+u(2400:aza,1) = 10;
+u(2400:aza,4) = 10;
 [x, t] = lsim(dis_sts, u, t);
 
 hold on

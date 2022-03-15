@@ -103,9 +103,9 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_3D,		"Velocity Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_3D,		"Velocity Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_3D,		"Velocity Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_2D,		"Velocity Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_2D,		"Velocity Yaw",			use_format_eNOT_USED);
 
 	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eNOT_USED);
@@ -116,10 +116,10 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_3D,		"Gyro Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_3D,		"Gyro Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_3D,		"Gyro Yaw",			use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eNOT_USED);
 

@@ -22,7 +22,7 @@ static const orientation_config_t default_orientation_config =
 		.prescaler = 1,
 		.mode = orien_mode_eSIMULATION,
 		.yaw_moment = 0.01f,
-		.motor_to_newton = 0.008f,
+		.motor_to_newton = 0.013f,
 		.inertia_matrix =
 		{
 				0.001985f, 		0.0f, 		0.0f,
@@ -38,8 +38,8 @@ static const orientation_config_t default_orientation_config =
 		},
 		.f =
 		{
-				0.17f,
-				0.17f,
+				0.16f,
+				0.16f,
 				1.0f,
 		}
 };

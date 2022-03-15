@@ -117,10 +117,16 @@ void MOTOR_Set(float * target)
 			motor.output_float[2] = target[2];
 			motor.output_float[3] = target[3];
 		}
-		motor.output[motor_eFRONT_LEFT] = (uint16_t)motor.output_float[0]+999;
-		motor.output[motor_eFRONT_RIGHT] = (uint16_t)motor.output_float[1]+999;
-		motor.output[motor_eBACK_RIGHT] = (uint16_t)motor.output_float[2]+999;
-		motor.output[motor_eBACK_LEFT] = (uint16_t)motor.output_float[3]+999;
+		/* Motor linearization */
+		motor.tmp_float[0] = sqrtf(motor.output_float[0]*1000);
+		motor.tmp_float[1] = sqrtf(motor.output_float[1]*1000);
+		motor.tmp_float[2] = sqrtf(motor.output_float[2]*1000);
+		motor.tmp_float[3] = sqrtf(motor.output_float[3]*1000);
+
+		motor.output[motor_eFRONT_LEFT] = (uint16_t)motor.tmp_float[0]+999;
+		motor.output[motor_eFRONT_RIGHT] = (uint16_t)motor.tmp_float[1]+999;
+		motor.output[motor_eBACK_RIGHT] = (uint16_t)motor.tmp_float[2]+999;
+		motor.output[motor_eBACK_LEFT] = (uint16_t)motor.tmp_float[3]+999;
 	}
 }
 
