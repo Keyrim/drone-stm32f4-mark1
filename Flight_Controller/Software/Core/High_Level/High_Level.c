@@ -46,6 +46,13 @@ static high_level_state_t states[high_level_eCOUNT] =
 				.controller_state = controller_state_eDISABLED,
 				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
+		},
+		[high_level_eSIMU_CLOSED_LOOP] =
+		{
+				.main = SIMULATION_CLOSED_LOOP_Main,
+				.controller_state = controller_state_eENABLE_P_GYRO,
+				.motor_state = motor_state_eENABLED,
+				.orientation_state = orien_mode_eREAL
 		}
 };
 

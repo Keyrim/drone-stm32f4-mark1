@@ -107,12 +107,12 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_2D,		"Velocity Yaw",			use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eMOTOR_BR,				(void*)&motors[orien_control_vector_eMOTOR_BR],			data_format_e16B_FLOAT_1D,		"Motor Back Right",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eMOTOR_BL,				(void*)&motors[orien_control_vector_eMOTOR_BL],			data_format_e16B_FLOAT_1D,		"Motor Back Left",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eMOTOR_BR,				(void*)&motors[orien_control_vector_eMOTOR_BR],			data_format_e16B_FLOAT_1D,		"Motor Back Right",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eMOTOR_BL,				(void*)&motors[orien_control_vector_eMOTOR_BL],			data_format_e16B_FLOAT_1D,		"Motor Back Left",		use_format_eAS_OUTPUT);
 
-	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_ROLL,	(void*)&target_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"Target Vel ROLL",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_ROLL,	(void*)&target_vel[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Target Vel ROLL",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
