@@ -111,6 +111,8 @@ void MPU_Init(void)
 			mpu.gyro_conversion = (float)1 / MPU6050_GYRO_SENS_2000 ;
 			break;
 	}
+	/* deg to rad conversion */
+	mpu.gyro_conversion *= 0.0174532925f;
 	/* -------------------- Accelerometer initialization --------------------------- */
 #if USE_SPI
 	temp_write[0] = MPU6050_ACCEL_CONFIG | MPU6050_READ ;

@@ -117,7 +117,7 @@ int main(void)
   TASK_MANAGER_Add_Task("Motors",					MOTOR_Init, 					NULL,								MOTOR_Process_Ms, 					MOTOR_Process_Gyro);
   TASK_MANAGER_Add_Task("Radio", 					RADIO_Process_Init, 			RADIO_Process_Main, 				NULL, 								NULL);
   TASK_MANAGER_Add_Task("Data Logger", 				DATA_LOGGER_Init, 				DATA_LOGGER_Main, 					NULL, 								NULL);
-  TASK_MANAGER_Add_Task("High Level", 				HIGH_LEVEL_Init, 				HIGH_LEVEL_Process_Main, 			NULL, 								NULL);
+  TASK_MANAGER_Add_Task("High Level", 				HIGH_LEVEL_Init, 				HIGH_LEVEL_Process_Main, 			HIGH_LEVEL_Process_Ms, 				NULL);
   TASK_MANAGER_Add_Task("Led", 						NULL, 							NULL, 								LED_Process_ms, 					NULL);
   TASK_MANAGER_Add_Task("Supervisor", 				NULL, 							NULL, 								SUPERVISOR_Process_Ms,				NULL);
 

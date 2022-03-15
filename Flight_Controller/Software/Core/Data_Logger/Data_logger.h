@@ -16,9 +16,14 @@
 typedef enum
 {
 	/* Buttons */
-	data_id_eCONFIG_REQUEST,
+	data_id_eCONFIG_REQUEST = 0,
 	data_id_eSTART_TRANSFER,
 	data_id_eSTOP_TRANSFER,
+	/* High level controls */
+	data_id_eHIGH_LEVEL_CONTROL1,
+	data_id_eHIGH_LEVEL_CONTROL2,
+	data_id_eHIGH_LEVEL_CONTROL3,
+	data_id_eHIGH_LEVEL_CONTROL4,
 	/* State vector */
 	data_id_eSTATE_VELOCITY_ROLL,
 	data_id_eSTATE_VELOCITY_PITCH,
@@ -31,6 +36,22 @@ typedef enum
 	data_id_eTARGET_ANGLE_SPEED_ROLL,
 	data_id_eTARGET_ANGLE_SPEED_PITCH,
 	data_id_eTARGET_ANGLE_SPEED_YAW,
+	/* Radio */
+	data_id_eRADIO1,
+	data_id_eRADIO2,
+	data_id_eRADIO3,
+	data_id_eRADIO4,
+	data_id_eRADIO5,
+	data_id_eRADIO6,
+	data_id_eRADIO7,
+	data_id_eRADIO8,
+	data_id_eRADIO9,
+	data_id_eRADIO10,
+	data_id_eRADIO11,
+	data_id_eRADIO12,
+	data_id_eRADIO13,
+	data_id_eRADIO14,
+
 	/* Motors */
 	data_id_eMOTOR_FL,
 	data_id_eMOTOR_FR,

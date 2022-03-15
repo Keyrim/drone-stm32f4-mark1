@@ -48,6 +48,7 @@ typedef struct
 	motor_config_t config;
 	motor_state_e state;
 	motor_state_e previous_state;
+	float tmp_float[motor_eCOUNT];
 	float output_float[motor_eCOUNT];
 	uint16_t output[motor_eCOUNT];
 }motor_t;

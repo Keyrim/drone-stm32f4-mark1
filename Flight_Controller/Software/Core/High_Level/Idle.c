@@ -8,6 +8,14 @@
 
 #include "High_Level.h"
 #include "../Sensors/Mpu.h"
+#include "../Motors/Motors.h"
+
+static float motor_zeros[motor_eCOUNT] = { 0 };
+
+void IDLE_Init(high_level_t * high_level)
+{
+	MOTOR_Set(motor_zeros);
+}
 
 void IDLE_Main(high_level_t * high_level)
 {
@@ -15,5 +23,12 @@ void IDLE_Main(high_level_t * high_level)
 	if(!MPU_Is_Ok())
 	{
 		high_level->state = high_level_eIDLE_NO_GYRO;
+	}
+	else if(high_level->radio[4] > 1500)
+	{
+		if(high_level->radio[5] < 1300)
+		{
+			high_level->state = high_level_eSIMU_OPEN_LOOP;
+		}
 	}
 }
