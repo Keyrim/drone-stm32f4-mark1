@@ -19,7 +19,7 @@ void SIMULATION_OPEN_LOOP_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_eIDLE;
 	}
-	else if(high_level->radio[5] > 1600)
+	else if(high_level->radio[5] < 1600 && high_level->radio[5] > 1300)
 	{
 		high_level->state = high_level_eSIMU_CLOSED_LOOP;
 	}

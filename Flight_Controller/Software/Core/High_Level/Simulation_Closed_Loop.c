@@ -10,6 +10,8 @@
 #include "../Motors/Motors.h"
 #include "../Sensors/Mpu.h"
 #include "../Radio/Radio.h"
+#include "../Controller/Controller.h"
+
 
 void SIMULATION_CLOSED_LOOP_Main(high_level_t * high_level)
 {
@@ -19,7 +21,7 @@ void SIMULATION_CLOSED_LOOP_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_eIDLE;
 	}
-	else if(high_level->radio[5] < 1600)
+	else if(high_level->radio[5] < 1300)
 	{
 		high_level->state = high_level_eSIMU_OPEN_LOOP;
 	}
