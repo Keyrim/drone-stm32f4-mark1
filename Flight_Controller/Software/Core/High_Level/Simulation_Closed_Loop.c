@@ -10,6 +10,8 @@
 #include "../Motors/Motors.h"
 #include "../Sensors/Mpu.h"
 #include "../Radio/Radio.h"
+#include "../Controller/Controller.h"
+
 
 void SIMULATION_CLOSED_LOOP_Main(high_level_t * high_level)
 {
@@ -19,12 +21,13 @@ void SIMULATION_CLOSED_LOOP_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_eIDLE;
 	}
-	else if(high_level->radio[5] < 1600)
+	else if(high_level->radio[5] < 1300)
 	{
 		high_level->state = high_level_eSIMU_OPEN_LOOP;
 	}
 	else
 	{
-		high_level->target_angle_speed[axe_eROLL] = ((float)high_level->radio[0] - 1500.0f)*0.01f;
+		high_level->target_angle_speed[axe_eROLL] = ((float)high_level->radio[0] - 1500.0f)*0.05f;
+		CONTROLLER_Set_Thrust((float)(high_level->radio[2]-1000));
 	}
 }
