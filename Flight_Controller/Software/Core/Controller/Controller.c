@@ -17,7 +17,7 @@ static const controller_config_t default_controller_config =
 {
 		/* Pid Configuration 	 Roll 		Pitch 		Yaw */
 		.angle_kp = 		{	4.0f, 		4.0f, 		0},
-		.angle_speep_kp = 	{	5.0f, 		0.8f, 		1.2f}
+		.angle_speep_kp = 	{	5.0f, 		5.0f, 		1.2f}
 };
 
 static controller_t controller = { 0 };
@@ -84,8 +84,8 @@ static inline void CONTROLLER_Process()
 {
 	/* First thing first, errors */
 	controller.angle_speed_error[axe_eROLL] = controller.target_angle_speed[axe_eROLL] - controller.angle_speed[axe_eROLL];
-	controller.angle_speed_error[axe_ePITCH] = 0; //controller.target_angle_speed[axe_ePITCH] - controller.angle_speed[axe_ePITCH];
-	controller.angle_speed_error[axe_eYAW] = 0; //controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
+	controller.angle_speed_error[axe_ePITCH] = controller.target_angle_speed[axe_ePITCH] - controller.angle_speed[axe_ePITCH];
+	controller.angle_speed_error[axe_eYAW] = controller.target_angle_speed[axe_eYAW] - controller.angle_speed[axe_eYAW];
 
 	/* Now, PID's time ! */
 	controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speep_kp[axe_eROLL];
