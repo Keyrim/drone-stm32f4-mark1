@@ -38,8 +38,8 @@ static const orientation_config_t default_orientation_config =
 		},
 		.f =
 		{
-				0.16f,
-				0.16f,
+				0.1f,
+				0.1f,
 				1.0f,
 		}
 };
@@ -85,9 +85,9 @@ static float R_array[orien_meas_vector_eCOUNT*orien_meas_vector_eCOUNT] =
 static arm_matrix_instance_f32 Q ;
 static float Q_array[orien_state_vector_eCOUNT*orien_state_vector_eCOUNT] =
 {
-		0.001f, 0, 0,
-		0, 0.001f, 0,
-		0, 0, 0.001f
+		0.1f, 0, 0,
+		0, 0.1f, 0,
+		0, 0, 0.1f
 };
 /* P Matrix definition */
 static arm_matrix_instance_f32 P_predict ;

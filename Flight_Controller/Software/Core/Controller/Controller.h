@@ -24,7 +24,8 @@ typedef enum
  */
 typedef struct
 {
-	float angle_speep_kp[axe_eCOUNT];
+	float angle_speed_kp[axe_eCOUNT];
+	float angle_speed_ki[axe_eCOUNT];
 	float angle_kp[axe_eCOUNT];
 }controller_config_t;
 
@@ -40,6 +41,7 @@ typedef struct
 	float * angle_speed;					/*	[degree / s]	Angular speed */
 	float target_angle_speed[axe_eCOUNT];	/*	[degree / s]	Angular speed target */
 	float angle_speed_error[axe_eCOUNT];	/*	[degree / s]	Angular speed error */
+	float angle_speed_I[axe_eCOUNT];
 	/* Controller state */
 	float global_thrust;
 	float output_pid[axe_eCOUNT];
@@ -54,5 +56,7 @@ void CONTROLLER_Set_State(controller_state_e new_state);
 void CONTROLLER_Set_Thrust(float thrust);
 float * CONTROLLER_Get_Angle_Target(void);
 float * CONTROLLER_Get_Angle_Speed_Target(void);
+float * CONTROLLER_Get_Pid_Output(void);
+float * CONTROLLER_Get_Pid_Output_I(void);
 
 #endif /* CONTROLLER_H_ */

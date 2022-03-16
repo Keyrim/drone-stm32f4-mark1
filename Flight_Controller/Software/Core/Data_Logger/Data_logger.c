@@ -96,6 +96,7 @@ void DATA_LOGGER_Init(void)
 	float * state_vector = ORIENTATION_Get_State_Vector();
 	float * motors = MOTOR_Get_Output_Float();
 	float * target_vel = CONTROLLER_Get_Angle_Speed_Target();
+	float * pid_vel = CONTROLLER_Get_Pid_Output();
 	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
@@ -104,22 +105,22 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eNOT_USED);
 
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_2D,		"Velocity Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_2D,		"Velocity Yaw",			use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eMOTOR_BR,				(void*)&motors[orien_control_vector_eMOTOR_BR],			data_format_e16B_FLOAT_1D,		"Motor Back Right",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eMOTOR_BL,				(void*)&motors[orien_control_vector_eMOTOR_BL],			data_format_e16B_FLOAT_1D,		"Motor Back Left",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_BR,				(void*)&motors[orien_control_vector_eMOTOR_BR],			data_format_e16B_FLOAT_1D,		"Motor Back Right",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eMOTOR_BL,				(void*)&motors[orien_control_vector_eMOTOR_BL],			data_format_e16B_FLOAT_1D,		"Motor Back Left",		use_format_eNOT_USED);
 
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_ROLL,	(void*)&target_vel[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Target Vel ROLL",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
 	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eNOT_USED);
 
@@ -129,6 +130,12 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eACC_RAW_ROLL,			(void*)&acc_raw[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Acc Roll Raw",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eNOT_USED);
+
+	DEFINE_DATA(data_id_ePID_P_VEL_ROLL,		(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel ROLL",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_P_VEL_PITCH,		(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel PITCH",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_P_VEL_YAW,			(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel YAW",		use_format_eNOT_USED);
+
+
 
 	DEFINE_DATA(data_id_eRADIO1, 				(void*)&radio[0],					data_format_e16B_UINT16,		"Radio 1",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eRADIO2, 				(void*)&radio[1],					data_format_e16B_UINT16,		"Radio 2",		use_format_eNOT_USED);
