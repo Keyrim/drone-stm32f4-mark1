@@ -17,7 +17,7 @@ static const controller_config_t default_controller_config =
 {
 		/* Pid Configuration 	 Roll 		Pitch 		Yaw */
 		.angle_kp = 		{	4.0f, 		4.0f, 		0},
-		.angle_speep_kp = 	{	5.0f, 		0.8f, 		1.2f}
+		.angle_speep_kp = 	{	6.0f, 		0.8f, 		1.2f}
 };
 
 static controller_t controller = { 0 };
