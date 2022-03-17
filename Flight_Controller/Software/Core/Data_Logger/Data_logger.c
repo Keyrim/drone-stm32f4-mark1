@@ -131,8 +131,8 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_ePID_P_VEL_ROLL,		(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel ROLL",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_ePID_P_VEL_PITCH,		(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel PITCH",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_P_VEL_ROLL,		(void*)&pid_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"PID.P Vel ROLL",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_P_VEL_PITCH,		(void*)&pid_vel[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.P Vel PITCH",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_ePID_P_VEL_YAW,			(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel YAW",		use_format_eNOT_USED);
 
 
