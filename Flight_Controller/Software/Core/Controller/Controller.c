@@ -18,7 +18,7 @@ static const controller_config_t default_controller_config =
 		/* Pid Configuration 	 Roll 		Pitch 		Yaw */
 		.angle_kp = 		{	4.0f, 		4.0f, 		0},
 		.angle_speed_kp = 	{	16.0f, 		16.0f, 		35.0f},
-		.angle_speed_ki = 	{	0.0f, 		0.0f, 		0.0f}
+		.angle_speed_ki = 	{	4.0f, 		4.0f, 		6.0f}
 };
 
 static controller_t controller = { 0 };
@@ -31,11 +31,18 @@ void CONTROLLER_Init(void)
 	controller.angle_speed = ORIENTATION_Get_State_Vector();
 	/* Initialize controller's state to "disabled" by default */
 	controller.state = controller_state_eDISABLED;
+	/* Copy paste pid settings from configuration */
+	for(uint8_t a = 0; a < 3; a++)
+	{
+		controller.angle_speed_kp[a] = controller.config.angle_speed_kp[a];
+		controller.angle_speed_ki[a] = controller.config.angle_speed_ki[a];
+		controller.angle_kp[a] = controller.config.angle_kp[a];
+	}
 	/* Adapt I  terms to frequency */
 	float period = MPU_Get_Period();
 	for(uint8_t a = 0; a < 3; a++)
 	{
-		controller.config.angle_speed_ki[a] *= period;
+		controller.angle_speed_ki[a] *= period;
 	}
 }
 
@@ -106,17 +113,17 @@ static inline void CONTROLLER_Process()
 
 	/* Now, PID's time ! */
 	/* P */
-	controller.output_pid[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.config.angle_speed_kp[axe_eROLL];
-	controller.output_pid[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speed_kp[axe_ePITCH];
-	controller.output_pid[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.config.angle_speed_kp[axe_eYAW];
+	controller.angle_speed_P[axe_eROLL] = controller.angle_speed_error[axe_eROLL] * controller.angle_speed_kp[axe_eROLL];
+	controller.angle_speed_P[axe_ePITCH] = controller.angle_speed_error[axe_ePITCH] * controller.angle_speed_kp[axe_ePITCH];
+	controller.angle_speed_P[axe_eYAW] = controller.angle_speed_error[axe_eYAW] * controller.angle_speed_kp[axe_eYAW];
 	/* I */
-	controller.angle_speed_I[axe_eROLL] += controller.angle_speed_error[axe_eROLL] * controller.config.angle_speed_ki[axe_eROLL];
-	controller.angle_speed_I[axe_ePITCH] += controller.angle_speed_error[axe_ePITCH] * controller.config.angle_speed_ki[axe_ePITCH];
-	controller.angle_speed_I[axe_eYAW] += controller.angle_speed_error[axe_eYAW] * controller.config.angle_speed_ki[axe_eYAW];
+	controller.angle_speed_I[axe_eROLL] += controller.angle_speed_error[axe_eROLL] * controller.angle_speed_ki[axe_eROLL];
+	controller.angle_speed_I[axe_ePITCH] += controller.angle_speed_error[axe_ePITCH] * controller.angle_speed_ki[axe_ePITCH];
+	controller.angle_speed_I[axe_eYAW] += controller.angle_speed_error[axe_eYAW] * controller.angle_speed_ki[axe_eYAW];
 	/* Add I and P terms */
-	controller.output_pid[axe_eROLL] += controller.angle_speed_I[axe_eROLL];
-	controller.output_pid[axe_ePITCH] += controller.angle_speed_I[axe_ePITCH];
-	controller.output_pid[axe_eYAW] += controller.angle_speed_I[axe_eYAW];
+	controller.output_pid[axe_eROLL] = controller.angle_speed_P[axe_eROLL] + controller.angle_speed_I[axe_eROLL];
+	controller.output_pid[axe_ePITCH] = controller.angle_speed_P[axe_ePITCH] + controller.angle_speed_I[axe_ePITCH];
+	controller.output_pid[axe_eYAW] = controller.angle_speed_P[axe_eYAW] + controller.angle_speed_I[axe_eYAW];
 	/* Mix each pid output */
 	controller.output_motor[orien_control_vector_eMOTOR_FL] = 	controller.global_thrust + controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] - controller.output_pid[axe_eYAW];
 	controller.output_motor[orien_control_vector_eMOTOR_FR] = 	controller.global_thrust - controller.output_pid[axe_eROLL] - controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];

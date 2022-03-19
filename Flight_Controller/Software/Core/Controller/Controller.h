@@ -37,11 +37,15 @@ typedef struct
 	float * angle;							/* 	[degree]		Angles */
 	float target_angle[axe_eCOUNT];			/* 	[degree]		Angular target */
 	float angle_error[axe_eCOUNT];			/* 	[degree]		Angular error */
+	float angle_kp[axe_eCOUNT];
 	/* Angular speed regulation */
 	float * angle_speed;					/*	[degree / s]	Angular speed */
 	float target_angle_speed[axe_eCOUNT];	/*	[degree / s]	Angular speed target */
 	float angle_speed_error[axe_eCOUNT];	/*	[degree / s]	Angular speed error */
+	float angle_speed_P[axe_eCOUNT];
 	float angle_speed_I[axe_eCOUNT];
+	float angle_speed_kp[axe_eCOUNT];
+	float angle_speed_ki[axe_eCOUNT];
 	/* Controller state */
 	float global_thrust;
 	float output_pid[axe_eCOUNT];
