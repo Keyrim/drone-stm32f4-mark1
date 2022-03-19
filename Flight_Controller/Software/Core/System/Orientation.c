@@ -21,7 +21,7 @@ static const orientation_config_t default_orientation_config =
 {
 		.prescaler = 1,
 		.mode = orien_mode_eSIMULATION,
-		.yaw_moment = 0.01f,
+		.yaw_moment = 0.00003f,
 		.motor_to_newton = 0.01f,
 		.inertia_matrix =
 		{
@@ -38,8 +38,8 @@ static const orientation_config_t default_orientation_config =
 		},
 		.f =
 		{
-				0.1f,
-				0.1f,
+				0.17f,
+				0.17f,
 				1.0f,
 		}
 };
@@ -77,9 +77,9 @@ static float H_array[orien_meas_vector_eCOUNT * orien_state_vector_eCOUNT] =
 static arm_matrix_instance_f32 R ;
 static float R_array[orien_meas_vector_eCOUNT*orien_meas_vector_eCOUNT] =
 {
-		30, 0, 0,
-		0, 30, 0,
-		0, 0, 30
+		100, 0, 0,
+		0, 100, 0,
+		0, 0, 1
 };
 /* system model covariance matrix */
 static arm_matrix_instance_f32 Q ;
