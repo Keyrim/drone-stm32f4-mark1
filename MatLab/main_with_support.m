@@ -13,7 +13,7 @@ f = 0.17;
 % Conversion signal moteur =>force en Newton(kg*m*s^-2)
 k = 0.008;
 % Constance de couple en yaw
-C = 0.01;
+C = 0.0003;
 % Position du centre de gravité du drone en mm (converti après en m)
 centerOfMass = [-16.65 -51.621 121.177];
 centerOfMass = centerOfMass * 0.001; %conversion mm
@@ -35,7 +35,7 @@ dt = 0.001;
 A = [-f    0       0;
     0       -f     0;
     0       0       -f];
-B = iInv * M
+B = iInv * M;
 C = eye(3);
 D = zeros(3, 4);
 sys = ss(A, B, C, D);

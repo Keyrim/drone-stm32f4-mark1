@@ -28,6 +28,7 @@ typedef enum
 	high_level_eACCRO,
 	high_level_eSIMU,
 	high_level_eSIMU_OPEN_LOOP,
+	high_level_eSIMU_CLOSED_LOOP,
 	high_level_eCOUNT
 }high_level_e;
 
@@ -86,5 +87,7 @@ void IDLE_NO_GYRO_Main(high_level_t * high_level);
 void SIMULATION_Main(high_level_t * high_level);
 
 void SIMULATION_OPEN_LOOP_Main(high_level_t * high_level);
+
+void SIMULATION_CLOSED_LOOP_Main(high_level_t * high_level);
 
 #endif /* HIGH_LEVEL_H_ */
