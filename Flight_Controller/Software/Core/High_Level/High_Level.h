@@ -18,6 +18,8 @@
 #define HL_YAW 		high_level->control[2]
 #define HL_POWER 	high_level->control[3]
 
+#define THROTTLE_MAX_TO_START 1050
+
 /*
  * @brief high level state enumeration definition
  */
