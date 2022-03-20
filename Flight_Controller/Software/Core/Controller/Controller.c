@@ -93,6 +93,11 @@ float * CONTROLLER_Get_Pid_Output(void)
 	return controller.output_pid;
 }
 
+float * CONTROLLER_Get_Pid_Output_P(void)
+{
+	return controller.angle_speed_P;
+}
+
 float * CONTROLLER_Get_Pid_Output_I(void)
 {
 	return controller.angle_speed_I;

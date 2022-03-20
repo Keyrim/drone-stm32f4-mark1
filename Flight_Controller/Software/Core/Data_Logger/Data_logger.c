@@ -97,6 +97,8 @@ void DATA_LOGGER_Init(void)
 	float * motors = MOTOR_Get_Output_Float();
 	float * target_vel = CONTROLLER_Get_Angle_Speed_Target();
 	float * pid_vel = CONTROLLER_Get_Pid_Output();
+	float * pid_vel_p = CONTROLLER_Get_Pid_Output_P();
+	float * pid_vel_i = CONTROLLER_Get_Pid_Output_I();
 	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
@@ -131,11 +133,15 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_ePID_P_VEL_ROLL,		(void*)&pid_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"PID.P Vel ROLL",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_ePID_P_VEL_PITCH,		(void*)&pid_vel[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.P Vel PITCH",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_ePID_P_VEL_YAW,			(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID.P Vel YAW",		use_format_eNOT_USED);
-
-
+	DEFINE_DATA(data_id_ePID_VEL_ROLL,			(void*)&pid_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"PID Vel ROLL",			use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_VEL_PITCH,			(void*)&pid_vel[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID Vel PITCH",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_VEL_YAW,			(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID Vel YAW",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_P_VEL_ROLL,		(void*)&pid_vel_p[axe_eROLL],		data_format_e16B_FLOAT_1D,		"PID.P Vel ROLL",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_P_VEL_PITCH,		(void*)&pid_vel_p[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.P Vel PITCH",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_P_VEL_YAW,			(void*)&pid_vel_p[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.P Vel YAW",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_I_VEL_ROLL,		(void*)&pid_vel_i[axe_eROLL],		data_format_e16B_FLOAT_1D,		"PID.I Vel ROLL",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_I_VEL_PITCH,		(void*)&pid_vel_i[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.I Vel PITCH",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_I_VEL_YAW,			(void*)&pid_vel_i[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.I Vel YAW",		use_format_eNOT_USED)
 
 	DEFINE_DATA(data_id_eRADIO1, 				(void*)&radio[0],					data_format_e16B_UINT16,		"Radio 1",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eRADIO2, 				(void*)&radio[1],					data_format_e16B_UINT16,		"Radio 2",		use_format_eNOT_USED);
