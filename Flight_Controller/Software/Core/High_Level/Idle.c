@@ -35,4 +35,8 @@ void IDLE_Main(high_level_t * high_level)
 			high_level->state = high_level_eACCRO;
 		}
 	}
+	else if(high_level->radio[7] > 1500)
+	{
+		high_level->state = high_level_ePID_TUNNING;
+	}
 }

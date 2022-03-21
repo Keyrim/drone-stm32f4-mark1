@@ -30,6 +30,7 @@ typedef enum
 	high_level_eACCRO,
 	high_level_eSIMU,
 	high_level_eSIMU_OPEN_LOOP,
+	high_level_ePID_TUNNING,
 	high_level_eCOUNT
 }high_level_e;
 
@@ -90,5 +91,7 @@ void SIMULATION_Main(high_level_t * high_level);
 void SIMULATION_OPEN_LOOP_Main(high_level_t * high_level);
 
 void ACCRO_Main(high_level_t * high_level);
+
+void PID_TUNNING_Main(high_level_t * high_level);
 
 #endif /* HIGH_LEVEL_H_ */
