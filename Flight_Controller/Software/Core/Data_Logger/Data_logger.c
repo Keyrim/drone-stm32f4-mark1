@@ -87,7 +87,7 @@ static void parse_uart(void);
  */
 void DATA_LOGGER_Init(void)
 {
-	/* Retrieve structure from modules */
+	/* Retrieve data structure from modules */
 	float * gyro = MPU_Get_Gyro_Ptr();
 	float * gyro_raw = MPU_Get_Gyro_Raw_Ptr();
 	float * acc = MPU_Get_Acc_Ptr();
@@ -99,6 +99,8 @@ void DATA_LOGGER_Init(void)
 	float * pid_vel = CONTROLLER_Get_Pid_Output();
 	float * pid_vel_p = CONTROLLER_Get_Pid_Output_P();
 	float * pid_vel_i = CONTROLLER_Get_Pid_Output_I();
+	float * pid_vel_kp = CONTROLLER_Get_Pid_KP();
+	float * pid_vel_ki = CONTROLLER_Get_Pid_KI();
 	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
@@ -142,6 +144,13 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_ePID_I_VEL_ROLL,		(void*)&pid_vel_i[axe_eROLL],		data_format_e16B_FLOAT_1D,		"PID.I Vel ROLL",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_I_VEL_PITCH,		(void*)&pid_vel_i[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.I Vel PITCH",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_I_VEL_YAW,			(void*)&pid_vel_i[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.I Vel YAW",		use_format_eNOT_USED)
+
+	DEFINE_DATA(data_id_ePID_KP_VEL_ROLL,		(void*)&pid_vel_kp[axe_eROLL],		data_format_e16B_FLOAT_2D,		"PID.KP Vel ROLL",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_KP_VEL_PITCH,		(void*)&pid_vel_kp[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"PID.KP Vel PITCH",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_KP_VEL_YAW,		(void*)&pid_vel_kp[axe_eYAW],		data_format_e16B_FLOAT_2D,		"PID.KP Vel YAW",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_KI_VEL_ROLL,		(void*)&pid_vel_ki[axe_eROLL],		data_format_e16B_FLOAT_2D,		"PID.KI Vel ROLL",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_KI_VEL_PITCH,		(void*)&pid_vel_ki[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"PID.KI Vel PITCH",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_ePID_KI_VEL_YAW,		(void*)&pid_vel_ki[axe_eYAW],		data_format_e16B_FLOAT_2D,		"PID.KI Vel YAW",		use_format_eNOT_USED)
 
 	DEFINE_DATA(data_id_eRADIO1, 				(void*)&radio[0],					data_format_e16B_UINT16,		"Radio 1",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eRADIO2, 				(void*)&radio[1],					data_format_e16B_UINT16,		"Radio 2",		use_format_eNOT_USED);

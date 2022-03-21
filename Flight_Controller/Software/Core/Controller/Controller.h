@@ -63,5 +63,7 @@ float * CONTROLLER_Get_Angle_Speed_Target(void);
 float * CONTROLLER_Get_Pid_Output(void);
 float * CONTROLLER_Get_Pid_Output_P(void);
 float * CONTROLLER_Get_Pid_Output_I(void);
+float * CONTROLLER_Get_Pid_KP(void);
+float * CONTROLLER_Get_Pid_KI(void);
 
 #endif /* CONTROLLER_H_ */

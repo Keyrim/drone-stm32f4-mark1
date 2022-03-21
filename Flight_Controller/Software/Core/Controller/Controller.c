@@ -103,6 +103,15 @@ float * CONTROLLER_Get_Pid_Output_I(void)
 	return controller.angle_speed_I;
 }
 
+float * CONTROLLER_Get_Pid_KP(void)
+{
+	return controller.angle_speed_kp;
+}
+float * CONTROLLER_Get_Pid_KI(void)
+{
+	return controller.angle_speed_ki;
+}
+
 /* Static functions definition */
 
 

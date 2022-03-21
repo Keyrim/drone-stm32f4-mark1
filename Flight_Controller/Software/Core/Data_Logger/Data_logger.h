@@ -61,6 +61,12 @@ typedef enum
 	data_id_ePID_I_VEL_ROLL,
 	data_id_ePID_I_VEL_PITCH,
 	data_id_ePID_I_VEL_YAW,
+	data_id_ePID_KP_VEL_ROLL,
+	data_id_ePID_KP_VEL_PITCH,
+	data_id_ePID_KP_VEL_YAW,
+	data_id_ePID_KI_VEL_ROLL,
+	data_id_ePID_KI_VEL_PITCH,
+	data_id_ePID_KI_VEL_YAW,
 	/* Motors */
 	data_id_eMOTOR_FL,
 	data_id_eMOTOR_FR,
