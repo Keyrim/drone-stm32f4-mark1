@@ -277,9 +277,9 @@ void MPU_Convert_Acc_Data(void)
 void MPU_Convert_Gyro_Data(void)
 {
 	/* Data convertion */
-	mpu.gyro_raw[0] = (int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion;
-	mpu.gyro_raw[1] = (int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion;
-	mpu.gyro_raw[2] = (int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion;
+	mpu.gyro_raw[0] = ((int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion) - 0.012f;
+	mpu.gyro_raw[1] = ((int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion) - 0.0015f;
+	mpu.gyro_raw[2] = ((int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion) - 0.001f;
 	/* Filtering */
 	mpu.gyro[0] = (mpu.gyro[0] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[0] * (float)(1-COEF_GYRO_FILTERING));
 	mpu.gyro[1] = (mpu.gyro[1] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[1] * (float)(1-COEF_GYRO_FILTERING));

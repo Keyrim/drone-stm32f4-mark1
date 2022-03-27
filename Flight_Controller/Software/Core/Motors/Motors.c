@@ -14,7 +14,7 @@
  */
 static const motor_config_t default_motor_config =
 {
-		.output_max = 500,
+		.output_max = 1000,
 		.timer = timer_e3,
 		.use_min_max_check = TRUE
 };
