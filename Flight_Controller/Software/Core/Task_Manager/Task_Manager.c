@@ -11,6 +11,19 @@
 
 #define MAX_NUMBER_OF_TASK	15
 
+/*
+ * @brief task manager structure definition
+ */
+typedef struct
+{
+	int32_t duration_us_init;
+	int32_t duration_us_main;
+	int32_t duration_us_it;
+	int32_t duration_us_gyro;
+}task_manager_t;
+
+static task_manager_t task_manager = { 0 };
+
 static task_t task[MAX_NUMBER_OF_TASK] = { 0 };
 static bool_e is_initialized = FALSE;
 static uint8_t task_count = 0;
