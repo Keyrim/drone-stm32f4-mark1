@@ -39,4 +39,8 @@ void IDLE_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_ePID_TUNNING;
 	}
+	else if(high_level->radio[6] > 1300)
+	{
+		high_level->state = high_level_eESC_CALIBRATION;
+	}
 }

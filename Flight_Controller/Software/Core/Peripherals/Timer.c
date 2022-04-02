@@ -8,11 +8,6 @@
 
 #include "Timer.h"
 
-#define DEFINE_TIMER(htim_)		\
-{								\
-	.htim = htim_				\
-}
-
 
 /*
  * @brief Timer structure definition
@@ -24,7 +19,7 @@ typedef struct
 
 static timer_t timer[timer_eCOUNT] =
 {
-		[timer_e3] = DEFINE_TIMER(&htim3)
+		[timer_e3] = (timer_t){&htim3}
 };
 
 /*
