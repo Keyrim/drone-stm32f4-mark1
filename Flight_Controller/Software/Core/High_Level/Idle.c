@@ -24,7 +24,7 @@ void IDLE_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_eIDLE_NO_GYRO;
 	}
-	else if(high_level->radio[4] > 1500)
+	else if(high_level->radio[4] > 1500  && high_level->radio[2] < THROTTLE_MAX_TO_START)
 	{
 		if(high_level->radio[5] < 1300)
 		{
@@ -32,7 +32,11 @@ void IDLE_Main(high_level_t * high_level)
 		}
 		else if(high_level->radio[5] < 1600)
 		{
-			high_level->state = high_level_eSIMU_CLOSED_LOOP;
+			high_level->state = high_level_eACCRO;
 		}
+	}
+	else if(high_level->radio[7] > 1500)
+	{
+		high_level->state = high_level_ePID_TUNNING;
 	}
 }

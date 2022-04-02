@@ -18,6 +18,8 @@
 #define HL_YAW 		high_level->control[2]
 #define HL_POWER 	high_level->control[3]
 
+#define THROTTLE_MAX_TO_START 1050
+
 /*
  * @brief high level state enumeration definition
  */
@@ -28,7 +30,7 @@ typedef enum
 	high_level_eACCRO,
 	high_level_eSIMU,
 	high_level_eSIMU_OPEN_LOOP,
-	high_level_eSIMU_CLOSED_LOOP,
+	high_level_ePID_TUNNING,
 	high_level_eCOUNT
 }high_level_e;
 
@@ -88,6 +90,8 @@ void SIMULATION_Main(high_level_t * high_level);
 
 void SIMULATION_OPEN_LOOP_Main(high_level_t * high_level);
 
-void SIMULATION_CLOSED_LOOP_Main(high_level_t * high_level);
+void ACCRO_Main(high_level_t * high_level);
+
+void PID_TUNNING_Main(high_level_t * high_level);
 
 #endif /* HIGH_LEVEL_H_ */

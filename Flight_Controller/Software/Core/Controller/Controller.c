@@ -17,8 +17,8 @@ static const controller_config_t default_controller_config =
 {
 		/* Pid Configuration 	 Roll 		Pitch 		Yaw */
 		.angle_kp = 		{	4.0f, 		4.0f, 		0},
-		.angle_speed_kp = 	{	16.0f, 		16.0f, 		35.0f},
-		.angle_speed_ki = 	{	4.0f, 		4.0f, 		6.0f}
+		.angle_speed_kp = 	{	21.0f, 		18.0f, 		40.0f},
+		.angle_speed_ki = 	{	17.0f, 		15.0f, 		15.0f}
 };
 
 static controller_t controller = { 0 };
@@ -93,9 +93,23 @@ float * CONTROLLER_Get_Pid_Output(void)
 	return controller.output_pid;
 }
 
+float * CONTROLLER_Get_Pid_Output_P(void)
+{
+	return controller.angle_speed_P;
+}
+
 float * CONTROLLER_Get_Pid_Output_I(void)
 {
 	return controller.angle_speed_I;
+}
+
+float * CONTROLLER_Get_Pid_KP(void)
+{
+	return controller.angle_speed_kp;
+}
+float * CONTROLLER_Get_Pid_KI(void)
+{
+	return controller.angle_speed_ki;
 }
 
 /* Static functions definition */
@@ -131,12 +145,6 @@ static inline void CONTROLLER_Process()
 	controller.output_motor[orien_control_vector_eMOTOR_BL] = 	controller.global_thrust + controller.output_pid[axe_eROLL] + controller.output_pid[axe_ePITCH] + controller.output_pid[axe_eYAW];
 	MOTOR_Set(controller.output_motor);
 }
-
-
-
-
-
-
 
 
 

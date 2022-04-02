@@ -51,15 +51,22 @@ typedef enum
 	data_id_eRADIO12,
 	data_id_eRADIO13,
 	data_id_eRADIO14,
-
 	/* Controller */
+	data_id_ePID_VEL_ROLL,
+	data_id_ePID_VEL_PITCH,
+	data_id_ePID_VEL_YAW,
 	data_id_ePID_P_VEL_ROLL,
 	data_id_ePID_P_VEL_PITCH,
 	data_id_ePID_P_VEL_YAW,
 	data_id_ePID_I_VEL_ROLL,
 	data_id_ePID_I_VEL_PITCH,
 	data_id_ePID_I_VEL_YAW,
-
+	data_id_ePID_KP_VEL_ROLL,
+	data_id_ePID_KP_VEL_PITCH,
+	data_id_ePID_KP_VEL_YAW,
+	data_id_ePID_KI_VEL_ROLL,
+	data_id_ePID_KI_VEL_PITCH,
+	data_id_ePID_KI_VEL_YAW,
 	/* Motors */
 	data_id_eMOTOR_FL,
 	data_id_eMOTOR_FR,
@@ -85,6 +92,8 @@ typedef enum
 
 /*
  * @brief Data format enumeration definition
+ * 		  Used to know how to encode the data before transmission
+ * 		  Or how to decode a data on reception
  */
 typedef enum
 {
@@ -106,8 +115,6 @@ typedef enum
 
 /*
  * @brief data format enumeration definition
- * 		  Used to know how to encode the data before transmission
- * 		  Or how decode a data on reception
  */
 typedef enum
 {
