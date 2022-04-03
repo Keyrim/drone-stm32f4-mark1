@@ -26,6 +26,7 @@ typedef struct radio_t
 	uint16_t channels[NB_CHANNEL_MAX];
 	radio_state_e state;
 	uint32_t next_update;
+	uint8_t counter_is_ok;
 }radio_t;
 
 void RADIO_Process_Main(void);

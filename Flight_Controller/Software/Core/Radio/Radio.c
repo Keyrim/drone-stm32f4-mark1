@@ -27,11 +27,20 @@ void RADIO_Process_Main(void)
 	if(IBUS_Process())
 	{
 		radio.next_update = HAL_GetTick() + TIMEOUT_RADIO_MS;
-		radio.state = radio_state_eOK;
+		if(radio.state == radio_state_eTIMEOUT)
+		{
+			radio.counter_is_ok ++;
+			if(radio.counter_is_ok > 10)
+			{
+				radio.state = radio_state_eOK;
+			}
+		}
+
 	}
 	else if(HAL_GetTick() > radio.next_update)
 	{
 		radio.state = radio_state_eTIMEOUT;
+		radio.counter_is_ok = 0;
 	}
 #endif
 }

@@ -9,6 +9,7 @@
 #include "High_Level.h"
 #include "../Sensors/Mpu.h"
 #include "../Motors/Motors.h"
+#include "../Radio/Radio.h"
 
 static float motor_zeros[motor_eCOUNT] = { 0 };
 
@@ -24,23 +25,27 @@ void IDLE_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_eIDLE_NO_GYRO;
 	}
-	else if(high_level->radio[4] > 1500  && high_level->radio[2] < THROTTLE_MAX_TO_START)
+	else if(RADIO_Get_State() == radio_state_eOK)
 	{
-		if(high_level->radio[5] < 1300)
+		if(high_level->radio[4] > 1500  && high_level->radio[2] < THROTTLE_MAX_TO_START)
 		{
-			high_level->state = high_level_eSIMU_OPEN_LOOP;
+			if(high_level->radio[5] < 1300)
+			{
+				high_level->state = high_level_eSIMU_OPEN_LOOP;
+			}
+			else if(high_level->radio[5] < 1600)
+			{
+				high_level->state = high_level_eACCRO;
+			}
 		}
-		else if(high_level->radio[5] < 1600)
+		else if(high_level->radio[7] > 1500)
 		{
-			high_level->state = high_level_eACCRO;
+			high_level->state = high_level_ePID_TUNNING;
+		}
+		else if(high_level->radio[6] > 1300)
+		{
+			high_level->state = high_level_eESC_CALIBRATION;
 		}
 	}
-	else if(high_level->radio[7] > 1500)
-	{
-		high_level->state = high_level_ePID_TUNNING;
-	}
-	else if(high_level->radio[6] > 1300)
-	{
-		high_level->state = high_level_eESC_CALIBRATION;
-	}
+
 }
