@@ -25,10 +25,16 @@ static const orientation_config_t default_orientation_config =
 		.motor_to_newton = 0.01f,
 		.inertia_matrix =
 		{
-				0.00187f, 		0.0f, 		0.0f,
-				0.0f,			0.001534f, 	0.0f,
-				0.0f, 			0.0f, 		0.002541f
+				0.001985f, 		0.0f, 		0.0f,
+				0.0f,			0.00233f, 	0.0f,
+				0.0f, 			0.0f, 		0.003242f
 		},
+//		.inertia_matrix =
+//		{
+//				0.00187f, 		0.0f, 		0.0f,
+//				0.0f,			0.001534f, 	0.0f,
+//				0.0f, 			0.0f, 		0.002541f
+//		},
 		.motor_pos =
 		{	/*				x				y	*/
 			(motor_pos_t){0.068663f,	 	0.089683f},
@@ -77,16 +83,16 @@ static float H_array[orien_meas_vector_eCOUNT * orien_state_vector_eCOUNT] =
 static arm_matrix_instance_f32 R ;
 static float R_array[orien_meas_vector_eCOUNT*orien_meas_vector_eCOUNT] =
 {
-		100, 0, 0,
-		0, 100, 0,
-		0, 0, 1
+		10, 0, 0,
+		0, 10, 0,
+		0, 0, 10
 };
 /* system model covariance matrix */
 static arm_matrix_instance_f32 Q ;
 static float Q_array[orien_state_vector_eCOUNT*orien_state_vector_eCOUNT] =
 {
-		0.1f, 0, 0,
-		0, 0.1f, 0,
+		0.01f, 0, 0,
+		0, 0.01f, 0,
 		0, 0, 0.1f
 };
 /* P Matrix definition */
@@ -117,7 +123,7 @@ void ORIENTATION_Init(void)
 	arm_mat_init_f32(&P_predict, orien_state_vector_eCOUNT, orien_state_vector_eCOUNT, P_array);
 	KALMAN_Init((kalman_t*)&kalman, (State_Space_Model_t*)&orientation, &P_predict, &Q, &R);
 	/* "Link" the gyroscope to the model by changing the measurement vector ptr */
-	orientation.z.pData = MPU_Get_Gyro_Raw_Ptr();
+	orientation.z.pData = MPU_Get_Gyro_Ptr();
 	orientation.u.pData = MOTOR_Get_Output_Float();
 }
 
