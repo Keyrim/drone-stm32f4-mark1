@@ -5,10 +5,9 @@
  *      Author: Theo
  */
 
-
+#include "stm32f4xx.h"
+#include "../../Drivers/CMSIS/DSP/Include/arm_math.h"
 #include "Motors.h"
-#include "math.h"
-
 /*
  * @brief default motor configuration
  */
@@ -118,10 +117,10 @@ void MOTOR_Set(float * target)
 			motor.output_float[3] = target[3];
 		}
 		/* Motor linearization */
-		motor.tmp_float[0] = sqrtf(motor.output_float[0]*1000);
-		motor.tmp_float[1] = sqrtf(motor.output_float[1]*1000);
-		motor.tmp_float[2] = sqrtf(motor.output_float[2]*1000);
-		motor.tmp_float[3] = sqrtf(motor.output_float[3]*1000);
+		arm_sqrt_f32(motor.output_float[0]*1000, &motor.tmp_float[0]);
+		arm_sqrt_f32(motor.output_float[1]*1000, &motor.tmp_float[1]);
+		arm_sqrt_f32(motor.output_float[2]*1000, &motor.tmp_float[2]);
+		arm_sqrt_f32(motor.output_float[3]*1000, &motor.tmp_float[3]);
 
 		motor.output[motor_eFRONT_LEFT] = (uint16_t)motor.tmp_float[0]+999;
 		motor.output[motor_eFRONT_RIGHT] = (uint16_t)motor.tmp_float[1]+999;
