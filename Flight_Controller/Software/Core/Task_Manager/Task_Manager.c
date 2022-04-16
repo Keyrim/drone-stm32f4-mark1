@@ -18,7 +18,9 @@
 typedef struct
 {
 	void (*call)(void);
+	uint32_t duration_tick;
 	float duration;
+	float duration_raw;
 	uint32_t duration_max;
 	uint32_t duration_min;
 }process_t;
@@ -44,16 +46,19 @@ typedef struct
 	float duration_us_main;
 	float duration_us_it;
 	float duration_us_gyro;
-	uint32_t time_ms;
-	uint32_t time_us;
-	TIM_HandleTypeDef * htim;
+	TIM_HandleTypeDef * htim_main;
+	float tick_main_to_us;
+	TIM_HandleTypeDef * htim_it;
+	float tick_it_to_us;
 }task_manager_t;
 
-static void PROCESS_Call(process_t * process);
+static float PROCESS_Call(process_t * process, TIM_HandleTypeDef * htim);
 
 static task_manager_t task_manager =
 {
-	.htim = &htim2
+	.htim_main = &htim2,
+	.htim_main = &htim5,
+
 };
 
 static task_t task[MAX_NUMBER_OF_TASK] = { 0 };
@@ -62,7 +67,7 @@ static uint8_t task_count = 0;
 
 void TASK_MANAGER_Init(void)
 {
-	HAL_TIM_Base_Start_IT(task_manager.htim);
+
 	uint32_t tmp = 0;
 	for(uint8_t t = 0; t < task_count; t++)
 	{
@@ -80,15 +85,22 @@ void TASK_MANAGER_Init(void)
 void TASK_MANAGER_Main(void)
 {
 	uint32_t tmp = 0;
+	uint32_t previous_tick = 0;
+	uint32_t tick;
+	HAL_TIM_Base_Start(task_manager.htim_main);
 	for(uint8_t t = 0; t < task_count; t++)
 	{
 		if(task[t].main.call)
 		{
-			PROCESS_Call(&task[t].main);
-			tmp += task[t].main.duration;
+			previous_tick = PROCESS_Call(&task[t].main);
+			tick = task_manager.htim_main->Instance->CNT;
+			task[t].main.duration_tick = tick - previous_tick;
+			task[t].main.duration_raw = task[t].main.duration_tick * task_manager.tick_main_to_us;
+			task[t].main.duration = task[t].main.duration * 0.998f + task[t].main.duration_raw * 0.002f;
+			previous_tick = tick;
 		}
 	}
-	task_manager.duration_us_main = tmp;
+	HAL_TIM_Base_Stop(task_manager.htim_main);
 }
 
 void TASK_MANAGER_It_ms(void)
@@ -123,20 +135,6 @@ void TASK_MANAGER_Gyro_Data_Ready(void)
 	task_manager.duration_us_gyro = tmp;
 }
 
-uint32_t TASK_MANAGER_Get_Time_Us(void)
-{
-	uint32_t time;
-	__disable_irq();
-	time = 1000 * task_manager.time_ms + task_manager.htim->Instance->CNT;
-	__enable_irq();
-	return time;
-}
-
-void TASK_MANAGER_Tick_Timer(void)
-{
-	task_manager.time_ms ++;
-}
-
 void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), void(*it)(void), void(*gyro)(void))
 {
 	if(task_count == MAX_NUMBER_OF_TASK)
@@ -151,14 +149,14 @@ void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), vo
 	task[task_count++].gyro_data_ready.call = gyro;
 }
 
-static void PROCESS_Call(process_t * process)
+static float PROCESS_Call(process_t * process, TIM_HandleTypeDef * htim)
 {
-	uint32_t time = TASK_MANAGER_Get_Time_Us();
+	tick = htim->Instance->CNT;
 	process->call();
-	time = TASK_MANAGER_Get_Time_Us() - time;
-	process->duration_min = MIN(time, process->duration_min);
-	process->duration_max = MAX(time, process->duration_max);
-	process->duration = process->duration * 0.998f + time * 0.002;
+	process->duration_tick = htim->Instance->CNT - tick;
+	process->duration_raw = process->duration_tick * task_manager.tick_main_to_us;
+	process->duration = process->duration * 0.998f + process->duration_raw * 0.002f;
+	return process->duration_raw;
 }
 
 
