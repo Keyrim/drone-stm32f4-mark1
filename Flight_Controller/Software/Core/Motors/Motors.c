@@ -29,7 +29,7 @@ void MOTOR_Init(void)
 	/* Load configuration */
 	motor.config = default_motor_config;
 	/* Start the timer */
-	TIMER_Start_All_Channels(motor.config.timer);
+	TIMER_Start_Pwm_All_Channels(motor.config.timer);
 }
 
 /*
@@ -45,12 +45,12 @@ void MOTOR_Process_Ms(void)
 	switch(motor.state)
 	{
 		case motor_state_eDISABLED:
-			TIMER_Stop_All_Channels(motor.config.timer);
+			TIMER_Stop_Pwm_All_Channels(motor.config.timer);
 			break;
 		case motor_state_eSIMULATION:
 			if(entrance)
 			{
-				TIMER_Stop_All_Channels(motor.config.timer);
+				TIMER_Stop_Pwm_All_Channels(motor.config.timer);
 			}
 			break;
 		case motor_state_eENABLED:
@@ -74,7 +74,7 @@ void MOTOR_Process_Gyro(void)
 		motor.output[2] = 1000;
 		motor.output[3] = 1000;
 		TIMER_Set_All_CCR(motor.config.timer, motor.output);
-		TIMER_Start_All_Channels(motor.config.timer);
+		TIMER_Start_Pwm_All_Channels(motor.config.timer);
 	}
 	TIMER_Set_All_CCR(motor.config.timer, motor.output);
 	motor.previous_state = motor.state;

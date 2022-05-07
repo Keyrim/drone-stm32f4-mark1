@@ -7,8 +7,8 @@
 
 
 #include "macro_types.h"
-#include "../Inc/tim.h"
 #include "Task_Manager.h"
+#include "../Peripherals/Timer.h"
 
 #define MAX_NUMBER_OF_TASK	15
 
@@ -18,11 +18,10 @@
 typedef struct
 {
 	void (*call)(void);
-	uint32_t duration_tick;
+	int32_t duration_tick;
 	float duration;
-	float duration_raw;
-	uint32_t duration_max;
-	uint32_t duration_min;
+	int32_t duration_max;
+	int32_t duration_min;
 }process_t;
 
 /*
@@ -46,18 +45,18 @@ typedef struct
 	float duration_us_main;
 	float duration_us_it;
 	float duration_us_gyro;
-	TIM_HandleTypeDef * htim_main;
-	float tick_main_to_us;
-	TIM_HandleTypeDef * htim_it;
-	float tick_it_to_us;
+	timer_e timer_main;
+	timer_e timer_it;
+	timer_e timer_gyro;
 }task_manager_t;
 
-static float PROCESS_Call(process_t * process, TIM_HandleTypeDef * htim);
+static int32_t PROCESS_Call(process_t * process, timer_e timer_id);
 
 static task_manager_t task_manager =
 {
-	.htim_main = &htim2,
-	.htim_main = &htim5,
+	.timer_main = timer_e9,
+	.timer_it = timer_e10,
+	.timer_gyro = timer_e11
 
 };
 
@@ -67,14 +66,16 @@ static uint8_t task_count = 0;
 
 void TASK_MANAGER_Init(void)
 {
+	TIMER_Start(task_manager.timer_main);
+	TIMER_Start(task_manager.timer_it);
+	TIMER_Start(task_manager.timer_gyro);
 
 	uint32_t tmp = 0;
 	for(uint8_t t = 0; t < task_count; t++)
 	{
 		if(task[t].init.call)
 		{
-			PROCESS_Call(&task[t].init);
-			tmp += task[t].init.duration;
+			tmp += PROCESS_Call(&task[t].init, task_manager.timer_main);
 		}
 	}
 	is_initialized = TRUE;
@@ -84,23 +85,16 @@ void TASK_MANAGER_Init(void)
 
 void TASK_MANAGER_Main(void)
 {
-	uint32_t tmp = 0;
-	uint32_t previous_tick = 0;
-	uint32_t tick;
-	HAL_TIM_Base_Start(task_manager.htim_main);
+
+	uint32_t sum = 0;
 	for(uint8_t t = 0; t < task_count; t++)
 	{
 		if(task[t].main.call)
 		{
-			previous_tick = PROCESS_Call(&task[t].main);
-			tick = task_manager.htim_main->Instance->CNT;
-			task[t].main.duration_tick = tick - previous_tick;
-			task[t].main.duration_raw = task[t].main.duration_tick * task_manager.tick_main_to_us;
-			task[t].main.duration = task[t].main.duration * 0.998f + task[t].main.duration_raw * 0.002f;
-			previous_tick = tick;
+			sum += PROCESS_Call(&task[t].main, task_manager.timer_main);
 		}
 	}
-	HAL_TIM_Base_Stop(task_manager.htim_main);
+	task_manager.duration_us_main =  sum;
 }
 
 void TASK_MANAGER_It_ms(void)
@@ -114,8 +108,7 @@ void TASK_MANAGER_It_ms(void)
 	{
 		if(task[t].it.call)
 		{
-			PROCESS_Call(&task[t].it);
-			tmp += task[t].it.duration;
+			tmp += PROCESS_Call(&task[t].it, task_manager.timer_it);
 		}
 	}
 	task_manager.duration_us_it = tmp;
@@ -128,8 +121,7 @@ void TASK_MANAGER_Gyro_Data_Ready(void)
 	{
 		if(task[t].gyro_data_ready.call)
 		{
-			PROCESS_Call(&task[t].gyro_data_ready);
-			tmp += task[t].gyro_data_ready.duration;
+			tmp += PROCESS_Call(&task[t].gyro_data_ready, task_manager.timer_gyro);
 		}
 	}
 	task_manager.duration_us_gyro = tmp;
@@ -149,14 +141,19 @@ void TASK_MANAGER_Add_Task(char * name, void(*init)(void), void(*main)(void), vo
 	task[task_count++].gyro_data_ready.call = gyro;
 }
 
-static float PROCESS_Call(process_t * process, TIM_HandleTypeDef * htim)
+
+static int32_t PROCESS_Call(process_t * process, timer_e timer_id)
 {
-	tick = htim->Instance->CNT;
+	int32_t before = (int32_t)TIMER_Get_Tick(timer_id);
 	process->call();
-	process->duration_tick = htim->Instance->CNT - tick;
-	process->duration_raw = process->duration_tick * task_manager.tick_main_to_us;
-	process->duration = process->duration * 0.998f + process->duration_raw * 0.002f;
-	return process->duration_raw;
+	int32_t after = (int32_t)TIMER_Get_Tick(timer_id);
+	process->duration_tick =  after - before;
+	if(after < before)
+	{
+		process->duration_tick -= (int32_t)0xffff;
+	}
+	process->duration = process->duration * 0.998f + (float)process->duration_tick * 0.002f;
+	return process->duration_tick;
 }
 
 
