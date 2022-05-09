@@ -23,7 +23,7 @@
 #define MAX_TRAME_RX_SIZE		30
 #define PERIODE_PING 			500
 #define PERIODE_CONFIG_SEND 	100
-#define PERIODE_SEND			10
+#define PERIODE_SEND			20
 #define UART_TELEMETRY			uart_e1
 
 /*
@@ -110,7 +110,7 @@ void DATA_LOGGER_Init(void)
 
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_2D,		"Velocity Roll",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_2D,		"Velocity Yaw",			use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eSTATE_VELOCITY_YAW,	(void*)&state_vector[orien_state_vector_eVELOCITY_YAW],				data_format_e16B_FLOAT_2D,		"Velocity Yaw",			use_format_eNOT_USED);
 
 	DEFINE_DATA(data_id_eMOTOR_FL,				(void*)&motors[orien_control_vector_eMOTOR_FL],			data_format_e16B_FLOAT_1D,		"Motor Front Left",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eMOTOR_FR,				(void*)&motors[orien_control_vector_eMOTOR_FR],			data_format_e16B_FLOAT_1D,		"Motor Front Right",	use_format_eNOT_USED);
@@ -119,14 +119,14 @@ void DATA_LOGGER_Init(void)
 
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_ROLL,	(void*)&target_vel[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Target Vel ROLL",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eAS_OUTPUT);
 
 	DEFINE_DATA(data_id_eACC_ROLL,				(void*)&acc[axe_eROLL],				data_format_e16B_FLOAT_2D,		"Acc Roll",			use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_PITCH,				(void*)&acc[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Acc Pitch",		use_format_eNOT_USED);
@@ -137,13 +137,13 @@ void DATA_LOGGER_Init(void)
 
 	DEFINE_DATA(data_id_ePID_VEL_ROLL,			(void*)&pid_vel[axe_eROLL],			data_format_e16B_FLOAT_1D,		"PID Vel ROLL",			use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_VEL_PITCH,			(void*)&pid_vel[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID Vel PITCH",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_ePID_VEL_YAW,			(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID Vel YAW",			use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_VEL_YAW,			(void*)&pid_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"PID Vel YAW",			use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_P_VEL_ROLL,		(void*)&pid_vel_p[axe_eROLL],		data_format_e16B_FLOAT_1D,		"PID.P Vel ROLL",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_P_VEL_PITCH,		(void*)&pid_vel_p[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.P Vel PITCH",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_ePID_P_VEL_YAW,			(void*)&pid_vel_p[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.P Vel YAW",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_ePID_P_VEL_YAW,			(void*)&pid_vel_p[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.P Vel YAW",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_I_VEL_ROLL,		(void*)&pid_vel_i[axe_eROLL],		data_format_e16B_FLOAT_1D,		"PID.I Vel ROLL",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_I_VEL_PITCH,		(void*)&pid_vel_i[axe_ePITCH],		data_format_e16B_FLOAT_1D,		"PID.I Vel PITCH",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_ePID_I_VEL_YAW,			(void*)&pid_vel_i[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.I Vel YAW",		use_format_eAS_OUTPUT)
+	DEFINE_DATA(data_id_ePID_I_VEL_YAW,			(void*)&pid_vel_i[axe_eYAW],		data_format_e16B_FLOAT_1D,		"PID.I Vel YAW",		use_format_eNOT_USED)
 
 	DEFINE_DATA(data_id_ePID_KP_VEL_ROLL,		(void*)&pid_vel_kp[axe_eROLL],		data_format_e16B_FLOAT_2D,		"PID.KP Vel ROLL",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_ePID_KP_VEL_PITCH,		(void*)&pid_vel_kp[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"PID.KP Vel PITCH",		use_format_eNOT_USED);
@@ -172,10 +172,10 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eSTART_TRANSFER,				NULL,	data_format_e0B_BUTTON,		"Start Transfer",		use_format_eAS_INPUT);
 	DEFINE_DATA(data_id_eSTOP_TRANSFER,					NULL,	data_format_e0B_BUTTON,		"Stop Transfer",		use_format_eAS_INPUT);
 
-	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL1,			NULL,	data_format_e16B_INT16,		"HighLevel 1",		use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL2,			NULL,	data_format_e16B_INT16,		"HighLevel 2",		use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL3,			NULL,	data_format_e16B_INT16,		"HighLevel 3",		use_format_eAS_INPUT);
-	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL4,			NULL,	data_format_e16B_INT16,		"HighLevel 4",		use_format_eAS_INPUT);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL1,			NULL,	data_format_e16B_INT16,		"HighLevel 1",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL2,			NULL,	data_format_e16B_INT16,		"HighLevel 2",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL3,			NULL,	data_format_e16B_INT16,		"HighLevel 3",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eHIGH_LEVEL_CONTROL4,			NULL,	data_format_e16B_INT16,		"HighLevel 4",		use_format_eNOT_USED);
 }
 /*
  * @brief Request to start logging data

@@ -9,30 +9,6 @@
 #define TASK_MANAGER_H_
 
 
-/*
- * @brief Process structure definition
- */
-typedef struct
-{
-	void (*call)(void);
-	float duration;
-	uint32_t duration_max;
-	uint32_t duration_min;
-}process_t;
-
-/*
- * @brief Task Structure definition
- */
-typedef struct
-{
-	char * name;
-	uint8_t name_len;
-	process_t init;
-	process_t main;
-	process_t it;
-	process_t gyro_data_ready;
-}task_t;
-
 void TASK_MANAGER_Init(void);
 void TASK_MANAGER_Main(void);
 void TASK_MANAGER_It_ms(void);

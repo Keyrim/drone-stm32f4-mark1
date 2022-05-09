@@ -134,6 +134,7 @@ typedef struct
 	float gyro_conversion;
 	float gyro[3];
 	float gyro_raw[3];
+	float gyro_cali[3];
 	float gyro_raw_last[3];
 	/* Accelerometer */
 	uint8_t * acc_data;

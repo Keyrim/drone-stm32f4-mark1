@@ -60,7 +60,15 @@ static high_level_state_t states[high_level_eCOUNT] =
 				.controller_state = controller_state_eDISABLED,
 				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
+		},
+		[high_level_eESC_CALIBRATION] =
+		{
+				.main = ESC_CALIBRATION_Main,
+				.controller_state = controller_state_eDISABLED,
+				.motor_state = motor_state_eENABLED,
+				.orientation_state = orien_mode_eREAL
 		}
+
 };
 
 void HIGH_LEVEL_Init(void)
