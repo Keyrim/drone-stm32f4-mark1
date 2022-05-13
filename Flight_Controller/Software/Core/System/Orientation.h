@@ -20,6 +20,9 @@ typedef enum
 	orien_state_vector_eVELOCITY_ROLL = 0,
 	orien_state_vector_eVELOCITY_PITCH,
 	orien_state_vector_eVELOCITY_YAW,
+	orien_state_vector_eANGLE_ROLL,
+	orien_state_vector_eANGLE_PITCH,
+	orien_state_vector_eANGLE_YAW,
 	orien_state_vector_eCOUNT
 }orientation_state_vector_e;
 
@@ -44,6 +47,9 @@ typedef enum
 	orien_meas_vector_eVELOCITY_ROLL = 0,
 	orien_meas_vector_eVELOCITY_PITCH,
 	orien_meas_vector_eVELOCITY_YAW,
+	orien_meas_vector_eANGLE_ROLL,
+	orien_meas_vector_eANGLE_PITCH,
+	orien_meas_vector_eANGLE_YAW,
 	orien_meas_vector_eCOUNT,
 }orientation_measurement_vector_e;
 
@@ -80,7 +86,7 @@ typedef struct
 }orientation_config_t;
 
 /*
- * @brief Orientation kalman structure inherited from kalman abstract structure
+ * @brief Orientation state space model structure inherited from state space model abstract structure
  */
 typedef struct
 {
@@ -89,7 +95,9 @@ typedef struct
 								 orien_meas_vector_eCOUNT);
 	orientation_config_t config;
 	orien_mode_e mode;
-	float period;	/* update period in seconds */
+	float * gyro_data;		/* gyro data array */
+	float * acc_data;		/* acc data array */
+	float period;		/* update period in seconds */
 }orientation_model_t;
 
 /*

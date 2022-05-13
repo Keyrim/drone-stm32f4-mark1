@@ -23,7 +23,7 @@
 #define MAX_TRAME_RX_SIZE		30
 #define PERIODE_PING 			500
 #define PERIODE_CONFIG_SEND 	100
-#define PERIODE_SEND			20
+#define PERIODE_SEND			15
 #define UART_TELEMETRY			uart_e1
 
 /*
@@ -92,7 +92,7 @@ void DATA_LOGGER_Init(void)
 	float * gyro_raw = MPU_Get_Gyro_Raw_Ptr();
 	float * acc = MPU_Get_Acc_Ptr();
 	float * acc_raw = MPU_Get_Acc_Raw_Ptr();
-	float * angle = COMPLEMENTARY_FILTER_Get_Angles();
+	float * angle = &ORIENTATION_Get_State_Vector()[3];
 	float * state_vector = ORIENTATION_Get_State_Vector();
 	float * motors = MOTOR_Get_Output_Float();
 	float * target_vel = CONTROLLER_Get_Angle_Speed_Target();
@@ -104,9 +104,9 @@ void DATA_LOGGER_Init(void)
 	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
-	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_3D,		"Angle Roll",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_3D,		"Angle Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_3D,		"Angle Yaw",		use_format_eNOT_USED);
 
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_2D,		"Velocity Roll",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eNOT_USED);
@@ -121,16 +121,16 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eAS_OUTPUT);
-	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_3D,		"Gyro Roll",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_3D,		"Gyro Pitch",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_3D,		"Gyro Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_3D,		"Gyro Roll Raw",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_3D,		"Gyro Pitch Raw",	use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_3D,		"Gyro Yaw Raw",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eACC_ROLL,				(void*)&acc[axe_eROLL],				data_format_e16B_FLOAT_2D,		"Acc Roll",			use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eACC_PITCH,				(void*)&acc[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Acc Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eACC_YAW,				(void*)&acc[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Acc Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eACC_ROLL,				(void*)&acc[axe_eROLL],				data_format_e16B_FLOAT_3D,		"Acc Roll",			use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eACC_PITCH,				(void*)&acc[axe_ePITCH],			data_format_e16B_FLOAT_3D,		"Acc Pitch",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eACC_YAW,				(void*)&acc[axe_eYAW],				data_format_e16B_FLOAT_3D,		"Acc Yaw",			use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eACC_RAW_ROLL,			(void*)&acc_raw[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Acc Roll Raw",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_RAW_PITCH,			(void*)&acc_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Acc Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eACC_RAW_YAW,			(void*)&acc_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Acc Yaw Raw",		use_format_eNOT_USED);

@@ -11,9 +11,9 @@
 #include "../../Drivers/CMSIS/DSP/Include/arm_math.h"
 #include "stdint.h"
 
-#define STATE_VECTOR_MAX_SIZE 	3	//n
+#define STATE_VECTOR_MAX_SIZE 	6	//n
 #define INPUT_MAX_SIZE 			4	//m
-#define OUTPUT_MAX_SIZE 		3	//l
+#define OUTPUT_MAX_SIZE 		6	//l
 
 /*
  * @brief
