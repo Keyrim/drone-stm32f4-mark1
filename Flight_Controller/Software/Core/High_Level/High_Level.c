@@ -54,6 +54,13 @@ static high_level_state_t states[high_level_eCOUNT] =
 				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
 		},
+		[high_level_eREMOTE_TELEMETRY] =
+		{
+				.main = REMOTE_TELEMETRY_Main,
+				.controller_state = controller_state_eENABLE_P_GYRO,
+				.motor_state = motor_state_eENABLED,
+				.orientation_state = orien_mode_eREAL
+		},
 		[high_level_ePID_TUNNING] =
 		{
 				.main = PID_TUNNING_Main,
@@ -68,6 +75,8 @@ static high_level_state_t states[high_level_eCOUNT] =
 				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
 		}
+
+
 
 };
 
