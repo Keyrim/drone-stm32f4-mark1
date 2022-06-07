@@ -27,7 +27,7 @@ static void angle_180(float * x);
 
 void COMPLEMENTARY_FILTER_Init(void)
 {
-	filter.gyro = MPU_Get_Gyro_Ptr();
+	filter.gyro = ORIENTATION_Get_State_Vector();
 	filter.gyro_raw = NULL;
 	filter.acc = MPU_Get_Acc_Ptr();
 	filter.alpha_gyro = ALPHA;

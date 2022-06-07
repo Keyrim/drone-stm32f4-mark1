@@ -104,9 +104,9 @@ void DATA_LOGGER_Init(void)
 	uint16_t * radio = RADIO_Get_Channel();
 
 	/* -------------- Outputs ----------------- */
-	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eANGLE_ROLL,			(void*)&angle[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Angle Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eANGLE_PITCH,			(void*)&angle[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Angle Pitch",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eANGLE_YAW,				(void*)&angle[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Angle Yaw",		use_format_eAS_OUTPUT);
 
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_ROLL,	(void*)&state_vector[orien_state_vector_eVELOCITY_ROLL],			data_format_e16B_FLOAT_2D,		"Velocity Roll",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eSTATE_VELOCITY_PITCH,	(void*)&state_vector[orien_state_vector_eVELOCITY_PITCH],			data_format_e16B_FLOAT_2D,		"Velocity Pitch",		use_format_eNOT_USED);
