@@ -19,6 +19,12 @@ typedef enum
 	controller_state_eENABLE_P_MS,
 }controller_state_e;
 
+typedef enum
+{
+	controller_mode_eGYRO = 0,
+	controller_mode_eANGLE
+}controller_mode_e;
+
 /*
  * @brief controller configuration structure definition
  */
@@ -34,14 +40,17 @@ typedef struct
 	/* Configuration */
 	controller_config_t config;
 	/* Angular position regulation */
-	float * angle;							/* 	[degree]		Angles */
-	float target_angle[axe_eCOUNT];			/* 	[degree]		Angular target */
-	float angle_error[axe_eCOUNT];			/* 	[degree]		Angular error */
+	float * angle;							/* 	[rad]		Angles */
+	float target_angle[axe_eCOUNT];			/* 	[rad]		Angular target */
+	float angle_error[axe_eCOUNT];			/* 	[rad]		Angular error */
+	float angle_P[axe_eCOUNT];
+	float angle_I[axe_eCOUNT];
 	float angle_kp[axe_eCOUNT];
+	float angle_ki[axe_eCOUNT];
 	/* Angular speed regulation */
-	float * angle_speed;					/*	[degree / s]	Angular speed */
-	float target_angle_speed[axe_eCOUNT];	/*	[degree / s]	Angular speed target */
-	float angle_speed_error[axe_eCOUNT];	/*	[degree / s]	Angular speed error */
+	float * angle_speed;					/*	[rad / s]	Angular speed */
+	float target_angle_speed[axe_eCOUNT];	/*	[rad / s]	Angular speed target */
+	float angle_speed_error[axe_eCOUNT];	/*	[rad / s]	Angular speed error */
 	float angle_speed_P[axe_eCOUNT];
 	float angle_speed_I[axe_eCOUNT];
 	float angle_speed_kp[axe_eCOUNT];
@@ -50,6 +59,7 @@ typedef struct
 	float global_thrust;
 	float output_pid[axe_eCOUNT];
 	float output_motor[motor_eCOUNT];
+	controller_mode_e mode;
 	controller_state_e state;
 }controller_t;
 
@@ -57,6 +67,7 @@ void CONTROLLER_Init(void);
 void CONTROLLER_Process_Gyro(void);
 void CONTROLLER_Process_ms(void);
 void CONTROLLER_Set_State(controller_state_e new_state);
+void CONTROLLER_Set_Mode(controller_mode_e new_mode);
 void CONTROLLER_Set_Thrust(float thrust);
 float * CONTROLLER_Get_Angle_Target(void);
 float * CONTROLLER_Get_Angle_Speed_Target(void);
