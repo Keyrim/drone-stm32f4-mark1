@@ -6,15 +6,17 @@
  */
 
 #include "Complementary_Filter.h"
-#include "math.h"
 #include "../Sensors/Mpu.h"
-#include "../System/Orientation.h"
+#include "math.h"
 
-#define RAD_TO_DEG ((float)57.2957795f)
-#define DEG_TO_RAD ((float)0.01745329f)
+#define RAD_TO_DEG(x) ((float)57.2957795f * x)
+#define DEG_TO_RAD(x) ((float)0.01745329f * x)
 
 #define FREQUENCY	1000
 #define ALPHA		((float)0.998f)
+#ifndef PI
+  #define PI               3.14159265358979f
+#endif
 
 static complementary_filter_t filter =
 {
@@ -27,7 +29,7 @@ static void angle_180(float * x);
 
 void COMPLEMENTARY_FILTER_Init(void)
 {
-	filter.gyro = ORIENTATION_Get_State_Vector();
+	filter.gyro = MPU_Get_Gyro_Ptr();
 	filter.gyro_raw = NULL;
 	filter.acc = MPU_Get_Acc_Ptr();
 	filter.alpha_gyro = ALPHA;
@@ -48,11 +50,11 @@ void COMPLEMENTARY_FILTER_Process(void)
 		float inv_acc_total = 1.0f / acc_total;
 		if(absolute(filter.acc[axe_eROLL]) < acc_total)
 		{
-			filter.angle_acc[axe_ePITCH] = 	-asinf(filter.acc[axe_eROLL] * inv_acc_total) * RAD_TO_DEG;
+			filter.angle_acc[axe_ePITCH] = 	 -asinf(filter.acc[axe_eROLL] * inv_acc_total);
 		}
 		if(absolute(filter.acc[axe_ePITCH]) < acc_total)
 		{
-			filter.angle_acc[axe_eROLL] = 	asinf(filter.acc[axe_ePITCH] * inv_acc_total) * RAD_TO_DEG;
+			filter.angle_acc[axe_eROLL] = 	 asinf(filter.acc[axe_ePITCH] * inv_acc_total);
 		}
 	}
 
@@ -74,7 +76,7 @@ void COMPLEMENTARY_FILTER_Process(void)
 		filter.angle[axe_ePITCH] += dy;
 		filter.angle[axe_eYAW] += dz;
 		/* Yaw drift compensation */
-		float sin_dz = sinf(DEG_TO_RAD * dz);
+		float sin_dz = sinf(dz);
 		filter.angle[axe_eROLL] += sin_dz * filter.angle[axe_ePITCH];
 		filter.angle[axe_ePITCH] -= sin_dz * filter.angle[axe_eROLL];
 		/* We use this to make sure our angles doesnt go above PI */
@@ -99,12 +101,12 @@ float * COMPLEMENTARY_FILTER_Get_Angles_Acc(void)
 
 static void angle_180(float * x)
 {
-	if(*x > 180)
+	if(*x > PI)
 	{
-		*x -= 360;
+		*x -= 2*PI;
 	}
-	else if( *x < -180)
+	else if( *x < -PI)
 	{
-		*x += 360 ;
+		*x += 2*PI ;
 	}
 }

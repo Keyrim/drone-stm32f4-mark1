@@ -15,5 +15,5 @@ void IDLE_NO_GYRO_Main(high_level_t * high_level)
 	{
 		high_level->state = high_level_ePID_TUNNING;
 	}
-	/* TODO Try to restart the mpu ..? => requires to be able to shut it down => we now it is nothing but trivial with those pull ups ^^*/
+	/* TODO Try to restart the mpu ..? => requires to be able to shut it down => we now it is anything but trivial with those pull ups ^^*/
 }

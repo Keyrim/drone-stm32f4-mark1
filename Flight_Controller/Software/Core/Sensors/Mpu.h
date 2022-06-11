@@ -156,6 +156,7 @@ float * MPU_Get_Gyro_Ptr(void);
 float * MPU_Get_Gyro_Raw_Ptr(void);
 float * MPU_Get_Acc_Ptr(void);
 float * MPU_Get_Acc_Raw_Ptr(void);
+void MPU_Set_Gyro_Calibration(float * calib);
 float MPU_Get_Period(void);
 bool_e MPU_Rx_Complete_Callback(void);
 

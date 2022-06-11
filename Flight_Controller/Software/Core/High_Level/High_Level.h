@@ -27,12 +27,14 @@ typedef enum
 {
 	high_level_eIDLE = 0,		/* Startup state */
 	high_level_eIDLE_NO_GYRO,
+	high_level_eANGLE,
 	high_level_eACCRO,
 	high_level_eSIMU,
 	high_level_eSIMU_OPEN_LOOP,
 	high_level_ePID_TUNNING,
 	high_level_eESC_CALIBRATION,
 	high_level_eREMOTE_TELEMETRY,
+	high_level_eGYRO_CALIBRATION,
 	high_level_eCOUNT
 }high_level_e;
 
@@ -92,12 +94,20 @@ void SIMULATION_Main(high_level_t * high_level);
 
 void SIMULATION_OPEN_LOOP_Main(high_level_t * high_level);
 
+void ACCRO_Init(high_level_t * high_level);
 void ACCRO_Main(high_level_t * high_level);
+
+void ANGLE_Init(high_level_t * high_level);
+void ANGLE_Main(high_level_t * high_level);
 
 void PID_TUNNING_Main(high_level_t * high_level);
 
 void ESC_CALIBRATION_Main(high_level_t * high_level);
 
 void REMOTE_TELEMETRY_Main(high_level_t * high_level);
+void REMOTE_TELEMETRY_Init(high_level_t * high_level);
+
+void GYRO_CALIBRATION_Init(high_level_t * high_level);
+void GYRO_CALIBRATION_Main(high_level_t * high_level);
 
 #endif /* HIGH_LEVEL_H_ */

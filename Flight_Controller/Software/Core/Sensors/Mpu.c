@@ -19,7 +19,10 @@ static const mpu_config_t default_mpu_configuration =
 		.acc_range = MPU_ACC_8G
 };
 
-static mpu_t mpu = { 0 };
+static mpu_t mpu =
+{
+	.gyro_cali = {0.0136685185f, 0.00779005373f, 0.0112024052f}
+};
 
 /* Static functions prototypes */
 void MPU_Convert_Acc_Data(void);
@@ -198,6 +201,13 @@ void MPU_Process_Ms(void)
 	}
 }
 
+void MPU_Set_Gyro_Calibration(float * calib)
+{
+	mpu.gyro_cali[0] += calib[0];
+	mpu.gyro_cali[1] += calib[1];
+	mpu.gyro_cali[2] += calib[2];
+}
+
 void MPU_Read_All(void)
 {
 	if(mpu.state == mpu_state_eERROR)
@@ -277,9 +287,9 @@ void MPU_Convert_Acc_Data(void)
 void MPU_Convert_Gyro_Data(void)
 {
 	/* Data convertion */
-	mpu.gyro_raw[0] = ((int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion) - 0.012f;
-	mpu.gyro_raw[1] = ((int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion) - 0.0015f;
-	mpu.gyro_raw[2] = ((int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion) - 0.001f;
+	mpu.gyro_raw[0] = ((int16_t)(mpu.gyro_data[1] | (mpu.gyro_data[0] << 8)) * mpu.gyro_conversion) - mpu.gyro_cali[0];
+	mpu.gyro_raw[1] = ((int16_t)(mpu.gyro_data[3] | (mpu.gyro_data[2] << 8)) * mpu.gyro_conversion) - mpu.gyro_cali[1];
+	mpu.gyro_raw[2] = ((int16_t)(mpu.gyro_data[5] | (mpu.gyro_data[4] << 8)) * mpu.gyro_conversion) - mpu.gyro_cali[2];
 	/* Filtering */
 	mpu.gyro[0] = (mpu.gyro[0] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[0] * (float)(1-COEF_GYRO_FILTERING));
 	mpu.gyro[1] = (mpu.gyro[1] * COEF_GYRO_FILTERING) + (mpu.gyro_raw[1] * (float)(1-COEF_GYRO_FILTERING));

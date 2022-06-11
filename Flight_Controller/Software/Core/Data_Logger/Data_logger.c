@@ -121,9 +121,9 @@ void DATA_LOGGER_Init(void)
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_PITCH,	(void*)&target_vel[axe_ePITCH],			data_format_e16B_FLOAT_1D,		"Target Vel PITCH",		use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eTARGET_ANGLE_SPEED_YAW,	(void*)&target_vel[axe_eYAW],			data_format_e16B_FLOAT_1D,		"Target Vel YAW",		use_format_eNOT_USED);
 
-	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eNOT_USED);
-	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eNOT_USED);
+	DEFINE_DATA(data_id_eGYRO_ROLL,				(void*)&gyro[axe_eROLL],			data_format_e16B_FLOAT_2D,		"Gyro Roll",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_PITCH,			(void*)&gyro[axe_ePITCH],			data_format_e16B_FLOAT_2D,		"Gyro Pitch",		use_format_eAS_OUTPUT);
+	DEFINE_DATA(data_id_eGYRO_YAW,				(void*)&gyro[axe_eYAW],				data_format_e16B_FLOAT_2D,		"Gyro Yaw",			use_format_eAS_OUTPUT);
 	DEFINE_DATA(data_id_eGYRO_RAW_ROLL,			(void*)&gyro_raw[axe_eROLL],		data_format_e16B_FLOAT_2D,		"Gyro Roll Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_RAW_PITCH,		(void*)&gyro_raw[axe_ePITCH],		data_format_e16B_FLOAT_2D,		"Gyro Pitch Raw",	use_format_eNOT_USED);
 	DEFINE_DATA(data_id_eGYRO_RAW_YAW,			(void*)&gyro_raw[axe_eYAW],			data_format_e16B_FLOAT_2D,		"Gyro Yaw Raw",		use_format_eNOT_USED);
@@ -243,13 +243,13 @@ void DATA_LOGGER_Reception(uint8_t * input_buffer)
 			switch(id)
 			{
 				case data_id_eHIGH_LEVEL_CONTROL1:
-					HIGH_LEVEL_Set_Control(high_level_control_e1, tmp_int_16);
+					HIGH_LEVEL_Set_Control(high_level_control_e1, tmp_int_16 - 10000);
 					break;
 				case data_id_eHIGH_LEVEL_CONTROL2:
-					HIGH_LEVEL_Set_Control(high_level_control_e2, tmp_int_16);
+					HIGH_LEVEL_Set_Control(high_level_control_e2, tmp_int_16 - 10000);
 					break;
 				case data_id_eHIGH_LEVEL_CONTROL3:
-					HIGH_LEVEL_Set_Control(high_level_control_e3, tmp_int_16);
+					HIGH_LEVEL_Set_Control(high_level_control_e3, tmp_int_16 - 10000);
 					break;
 				case data_id_eHIGH_LEVEL_CONTROL4:
 					HIGH_LEVEL_Set_Control(high_level_control_e4, tmp_int_16);

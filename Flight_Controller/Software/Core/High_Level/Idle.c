@@ -31,7 +31,7 @@ void IDLE_Main(high_level_t * high_level)
 		{
 			if(high_level->radio[5] < 1300)
 			{
-				high_level->state = high_level_eSIMU_OPEN_LOOP;
+				high_level->state = high_level_eANGLE;
 			}
 			else if(high_level->radio[5] < 1600)
 			{
@@ -49,6 +49,10 @@ void IDLE_Main(high_level_t * high_level)
 		else if(high_level->radio[6] > 1300)
 		{
 			high_level->state = high_level_eESC_CALIBRATION;
+		}
+		else if(high_level->radio[9] > 1500)
+		{
+			high_level->state = high_level_eGYRO_CALIBRATION;
 		}
 	}
 

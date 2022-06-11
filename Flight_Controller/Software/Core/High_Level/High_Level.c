@@ -49,13 +49,23 @@ static high_level_state_t states[high_level_eCOUNT] =
 		},
 		[high_level_eACCRO] =
 		{
+				.entrance = ACCRO_Init,
 				.main = ACCRO_Main,
+				.controller_state = controller_state_eENABLE_P_GYRO,
+				.motor_state = motor_state_eENABLED,
+				.orientation_state = orien_mode_eREAL
+		},
+		[high_level_eANGLE] =
+		{
+				.entrance = ANGLE_Init,
+				.main = ANGLE_Main,
 				.controller_state = controller_state_eENABLE_P_GYRO,
 				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
 		},
 		[high_level_eREMOTE_TELEMETRY] =
 		{
+				.entrance = REMOTE_TELEMETRY_Init,
 				.main = REMOTE_TELEMETRY_Main,
 				.controller_state = controller_state_eENABLE_P_GYRO,
 				.motor_state = motor_state_eENABLED,
@@ -74,10 +84,15 @@ static high_level_state_t states[high_level_eCOUNT] =
 				.controller_state = controller_state_eDISABLED,
 				.motor_state = motor_state_eENABLED,
 				.orientation_state = orien_mode_eREAL
+		},
+		[high_level_eGYRO_CALIBRATION] =
+		{
+				.entrance = GYRO_CALIBRATION_Init,
+				.main = GYRO_CALIBRATION_Main,
+				.controller_state = controller_state_eDISABLED,
+				.motor_state = motor_state_eENABLED,
+				.orientation_state = orien_mode_eREAL
 		}
-
-
-
 };
 
 void HIGH_LEVEL_Init(void)

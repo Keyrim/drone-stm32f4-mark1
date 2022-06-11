@@ -33,6 +33,7 @@ typedef struct
 	float angle_speed_kp[axe_eCOUNT];
 	float angle_speed_ki[axe_eCOUNT];
 	float angle_kp[axe_eCOUNT];
+	float angle_kd[axe_eCOUNT];
 }controller_config_t;
 
 typedef struct
@@ -43,10 +44,11 @@ typedef struct
 	float * angle;							/* 	[rad]		Angles */
 	float target_angle[axe_eCOUNT];			/* 	[rad]		Angular target */
 	float angle_error[axe_eCOUNT];			/* 	[rad]		Angular error */
+	float angle_previous[axe_eCOUNT];	/* 	[rad]		Angular previous error */
 	float angle_P[axe_eCOUNT];
-	float angle_I[axe_eCOUNT];
+	float angle_D[axe_eCOUNT];
 	float angle_kp[axe_eCOUNT];
-	float angle_ki[axe_eCOUNT];
+	float angle_kd[axe_eCOUNT];
 	/* Angular speed regulation */
 	float * angle_speed;					/*	[rad / s]	Angular speed */
 	float target_angle_speed[axe_eCOUNT];	/*	[rad / s]	Angular speed target */

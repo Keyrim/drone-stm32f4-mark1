@@ -12,6 +12,10 @@
 #include "../Radio/Radio.h"
 #include "../Controller/Controller.h"
 
+void ACCRO_Init(high_level_t * high_level)
+{
+	CONTROLLER_Set_Mode(controller_mode_eGYRO);
+}
 
 void ACCRO_Main(high_level_t * high_level)
 {
