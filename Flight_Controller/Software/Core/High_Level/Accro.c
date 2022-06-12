@@ -31,9 +31,9 @@ void ACCRO_Main(high_level_t * high_level)
 	}
 	else
 	{
-		high_level->target_angle_speed[axe_eROLL] = ((float)high_level->radio[0] - 1500.0f)*0.04f;
-		high_level->target_angle_speed[axe_ePITCH] = ((float)high_level->radio[1] - 1500.0f)*0.04f;
-		high_level->target_angle_speed[axe_eYAW] = ((float)high_level->radio[3] - 1500.0f)*0.04f;
+		high_level->target_angle_speed[axe_eROLL] = ((float)high_level->radio[0] - 1500.0f)*0.02f;
+		high_level->target_angle_speed[axe_ePITCH] = ((float)high_level->radio[1] - 1500.0f)*0.02f;
+		high_level->target_angle_speed[axe_eYAW] = ((float)high_level->radio[3] - 1500.0f)*0.02f;
 		CONTROLLER_Set_Thrust((float)(high_level->radio[2] - 1000));
 	}
 }
