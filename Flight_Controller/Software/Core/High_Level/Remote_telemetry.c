@@ -35,8 +35,8 @@ void REMOTE_TELEMETRY_Main(high_level_t * high_level)
 	}
 	else
 	{
-		high_level->target_angle[axe_eROLL] = ((float)high_level->control[0])*0.005f;
-		high_level->target_angle[axe_ePITCH] = ((float)high_level->control[1])*0.005f;
+		high_level->target_angle[axe_eROLL] = ((float)high_level->control[0])*0.001f;
+		high_level->target_angle[axe_ePITCH] = ((float)high_level->control[1])*0.001f;
 		high_level->target_angle[axe_eYAW] = ((float)high_level->control[3])*0.0f;
 		CONTROLLER_Set_Thrust(high_level->control[2]);
 	}
