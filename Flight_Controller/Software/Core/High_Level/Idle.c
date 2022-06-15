@@ -48,7 +48,7 @@ void IDLE_Main(high_level_t * high_level)
 		}
 		else if(high_level->radio[6] > 1300)
 		{
-			high_level->state = high_level_eESC_CALIBRATION;
+			//high_level->state = high_level_eESC_CALIBRATION;
 		}
 		else if(high_level->radio[9] > 1500)
 		{

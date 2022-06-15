@@ -8,7 +8,7 @@
 
 #include "High_Level.h"
 
-static float motor_high[4] = { 1000, 1000, 1000, 1000 };
+//static float motor_high[4] = { 1000, 1000, 1000, 1000 };
 static float motor_low[4] = { 0 };
 
 void ESC_CALIBRATION_Main(high_level_t * high_level)
@@ -25,7 +25,7 @@ void ESC_CALIBRATION_Main(high_level_t * high_level)
 		}
 		else
 		{
-			MOTOR_Set(motor_high);
+//			MOTOR_Set(motor_high);
 		}
 	}
 }
